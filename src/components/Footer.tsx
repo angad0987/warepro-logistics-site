@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { PackageCheck, Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { PackageCheck, Mail, Phone, MapPin, Globe, Send, Share2, Camera } from "lucide-react";
 
 export function Footer() {
   return (
@@ -16,7 +16,7 @@ export function Footer() {
             Smart warehousing, inventory, and distribution solutions trusted by ambitious supply chains.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Linkedin, Twitter, Facebook, Instagram].map((Icon, i) => (
+            {[Globe, Send, Share2, Camera].map((Icon, i) => (
               <a key={i} href="#" aria-label="Social link" className="grid h-9 w-9 place-items-center rounded-full bg-white/5 hover:bg-primary transition-colors">
                 <Icon className="h-4 w-4" />
               </a>
