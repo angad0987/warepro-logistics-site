@@ -53,10 +53,11 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.03 256);
 
-  /* Brand primary: corporate blue */
-  --primary: oklch(0.52 0.18 256);
-  --primary-foreground: oklch(0.99 0 0);
-  --primary-glow: oklch(0.66 0.16 248);
+  /* Brand primary: warehouse yellow */
+  --primary: oklch(0.85 0.18 92);
+  --primary-foreground: oklch(0.18 0.04 256);
+  --primary-glow: oklch(0.9 0.17 95);
+
 
   --secondary: oklch(0.96 0.01 256);
   --secondary-foreground: oklch(0.21 0.03 256);
