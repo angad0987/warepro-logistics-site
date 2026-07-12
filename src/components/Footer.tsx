@@ -18,7 +18,7 @@ export function Footer() {
             {BRAND.tagline}. Reliable, scalable, technology-driven logistics for growing brands.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Linkedin, Facebook, Instagram, Twitter].map((Icon, i) => (
+            {[Globe, Send, Share2, Camera].map((Icon, i) => (
               <a key={i} href="#" aria-label="Social link" className="grid h-9 w-9 place-items-center rounded-full bg-white/5 hover:bg-primary hover:text-primary-foreground transition-colors">
                 <Icon className="h-4 w-4" />
               </a>
