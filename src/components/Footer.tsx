@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { PackageCheck, Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Twitter } from "lucide-react";
+import { PackageCheck, Mail, Phone, MapPin, Globe, Send, Share2, Camera } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
 
