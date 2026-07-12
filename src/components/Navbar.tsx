@@ -2,10 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, PackageCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BRAND } from "@/lib/brand";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
+  { to: "/industries", label: "Industries" },
+  { to: "/why-choose-us", label: "Why Us" },
+  { to: "/about", label: "About" },
+  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -24,7 +29,7 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border shadow-card-soft"
+          ? "bg-background/90 backdrop-blur-md border-b border-border shadow-card-soft"
           : "bg-transparent"
       }`}
     >
@@ -34,11 +39,11 @@ export function Navbar() {
             <PackageCheck className="h-5 w-5" />
           </span>
           <span className={`font-display text-lg font-bold tracking-tight ${scrolled ? "text-foreground" : "text-white"}`}>
-            WarePro<span className="text-primary-glow">.</span>
+            Core<span className="text-primary">Warehousing</span>
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
             <Link
               key={l.to}
@@ -54,7 +59,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex">
           <Link
             to="/contact"
             className="inline-flex items-center rounded-full gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]"
@@ -66,7 +71,7 @@ export function Navbar() {
         <button
           aria-label="Toggle menu"
           onClick={() => setOpen((s) => !s)}
-          className={`md:hidden grid h-10 w-10 place-items-center rounded-lg border ${
+          className={`lg:hidden grid h-10 w-10 place-items-center rounded-lg border ${
             scrolled ? "border-border text-foreground" : "border-white/30 text-white"
           }`}
         >
@@ -80,9 +85,9 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-background border-b border-border"
+            className="lg:hidden bg-background border-b border-border"
           >
-            <div className="container-x py-4 flex flex-col gap-2">
+            <div className="container-x py-4 flex flex-col gap-1">
               {links.map((l) => (
                 <Link
                   key={l.to}
