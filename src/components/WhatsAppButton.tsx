@@ -1,10 +1,11 @@
 import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { BRAND } from "@/lib/brand";
 
 export function WhatsAppButton() {
   return (
     <motion.a
-      href="https://wa.me/15550102200?text=Hi%20WarePro%2C%20I%27d%20like%20a%20quote."
+      href={BRAND.whatsappUrl}
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
