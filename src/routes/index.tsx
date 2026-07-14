@@ -4,7 +4,7 @@ import { useState } from "react";
 import { z } from "zod";
 import {
   ArrowRight, Warehouse, Boxes, Truck, ShoppingCart, PackageOpen, RotateCcw,
-  Package, Layers, ShieldCheck, Activity, Zap, Users, DollarSign, Cpu,
+  Package, Layers,
   CheckCircle2, Send, Quote,
 } from "lucide-react";
 import heroImg from "@/assets/hero-warehouse.jpg";
