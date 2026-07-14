@@ -63,14 +63,6 @@ const services = [
 
 const platforms = ["Amazon", "Flipkart", "Shopify", "WooCommerce", "Meesho"];
 
-const whyUs = [
-  { icon: ShieldCheck, title: "Reliable Operations" },
-  { icon: Activity, title: "Scalable Solutions" },
-  { icon: Cpu, title: "Technology Driven" },
-  { icon: Zap, title: "Faster Fulfillment" },
-  { icon: Users, title: "Professional Support" },
-  { icon: DollarSign, title: "Cost-Effective" },
-];
 
 const testimonials = [
   { name: "Client Name", role: "Company", quote: "Add your first client testimonial here to build trust with prospects." },
