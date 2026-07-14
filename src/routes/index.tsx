@@ -11,6 +11,8 @@ import heroImg from "@/assets/hero-warehouse.jpg";
 import fleetImg from "@/assets/fleet.jpg";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
+import { HowItWorks } from "@/components/HowItWorks";
+import { IconCallouts } from "@/components/IconCallouts";
 
 export const Route = createFileRoute("/")({
   head: () => ({
