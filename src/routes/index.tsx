@@ -4,13 +4,15 @@ import { useState } from "react";
 import { z } from "zod";
 import {
   ArrowRight, Warehouse, Boxes, Truck, ShoppingCart, PackageOpen, RotateCcw,
-  Package, Layers, ShieldCheck, Activity, Zap, Users, DollarSign, Cpu,
+  Package, Layers,
   CheckCircle2, Send, Quote,
 } from "lucide-react";
 import heroImg from "@/assets/hero-warehouse.jpg";
 import fleetImg from "@/assets/fleet.jpg";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
+import { HowItWorks } from "@/components/HowItWorks";
+import { IconCallouts } from "@/components/IconCallouts";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,14 +63,6 @@ const services = [
 
 const platforms = ["Amazon", "Flipkart", "Shopify", "WooCommerce", "Meesho"];
 
-const whyUs = [
-  { icon: ShieldCheck, title: "Reliable Operations" },
-  { icon: Activity, title: "Scalable Solutions" },
-  { icon: Cpu, title: "Technology Driven" },
-  { icon: Zap, title: "Faster Fulfillment" },
-  { icon: Users, title: "Professional Support" },
-  { icon: DollarSign, title: "Cost-Effective" },
-];
 
 const testimonials = [
   { name: "Client Name", role: "Company", quote: "Add your first client testimonial here to build trust with prospects." },
@@ -190,26 +184,16 @@ function Home() {
         </div>
       </section>
 
+      {/* HOW IT WORKS */}
+      <HowItWorks />
+
       {/* WHY CHOOSE US */}
-      <section className="py-24 gradient-dark text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_20%,oklch(0.85_0.18_92_/_0.25),transparent_50%)]" />
-        <div className="container-x relative">
-          <Reveal className="max-w-2xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Why CoreWarehousing</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold">Built for ambitious supply chains.</h2>
-          </Reveal>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {whyUs.map((w, i) => (
-              <Reveal key={w.title} delay={i * 0.05}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6 hover:bg-white/10 transition-colors">
-                  <w.icon className="h-7 w-7 text-primary" />
-                  <h3 className="mt-4 font-display font-bold text-lg">{w.title}</h3>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <IconCallouts
+        variant="dark"
+        eyebrow="Why CoreWarehousing"
+        title="Built for ambitious supply chains."
+        intro="Six values delivered daily by our operations team — not just a marketing tagline."
+      />
 
       {/* PLATFORMS */}
       <section className="py-20">
