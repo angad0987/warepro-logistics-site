@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Target, Compass, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import { getIcon } from "@/lib/icons";
 import fleetImg from "@/assets/fleet.jpg";
+import { aboutPage, visionMission, story } from "@/content/about";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -19,16 +21,20 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
+  const VisionIcon = getIcon(visionMission.vision.icon);
+  const MissionIcon = getIcon(visionMission.mission.icon);
+  const StoryIcon = getIcon(story.icon);
+
   return (
     <>
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 gradient-dark text-white overflow-hidden">
         <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_50%_30%,oklch(0.85_0.18_92_/_0.4),transparent_50%)]" />
         <div className="container-x relative">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">About us</span>
-            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight">A modern warehousing partner for ambitious brands.</h1>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">{aboutPage.eyebrow}</span>
+            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">{aboutPage.headline}</h1>
             <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed">
-              CoreWarehousing was built by supply-chain operators who believe growing brands deserve better logistics.
+              {aboutPage.subheadline}
             </p>
           </motion.div>
         </div>
@@ -40,23 +46,19 @@ function About() {
           <Reveal>
             <div className="h-full rounded-3xl border border-border bg-card p-8 md:p-10 shadow-card-soft">
               <div className="grid h-12 w-12 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
-                <Compass className="h-6 w-6" />
+                <VisionIcon className="h-6 w-6" />
               </div>
-              <h2 className="mt-6 text-2xl md:text-3xl font-bold text-navy">Our Vision</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                To be the most trusted warehousing and 3PL partner for growing brands — recognized for reliability, transparency and operational excellence at every scale.
-              </p>
+              <h2 className="mt-6 text-2xl md:text-3xl font-bold text-navy font-heading">{visionMission.vision.title}</h2>
+              <p className="mt-4 text-muted-foreground leading-relaxed">{visionMission.vision.text}</p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="h-full rounded-3xl border border-border bg-card p-8 md:p-10 shadow-card-soft">
               <div className="grid h-12 w-12 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
-                <Target className="h-6 w-6" />
+                <MissionIcon className="h-6 w-6" />
               </div>
-              <h2 className="mt-6 text-2xl md:text-3xl font-bold text-navy">Our Mission</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                To simplify warehousing and fulfillment for B2B and D2C brands — combining professional operations, marketplace integrations and hands-on support so our clients can focus on growth.
-              </p>
+              <h2 className="mt-6 text-2xl md:text-3xl font-bold text-navy font-heading">{visionMission.mission.title}</h2>
+              <p className="mt-4 text-muted-foreground leading-relaxed">{visionMission.mission.text}</p>
             </div>
           </Reveal>
         </div>
@@ -70,21 +72,15 @@ function About() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="grid h-12 w-12 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
-              <Sparkles className="h-6 w-6" />
+              <StoryIcon className="h-6 w-6" />
             </div>
-            <h2 className="mt-6 text-3xl md:text-4xl font-bold text-navy">Our Story</h2>
-            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
-              CoreWarehousing started with a clear conviction: modern brands were being underserved by outdated warehousing options. The team came together to build an alternative — one that pairs disciplined operations with the technology brands expect today.
-            </p>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Since day one, we've focused on operational excellence: accurate inbound receipt, disciplined inventory practices, dependable dispatch and professional support. Today we serve brands across eCommerce, retail, FMCG, electronics, fashion, manufacturing, consumer goods, automotive and healthcare.
-            </p>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Everything we do is grounded in one belief — that your logistics partner should feel like an extension of your own team.
-            </p>
+            <h2 className="mt-6 text-3xl md:text-4xl font-bold text-navy font-heading">{story.title}</h2>
+            {story.paragraphs.map((p) => (
+              <p key={p.slice(0, 20)} className="mt-4 text-muted-foreground leading-relaxed">{p}</p>
+            ))}
             <div className="mt-8">
               <Link to="/contact" className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant">
-                Partner with us <ArrowRight className="h-4 w-4" />
+                {story.cta} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>

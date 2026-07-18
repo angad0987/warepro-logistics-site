@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { IconCallouts } from "@/components/IconCallouts";
+import { whyChooseUsPage } from "@/content/why-choose-us";
 
 export const Route = createFileRoute("/why-choose-us")({
   head: () => ({
@@ -26,25 +27,25 @@ function WhyChooseUs() {
         <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_30%_30%,oklch(0.85_0.18_92_/_0.4),transparent_50%)]" />
         <div className="container-x relative">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Why choose us</span>
-            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight">Reasons brands trust CoreWarehousing.</h1>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">{whyChooseUsPage.eyebrow}</span>
+            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">{whyChooseUsPage.headline}</h1>
             <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed">
-              Six values we deliver on — every day, at every facility, for every client.
+              {whyChooseUsPage.subheadline}
             </p>
           </motion.div>
         </div>
       </section>
 
       <IconCallouts
-        eyebrow="Our promise"
-        title="Six reasons brands trust us."
-        intro="Each value is delivered daily by our operations team — not a marketing tagline."
+        eyebrow={whyChooseUsPage.calloutEyebrow}
+        title={whyChooseUsPage.calloutTitle}
+        intro={whyChooseUsPage.calloutIntro}
       />
 
       <section className="pb-24 -mt-8">
         <div className="container-x text-center">
           <Link to="/contact" className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant hover:scale-[1.03] transition-transform">
-            Start a conversation <ArrowRight className="h-4 w-4" />
+            {whyChooseUsPage.cta} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

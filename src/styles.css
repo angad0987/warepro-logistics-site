@@ -1,3 +1,5 @@
+@import '@fontsource-variable/sora';
+@import '@fontsource-variable/inter';
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -37,8 +39,8 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-steel: var(--steel);
 
-  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: 'Sora Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -123,7 +125,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4, h5 { font-family: var(--font-heading); letter-spacing: -0.02em; }
 }
 
 @utility container-x {

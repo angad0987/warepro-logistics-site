@@ -5,6 +5,7 @@ import { z } from "zod";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
+import { contactPage, contactInfoCards, formLabels, businessTypes, volumeOptions, warehouseNeeds } from "@/content/contact";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,35 +20,6 @@ export const Route = createFileRoute("/contact")({
   }),
   component: Contact,
 });
-
-const businessTypes = [
-  "D2C / eCommerce Brand",
-  "B2B Distributor / Wholesaler",
-  "Manufacturer",
-  "Retailer",
-  "3PL Partner",
-  "Other",
-];
-
-const volumeOptions = [
-  "Less than 500 orders / month",
-  "500 – 2,000 orders / month",
-  "2,000 – 10,000 orders / month",
-  "10,000 – 50,000 orders / month",
-  "50,000+ orders / month",
-  "Not sure — need consultation",
-];
-
-const warehouseNeeds = [
-  "Shared warehousing",
-  "Dedicated warehousing",
-  "eCommerce fulfillment",
-  "B2B / bulk fulfillment",
-  "Cross-docking",
-  "Reverse logistics",
-  "Packaging & kitting",
-  "Multiple / not sure yet",
-];
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -96,10 +68,10 @@ function Contact() {
         <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_30%_30%,oklch(0.85_0.18_92_/_0.4),transparent_50%)]" />
         <div className="container-x relative">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Get in touch</span>
-            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight">Let's build a smarter supply chain — together.</h1>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">{contactPage.eyebrow}</span>
+            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">{contactPage.headline}</h1>
             <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed">
-              Share your requirements and our team will respond within a few business hours with a tailored proposal.
+              {contactPage.subheadline}
             </p>
           </motion.div>
         </div>
@@ -109,41 +81,41 @@ function Contact() {
         <div className="container-x grid lg:grid-cols-[1.4fr_1fr] gap-10">
           <Reveal>
             <div className="rounded-3xl border border-border bg-card p-7 md:p-10 shadow-card-soft">
-              <h2 className="text-2xl md:text-3xl font-bold text-navy">Request a detailed quote</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">{contactPage.formTitle}</h2>
               <p className="mt-2 text-muted-foreground">
-                A short form built to qualify your B2B / 3PL requirement — the more you share, the sharper our proposal.
+                {contactPage.formDescription}
               </p>
 
               {submitted ? (
                 <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/10 p-6 flex items-start gap-4">
                   <CheckCircle2 className="h-8 w-8 text-primary shrink-0" />
                   <div>
-                    <h3 className="font-bold text-navy">Thanks — we received your request!</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Your email client should have opened with the details. We'll respond within a few business hours.</p>
-                    <button onClick={() => setSubmitted(false)} className="mt-4 text-sm font-semibold text-primary">Submit another request</button>
+                    <h3 className="font-bold text-navy font-heading">{contactPage.successTitle}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{contactPage.successMessage}</p>
+                    <button onClick={() => setSubmitted(false)} className="mt-4 text-sm font-semibold text-primary">{contactPage.successRetry}</button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={onSubmit} className="mt-8 grid sm:grid-cols-2 gap-5" noValidate>
-                  <Field label="Name" name="name" error={errors.name} placeholder="Your full name" />
-                  <Field label="Company Name" name="company" error={errors.company} placeholder="Your company" />
+                  <Field label={formLabels.name} name="name" error={errors.name} placeholder={formLabels.namePlaceholder} />
+                  <Field label={formLabels.company} name="company" error={errors.company} placeholder={formLabels.companyPlaceholder} />
 
-                  <Select label="Business Type" name="businessType" options={businessTypes} error={errors.businessType} placeholder="Select business type" />
-                  <Select label="Monthly Order / Inventory Volume" name="volume" options={volumeOptions} error={errors.volume} placeholder="Select volume range" />
+                  <Select label={formLabels.businessType} name="businessType" options={businessTypes} error={errors.businessType} placeholder={formLabels.businessTypePlaceholder} />
+                  <Select label={formLabels.volume} name="volume" options={volumeOptions} error={errors.volume} placeholder={formLabels.volumePlaceholder} />
 
                   <div className="sm:col-span-2">
-                    <Select label="Warehouse Needs" name="warehouseNeeds" options={warehouseNeeds} error={errors.warehouseNeeds} placeholder="Select requirement" />
+                    <Select label={formLabels.warehouseNeeds} name="warehouseNeeds" options={warehouseNeeds} error={errors.warehouseNeeds} placeholder={formLabels.warehouseNeedsPlaceholder} />
                   </div>
 
-                  <Field label="Contact Number" name="phone" type="tel" error={errors.phone} placeholder="+91 98765 43210" />
-                  <Field label="Email" name="email" type="email" error={errors.email} placeholder="you@company.com" />
+                  <Field label={formLabels.phone} name="phone" type="tel" error={errors.phone} placeholder={formLabels.phonePlaceholder} />
+                  <Field label={formLabels.email} name="email" type="email" error={errors.email} placeholder={formLabels.emailPlaceholder} />
 
                   <div className="sm:col-span-2">
-                    <Label>Anything else? (optional)</Label>
+                    <Label>{formLabels.messageLabel}</Label>
                     <textarea
                       name="message"
                       rows={4}
-                      placeholder="Tell us about your SKUs, geographies, timelines or special requirements..."
+                      placeholder={formLabels.messagePlaceholder}
                       className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition resize-none"
                     />
                   </div>
@@ -152,10 +124,10 @@ function Contact() {
                     type="submit"
                     className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant hover:scale-[1.01] transition-transform"
                   >
-                    Send Request <Send className="h-4 w-4" />
+                    {contactPage.submitLabel} <Send className="h-4 w-4" />
                   </button>
                   <p className="sm:col-span-2 text-xs text-muted-foreground text-center">
-                    Submitting opens your email client with the request pre-filled to {BRAND.email}.
+                    {contactPage.privacyNote}{BRAND.email}.
                   </p>
                 </form>
               )}
@@ -164,16 +136,17 @@ function Contact() {
 
           <Reveal delay={0.1}>
             <div className="space-y-5">
-              <InfoCard icon={MapPin} title="Head Office">{BRAND.address}</InfoCard>
-              <InfoCard icon={Phone} title="Phone">
+              <InfoCard icon={MapPin} title={contactInfoCards.headOffice}>{BRAND.address}</InfoCard>
+              <InfoCard icon={Phone} title={contactInfoCards.phone}>
                 <a href={BRAND.phoneHref} className="hover:text-primary">{BRAND.phone}</a>
               </InfoCard>
-              <InfoCard icon={Mail} title="Email">
+              <InfoCard icon={Mail} title={contactInfoCards.email}>
                 <a href={`mailto:${BRAND.email}`} className="hover:text-primary">{BRAND.email}</a>
               </InfoCard>
-              <InfoCard icon={Clock} title="Business Hours">
-                Mon – Sat: 9:00 AM – 7:00 PM<br />
-                Sun: Closed (24/7 Ops on request)
+              <InfoCard icon={Clock} title={contactInfoCards.businessHours}>
+                {contactInfoCards.businessHoursDetail.split("\n").map((line, i) => (
+                  <span key={i}>{line}{i === 0 ? <br /> : null}</span>
+                ))}
               </InfoCard>
 
               <a
@@ -186,8 +159,8 @@ function Contact() {
                 <div className="flex items-center gap-3">
                   <MessageCircle className="h-6 w-6" />
                   <div>
-                    <div className="font-semibold">Chat on WhatsApp</div>
-                    <div className="text-xs text-white/85">Fast replies during business hours</div>
+                    <div className="font-semibold">{contactInfoCards.whatsappHeadline}</div>
+                    <div className="text-xs text-white/85">{contactInfoCards.whatsappSubtext}</div>
                   </div>
                 </div>
                 <span className="text-xl">→</span>

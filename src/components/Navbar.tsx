@@ -1,18 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, PackageCheck } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BRAND } from "@/lib/brand";
-
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/industries", label: "Industries" },
-  { to: "/why-choose-us", label: "Why Us" },
-  { to: "/about", label: "About" },
-  { to: "/blog", label: "Blog" },
-  { to: "/contact", label: "Contact" },
-];
+import { navLinks, ctaLabel } from "@/content/nav";
+import logoImg from "@/assets/logo.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,23 +27,23 @@ export function Navbar() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="grid h-10 w-10 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
-            <PackageCheck className="h-5 w-5" />
+          <span className="grid h-14 w-14 place-items-center rounded-full overflow-hidden">
+            <img src={logoImg} alt="CoreWarehousing" className="h-14 w-14 object-cover" />
           </span>
-          <span className={`font-display text-lg font-bold tracking-tight ${scrolled ? "text-foreground" : "text-white"}`}>
-            Core<span className="text-primary">Warehousing</span>
+          <span className={`font-heading text-xl font-bold tracking-tight ${scrolled ? "text-foreground" : "text-white"}`}>
+            Core<span>Warehousing</span>
           </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm font-medium transition-colors ${
-                scrolled ? "text-foreground/80 hover:text-primary" : "text-white/85 hover:text-white"
+              className={`text-sm font-medium transition-all ${
+                scrolled ? "text-foreground/80 hover:font-bold hover:underline" : "text-white/85 hover:font-bold hover:underline"
               }`}
-              activeProps={{ className: scrolled ? "text-primary" : "text-white" }}
+              activeProps={{ className: scrolled ? "font-bold underline" : "text-white font-bold underline" }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}
@@ -64,7 +56,7 @@ export function Navbar() {
             to="/contact"
             className="inline-flex items-center rounded-full gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]"
           >
-            Get a Quote
+            {ctaLabel}
           </Link>
         </div>
 
@@ -88,12 +80,12 @@ export function Navbar() {
             className="lg:hidden bg-background border-b border-border"
           >
             <div className="container-x py-4 flex flex-col gap-1">
-              {links.map((l) => (
+              {navLinks.map((l) => (
                 <Link
                   key={l.to}
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className="px-3 py-3 rounded-lg text-foreground hover:bg-muted text-base font-medium"
+                  className="px-3 py-3 rounded-lg text-foreground hover:font-bold hover:underline text-base font-medium"
                 >
                   {l.label}
                 </Link>
@@ -103,7 +95,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-2 inline-flex items-center justify-center rounded-full gradient-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
               >
-                Get a Quote
+                {ctaLabel}
               </Link>
             </div>
           </motion.div>

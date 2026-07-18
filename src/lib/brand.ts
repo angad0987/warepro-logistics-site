@@ -5,7 +5,7 @@ export const BRAND = {
   phoneHref: "tel:+919876543210",
   whatsapp: "919876543210",
   whatsappUrl: "https://wa.me/919876543210?text=Hi%20CoreWarehousing%2C%20I%27d%20like%20a%20quote.",
-  email: "hello@corewarehousing.com",
+  email: "nandhasaksham@gmail.com",
   address: "Plot 42, Logistics Park, Bhiwandi, Maharashtra 421302, India",
   mapQuery: "Bhiwandi+Logistics+Park",
 };

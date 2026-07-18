@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { PackageCheck, Mail, Phone, MapPin, Globe, Send, Share2, Camera } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
+import { footerCompanyLinks, footerServicesLinks, footerDescription, footerTagline } from "@/content/nav";
 
 export function Footer() {
   return (
@@ -12,10 +13,10 @@ export function Footer() {
             <span className="grid h-10 w-10 place-items-center rounded-xl gradient-primary text-primary-foreground">
               <PackageCheck className="h-5 w-5" />
             </span>
-            <span className="font-display text-lg font-bold text-white">Core<span className="text-primary">Warehousing</span></span>
+            <span className="font-heading text-lg font-bold text-white">Core<span className="text-primary">Warehousing</span></span>
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-white/65">
-            {BRAND.tagline}. Reliable, scalable, technology-driven logistics for growing brands.
+            {BRAND.tagline}. {footerDescription}
           </p>
           <div className="mt-6 flex gap-3">
             {[Globe, Send, Share2, Camera].map((Icon, i) => (
@@ -27,25 +28,20 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white text-sm font-semibold mb-4">Company</h4>
+          <h4 className="text-white text-sm font-semibold mb-4">{footerCompanyLinks.title}</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/about" className="hover:text-white">About Us</Link></li>
-            <li><Link to="/why-choose-us" className="hover:text-white">Why Choose Us</Link></li>
-            <li><Link to="/industries" className="hover:text-white">Industries</Link></li>
-            <li><Link to="/blog" className="hover:text-white">Blog</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+            {footerCompanyLinks.links.map((l) => (
+              <li key={l.to + l.label}><Link to={l.to} className="hover:text-white">{l.label}</Link></li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="text-white text-sm font-semibold mb-4">Services</h4>
+          <h4 className="text-white text-sm font-semibold mb-4">{footerServicesLinks.title}</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/services" className="hover:text-white">Warehousing</Link></li>
-            <li><Link to="/services" className="hover:text-white">Inventory Management</Link></li>
-            <li><Link to="/services" className="hover:text-white">B2B Fulfillment</Link></li>
-            <li><Link to="/services" className="hover:text-white">eCommerce Fulfillment</Link></li>
-            <li><Link to="/services" className="hover:text-white">Transportation</Link></li>
-            <li><Link to="/services" className="hover:text-white">Cross Docking</Link></li>
+            {footerServicesLinks.links.map((l) => (
+              <li key={l.to + l.label}><Link to={l.to} className="hover:text-white">{l.label}</Link></li>
+            ))}
           </ul>
         </div>
 
@@ -61,7 +57,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/55">
           <p>© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
-          <p>Built for modern supply chains.</p>
+          <p>{footerTagline}</p>
         </div>
       </div>
     </footer>
