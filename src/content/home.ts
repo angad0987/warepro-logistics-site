@@ -98,6 +98,9 @@ export interface QuickEnquiryContent {
   businessTypes: string[];
   buttonLabel: string;
   successMessage: string;
+  errorApiMessage: string;
+  errorNetworkMessage: string;
+  submittingLabel: string;
   privacyNotice: string;
 }
 
@@ -107,6 +110,9 @@ export const quickEnquiry: QuickEnquiryContent = {
   subheadline: "Tell us who you are — our team responds fast.",
   businessTypes: ["D2C / eCommerce Brand", "B2B Distributor", "Manufacturer", "Retailer", "3PL Partner", "Other"],
   buttonLabel: "Request Callback",
-  successMessage: "Thanks! Opening your email…",
+  successMessage: "Thank you! Your callback request has been submitted successfully. Our team will contact you shortly.",
+  errorApiMessage: "Unable to submit your request. Please try again.",
+  errorNetworkMessage: "Something went wrong. Please check your internet connection and try again.",
+  submittingLabel: "Submitting...",
   privacyNotice: "By submitting, you agree to be contacted about your enquiry.",
 };
