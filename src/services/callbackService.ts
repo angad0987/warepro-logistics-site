@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyIDgKIXvf-cSVLSETIYqjMN7QPsfIuWhm1ogBG6cnvyroF_7iig6DXbk1qe6OHpLz_Og/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkbuBBcfRZMpUHB8N-R1__Ud4PkmMeSAv6hUufTVZEgO7do3zRHDTEqA20jZTcuLWDBQ/exec";
 
 export interface CallbackSuccessResponse {
   success: true;
@@ -45,6 +45,7 @@ export async function submitCallbackRequest(data: {
   business: string;
   phone: string;
   email: string;
+  token: string;
 }): Promise<CallbackResponse> {
   const response = await fetch(APPS_SCRIPT_URL, {
     method: "POST",

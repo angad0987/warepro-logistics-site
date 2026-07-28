@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { ArrowRight, CheckCircle2, Send, Quote } from "lucide-react";
@@ -11,6 +12,7 @@ import { BRAND } from "@/lib/brand";
 import { HowItWorks } from "@/components/HowItWorks";
 import { IconCallouts } from "@/components/IconCallouts";
 import { DynamicIcon } from "@/lib/DynamicIcon";
+import { Turnstile } from "react-turnstile";
 import {
   hero,
   brandStory,
@@ -28,7 +30,7 @@ import flipkartLogo from "@/assets/flipkartlogo.png";
 import shopifyLogo from "@/assets/shopify-seeklogo.png";
 import woocommerceLogo from "@/assets/woocommerce-seeklogo.png";
 import meeshoLogo from "@/assets/meesho-seeklogo.png";
-
+const TURNSTILE_SITE_KEY = "0x4AAAAAAD-QgbU_QzuaLLUM";
 const platformLogoMap: Record<string, string> = {
   amazonlogo: amazonLogo,
   flipkartlogo: flipkartLogo,
@@ -328,6 +330,12 @@ function Home() {
   );
 }
 
+function ClientOnly({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted ? <>{children}</> : null;
+}
+
 function QuickEnquiry() {
   const [name, setName] = useState("");
   const [businessType, setBusinessType] = useState("");
@@ -337,6 +345,7 @@ function QuickEnquiry() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [token, setToken] = useState("");
 
   const resetForm = () => {
     setName("");
@@ -349,6 +358,10 @@ function QuickEnquiry() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!token) {
+      setErrorMessage("Please complete the security verification.");
+      return;
+    }
 
     if (isSubmitting) return;
 
@@ -375,7 +388,8 @@ function QuickEnquiry() {
         business: parsed.data.businessType,
         phone: parsed.data.phone,
         email: parsed.data.email,
-      });
+        token: token,
+      })
 
       if (result.success) {
         resetForm();
@@ -497,9 +511,23 @@ function QuickEnquiry() {
               {errorMessage}
             </div>
           )}
+          <ClientOnly>
+            <Turnstile
+              sitekey={TURNSTILE_SITE_KEY}
+              onVerify={(token) => {
+                setToken(token);
+              }}
+              onExpire={() => {
+                setToken("");
+              }}
+              onError={() => {
+                setToken("");
+              }}
+            />
+          </ClientOnly>
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={!token || isSubmitting}
             className="w-full inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {isSubmitting ? quickEnquiry.submittingLabel : quickEnquiry.buttonLabel}
