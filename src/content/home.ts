@@ -10,8 +10,8 @@ export interface HeroContent {
 
 export const hero: HeroContent = {
   badge: "B2B Warehousing & 3PL Fulfillment",
-  headline: "Warehousing that ",
-  headlineHighlight: "scales with your brand.",
+  headline: "Warehouses designed to keep your ",
+  headlineHighlight: "inventory safe and business moving.",
   subheadline:
     "CoreWarehousing runs the storage, inventory and fulfillment backbone behind ambitious B2B and D2C companies — reliably, and at any volume.",
   benefits: [
@@ -35,11 +35,11 @@ export interface BrandStoryContent {
 }
 
 export const brandStory: BrandStoryContent = {
-  eyebrow: "Our story",
+  eyebrow: "Discover Our Story",
   headline: "Built by supply-chain operators, for growing brands.",
   paragraphs: [
-    "CoreWarehousing was founded to solve a simple problem: modern brands need warehousing that keeps pace with their growth — without the overhead of running their own operations.",
-    "Today we operate strategically located facilities, integrate with every major marketplace, and provide dedicated support to B2B distributors, D2C brands and 3PL partners across the country.",
+    "We don't see warehousing just as a storage instead we see it as the backbone of every successful supply chain. Every pallet stored, every carton handled, and every shipment dispatched plays a vital role in keeping businesses moving forward.",
+    "Core Warehousing was created to redefine how businesses experience warehousing. We believe storage is more than space. It's the foundation of an efficient supply chain. By combining trusted warehouse partnerships with standardized operations and smart inventory management, we help businesses grow with confidence.",
   ],
   ctaPrimary: "About Us",
   ctaSecondary: "Why Choose Us",
@@ -66,17 +66,19 @@ export interface PlatformsSectionContent {
 export const platformsSection: PlatformsSectionContent = {
   eyebrow: "Integrations",
   headline: "Plug into the platforms you already sell on.",
-  subheadline: "Native marketplace integrations for seamless order flow and inventory sync.",
+  subheadline: "Native marketplace integrations launching soon — seamless order flow and inventory sync, right out of the box.",
 };
 
 export interface TestimonialsSectionContent {
   eyebrow: string;
   headline: string;
+  subheadline: string;
 }
 
 export const testimonialsSection: TestimonialsSectionContent = {
   eyebrow: "Trusted by brands",
-  headline: "Real results, from real partners.",
+  headline: "Real results, coming soon.",
+  subheadline: "We're gathering success stories from our partners. Check back soon.",
 };
 
 export interface CTASectionContent {
@@ -86,9 +88,9 @@ export interface CTASectionContent {
 }
 
 export const ctaSection: CTASectionContent = {
-  headline: "Ready to optimize your supply chain?",
-  subheadline: "Share your volumes and we'll build a tailored 3PL proposal within 24 hours.",
-  cta: "Request Free Quote",
+  headline: "Ready to simplify your warehousing?",
+  subheadline: "Every business has unique storage and fulfillment needs. Tell us about yours and get a tailored solution.",
+  cta: "Request Quote",
 };
 
 export interface QuickEnquiryContent {
@@ -106,7 +108,7 @@ export interface QuickEnquiryContent {
 
 export const quickEnquiry: QuickEnquiryContent = {
   eyebrow: "Quick Enquiry",
-  headline: "Get a callback in minutes.",
+  headline: "Get a callback or quick call us.",
   subheadline: "Tell us who you are — our team responds fast.",
   businessTypes: ["D2C / eCommerce Brand", "B2B Distributor", "Manufacturer", "Retailer", "3PL Partner", "Other"],
   buttonLabel: "Request Callback",

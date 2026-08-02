@@ -3,8 +3,8 @@ import { getIcon } from "@/lib/icons";
 import { whyChooseUs } from "@/content/why-choose-us";
 
 export function IconCallouts({
-  eyebrow = "Why CoreWarehousing",
-  title = "Built for ambitious supply chains.",
+  eyebrow = "Why partner with us",
+  title = "Built for modern suplly chain.",
   intro,
   variant = "light",
 }: {

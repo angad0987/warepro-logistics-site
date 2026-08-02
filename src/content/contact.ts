@@ -8,7 +8,9 @@ export interface ContactPageContent {
   successMessage: string;
   successRetry: string;
   submitLabel: string;
+  submitLoadingLabel: string;
   privacyNote: string;
+  errorNetworkMessage: string;
 }
 
 export const contactPage: ContactPageContent = {
@@ -18,10 +20,12 @@ export const contactPage: ContactPageContent = {
   formTitle: "Request a detailed quote",
   formDescription: "A short form built to qualify your B2B / 3PL requirement — the more you share, the sharper our proposal.",
   successTitle: "Thanks — we received your request!",
-  successMessage: "Your email client should have opened with the details. We'll respond within a few business hours.",
+  successMessage: "Your detailed quote request has been submitted. Our team will reach out within a few business hours with a tailored proposal.",
   successRetry: "Submit another request",
   submitLabel: "Send Request",
-  privacyNote: "Submitting opens your email client with the request pre-filled to ",
+  submitLoadingLabel: "Sending...",
+  privacyNote: "Your details are secure and used only to prepare your quote.",
+  errorNetworkMessage: "Something went wrong. Please check your internet connection and try again.",
 };
 
 export const businessTypes: string[] = [

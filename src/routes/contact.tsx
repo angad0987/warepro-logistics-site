@@ -1,11 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { z } from "zod";
-import { Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle2 } from "lucide-react";
+import { ClipboardList, SearchCheck, PhoneCall, FileText, Warehouse, Send, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
-import { contactPage, contactInfoCards, formLabels, businessTypes, volumeOptions, warehouseNeeds } from "@/content/contact";
+import { contactPage, formLabels, businessTypes, volumeOptions, warehouseNeeds } from "@/content/contact";
+import { submitCallbackRequest } from "@/services/callbackService";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
+import {
+  GeoapifyContext,
+  GeoapifyGeocoderAutocomplete,
+} from "@geoapify/react-geocoder-autocomplete";
+import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+import "@/geoapify-overrides.css";
+
+const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -22,26 +32,73 @@ export const Route = createFileRoute("/contact")({
 });
 
 const schema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
+  name: z.string().trim().min(1, "Required").max(100),
   company: z.string().trim().min(1, "Company name is required").max(120),
   businessType: z.string().min(1, "Select a business type"),
   volume: z.string().min(1, "Select your monthly volume"),
   warehouseNeeds: z.string().min(1, "Select your warehouse need"),
-  phone: z.string().trim().min(5, "Phone is required").max(40),
-  email: z.string().trim().email("Enter a valid email").max(255),
+  phone: z.string().trim().min(8, "Valid phone required").max(20),
+  email: z.string().trim().email("Valid email required"),
+  city: z.string().min(2, "City is required").max(100, "City is too long"),
   message: z.string().trim().max(1000).optional(),
 });
 
-function Contact() {
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
+const timelineSteps = [
+  { icon: ClipboardList, title: "Submit Your Requirement", desc: "Fill in the enquiry form with your warehousing, fulfilment or logistics requirements.", badge: "~2 minutes" },
+  { icon: SearchCheck, title: "Requirement Review", desc: "Our logistics specialists carefully review your business needs and operational requirements.", badge: "Within 2 Business Hours" },
+  { icon: PhoneCall, title: "Consultation Call", desc: "A warehouse expert contacts you to discuss inventory, storage, fulfilment and transportation requirements.", badge: "15–30 mins" },
+  { icon: FileText, title: "Receive Custom Proposal", desc: "We prepare a tailored quotation with pricing, storage recommendations and service options.", badge: "Same Day / Next Business Day" },
+  { icon: Warehouse, title: "Start Operations", desc: "After approval, inventory onboarding begins and your warehouse operations go live.", badge: "Fast Onboarding" },
+];
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const trustFeatures = ["Fast Response", "Dedicated Logistics Expert", "Tailored Pricing", "Scalable Warehousing"];
+
+function Contact() {
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [volume, setVolume] = useState("");
+  const [warehouseNeed, setWarehouseNeed] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [city, setCity] = useState("");
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const selectedPlaceRef = useRef<any>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [token, setToken] = useState("");
+
+  const resetForm = () => {
+    setName("");
+    setCompany("");
+    setBusinessType("");
+    setVolume("");
+    setWarehouseNeed("");
+    setPhone("");
+    setEmail("");
+    setMessage("");
+    setCity("");
+    setSelectedPlace(null);
+    selectedPlaceRef.current = null;
+    setErrors({});
+    setErrorMessage("");
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const data = Object.fromEntries(fd.entries());
+    if (!token) {
+      setErrorMessage("Please complete the security verification.");
+      return;
+    }
+
+    if (isSubmitting) return;
+
+    const data = { name, company, businessType, volume, warehouseNeeds: warehouseNeed, phone, email, city, message };
     const parsed = schema.safeParse(data);
+
     if (!parsed.success) {
       const errs: Record<string, string> = {};
       parsed.error.issues.forEach((i) => {
@@ -51,15 +108,64 @@ function Contact() {
       setErrors(errs);
       return;
     }
+
     setErrors({});
-    const d = parsed.data;
-    const subject = encodeURIComponent(`Quote request from ${d.company}`);
-    const body = encodeURIComponent(
-      `Name: ${d.name}\nCompany: ${d.company}\nBusiness Type: ${d.businessType}\nMonthly Volume: ${d.volume}\nWarehouse Needs: ${d.warehouseNeeds}\nPhone: ${d.phone}\nEmail: ${d.email}\n\nMessage:\n${d.message ?? ""}`
-    );
-    window.location.href = `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
-    form.reset();
+    setErrorMessage("");
+    setIsSubmitting(true);
+
+    try {
+      const result = await submitCallbackRequest({
+        name: parsed.data.name,
+        business: parsed.data.businessType,
+        city: parsed.data.city,
+        phone: parsed.data.phone,
+        email: parsed.data.email,
+        token: token,
+        formType: "DETAILED_QUOTE",
+        companyName: parsed.data.company,
+        monthlyOrder: parsed.data.volume,
+        warehouseType: parsed.data.warehouseNeeds,
+        message: parsed.data.message
+      });
+
+      if (result.success) {
+        resetForm();
+        setErrors({});
+        setErrorMessage("");
+        setSubmitted(true);
+        return;
+      }
+
+      switch (result.type) {
+        case "VALIDATION_ERROR": {
+          const mapped: Record<string, string> = {};
+          if (result.errors) {
+            for (const [key, value] of Object.entries(result.errors)) {
+              mapped[key === "business" ? "businessType" : key] = value;
+            }
+          }
+          setErrors(mapped);
+          setErrorMessage("");
+          break;
+        }
+        case "SECURITY_ERROR":
+          setErrorMessage(result.message);
+          break;
+        case "DUPLICATE_ERROR":
+          setErrorMessage(result.message);
+          break;
+        case "SERVER_ERROR":
+          setErrorMessage(result.message);
+          break;
+        default:
+          setErrorMessage("Something went wrong.");
+          break;
+      }
+    } catch {
+      setErrorMessage(contactPage.errorNetworkMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -78,7 +184,7 @@ function Contact() {
       </section>
 
       <section className="py-20">
-        <div className="container-x grid lg:grid-cols-[1.4fr_1fr] gap-10">
+        <div className="container-x grid lg:grid-cols-[1.4fr_1fr] gap-14">
           <Reveal>
             <div className="rounded-3xl border border-border bg-card p-7 md:p-10 shadow-card-soft">
               <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">{contactPage.formTitle}</h2>
@@ -97,18 +203,59 @@ function Contact() {
                 </div>
               ) : (
                 <form onSubmit={onSubmit} className="mt-8 grid sm:grid-cols-2 gap-5" noValidate>
-                  <Field label={formLabels.name} name="name" error={errors.name} placeholder={formLabels.namePlaceholder} />
-                  <Field label={formLabels.company} name="company" error={errors.company} placeholder={formLabels.companyPlaceholder} />
+                  <Field label={formLabels.name} name="name" error={errors.name} placeholder={formLabels.namePlaceholder} value={name} onChange={setName} />
+                  <Field label={formLabels.company} name="company" error={errors.company} placeholder={formLabels.companyPlaceholder} value={company} onChange={setCompany} />
 
-                  <Select label={formLabels.businessType} name="businessType" options={businessTypes} error={errors.businessType} placeholder={formLabels.businessTypePlaceholder} />
-                  <Select label={formLabels.volume} name="volume" options={volumeOptions} error={errors.volume} placeholder={formLabels.volumePlaceholder} />
+                  <Select label={formLabels.businessType} name="businessType" options={businessTypes} error={errors.businessType} placeholder={formLabels.businessTypePlaceholder} value={businessType} onChange={setBusinessType} />
+                  <Select label={formLabels.volume} name="volume" options={volumeOptions} error={errors.volume} placeholder={formLabels.volumePlaceholder} value={volume} onChange={setVolume} />
 
                   <div className="sm:col-span-2">
-                    <Select label={formLabels.warehouseNeeds} name="warehouseNeeds" options={warehouseNeeds} error={errors.warehouseNeeds} placeholder={formLabels.warehouseNeedsPlaceholder} />
+                    <Select label={formLabels.warehouseNeeds} name="warehouseNeeds" options={warehouseNeeds} error={errors.warehouseNeeds} placeholder={formLabels.warehouseNeedsPlaceholder} value={warehouseNeed} onChange={setWarehouseNeed} />
                   </div>
 
-                  <Field label={formLabels.phone} name="phone" type="tel" error={errors.phone} placeholder={formLabels.phonePlaceholder} />
-                  <Field label={formLabels.email} name="email" type="email" error={errors.email} placeholder={formLabels.emailPlaceholder} />
+                  <Field label={formLabels.phone} name="phone" type="tel" error={errors.phone} placeholder={formLabels.phonePlaceholder} value={phone} onChange={setPhone} />
+                  <Field label={formLabels.email} name="email" type="email" error={errors.email} placeholder={formLabels.emailPlaceholder} value={email} onChange={setEmail} />
+
+                  <div className="sm:col-span-2">
+                    <Label>City</Label>
+                    <div
+                      className="mt-2 contact-geoapify"
+                      onBlur={() => {
+                        setTimeout(() => {
+                          if (!selectedPlaceRef.current) setCity("");
+                        }, 200);
+                      }}
+                    >
+                      <GeoapifyContext apiKey={GEOAPIFY_API_KEY}>
+                        <GeoapifyGeocoderAutocomplete
+                          placeholder="Enter your city"
+                          type="city"
+                          filterByCountryCode={["in"]}
+                          limit={5}
+                          debounceDelay={500}
+                          skipIcons={true}
+                          value={city}
+                          placeSelect={(place) => {
+                            if (!place) return;
+                            setSelectedPlace(place);
+                            selectedPlaceRef.current = place;
+                            setCity(place.properties.city ?? "");
+                          }}
+                          onUserInput={(value) => {
+                            setSelectedPlace(null);
+                            selectedPlaceRef.current = null;
+                            setCity(value);
+                          }}
+                          onClear={() => {
+                            setSelectedPlace(null);
+                            selectedPlaceRef.current = null;
+                            setCity("");
+                          }}
+                        />
+                      </GeoapifyContext>
+                    </div>
+                    {errors.city && <p className="mt-1.5 text-xs text-destructive">{errors.city}</p>}
+                  </div>
 
                   <div className="sm:col-span-2">
                     <Label>{formLabels.messageLabel}</Label>
@@ -116,18 +263,31 @@ function Contact() {
                       name="message"
                       rows={4}
                       placeholder={formLabels.messagePlaceholder}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition resize-none"
                     />
                   </div>
 
+                  {errorMessage && (
+                    <div className="sm:col-span-2 rounded-xl bg-red-50 border border-red-300 p-3 text-sm text-red-600">
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  <div className="sm:col-span-2">
+                    <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
+                  </div>
+
                   <button
                     type="submit"
-                    className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant hover:scale-[1.01] transition-transform"
+                    disabled={!token || isSubmitting}
+                    className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant hover:scale-[1.01] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    {contactPage.submitLabel} <Send className="h-4 w-4" />
+                    {isSubmitting ? contactPage.submitLoadingLabel : contactPage.submitLabel} {!isSubmitting && <Send className="h-4 w-4" />}
                   </button>
                   <p className="sm:col-span-2 text-xs text-muted-foreground text-center">
-                    {contactPage.privacyNote}{BRAND.email}.
+                    {contactPage.privacyNote}
                   </p>
                 </form>
               )}
@@ -135,36 +295,46 @@ function Contact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="space-y-5">
-              <InfoCard icon={MapPin} title={contactInfoCards.headOffice}>{BRAND.address}</InfoCard>
-              <InfoCard icon={Phone} title={contactInfoCards.phone}>
-                <a href={BRAND.phoneHref} className="hover:text-primary">{BRAND.phone}</a>
-              </InfoCard>
-              <InfoCard icon={Mail} title={contactInfoCards.email}>
-                <a href={`mailto:${BRAND.email}`} className="hover:text-primary">{BRAND.email}</a>
-              </InfoCard>
-              <InfoCard icon={Clock} title={contactInfoCards.businessHours}>
-                {contactInfoCards.businessHoursDetail.split("\n").map((line, i) => (
-                  <span key={i}>{line}{i === 0 ? <br /> : null}</span>
-                ))}
-              </InfoCard>
+            <div className="space-y-4 lg:-mt-8">
+              <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
+                <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">What Happens Next?</h2>
+                <p className="mt-4 text-muted-foreground">From your enquiry to warehouse onboarding, here's exactly what you can expect.</p>
+              </div>
 
-              <a
-                href={BRAND.whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-between rounded-2xl p-5 text-white shadow-elegant"
-                style={{ background: "linear-gradient(135deg, #22c55e, #16a34a)" }}
-              >
-                <div className="flex items-center gap-3">
-                  <MessageCircle className="h-6 w-6" />
-                  <div>
-                    <div className="font-semibold">{contactInfoCards.whatsappHeadline}</div>
-                    <div className="text-xs text-white/85">{contactInfoCards.whatsappSubtext}</div>
-                  </div>
+              <div className="relative mt-6">
+                <div className="absolute left-[23px] top-0 bottom-0 border-l-2 border-dashed border-primary/40" />
+
+                <div className="space-y-5">
+                  {timelineSteps.map((s, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.12, duration: 0.4 }}
+                      className="relative pl-14 group"
+                    >
+                      <div className="absolute left-0 top-0 grid h-[46px] w-[46px] place-items-center rounded-full bg-primary/15 border-2 border-background shadow-md transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/25">
+                        <s.icon className="h-5 w-5 text-primary" />
+                        <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-navy text-white text-[9px] font-bold grid place-items-center shadow-sm">
+                          {i + 1}
+                        </span>
+                      </div>
+
+                      <div className="rounded-2xl border border-border bg-card p-5 shadow-card-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-elegant group-hover:border-primary/40">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <div className="font-semibold text-navy">{s.title}</div>
+                            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                          </div>
+                          <span className="shrink-0 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold text-primary whitespace-nowrap">
+                            {s.badge}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-                <span className="text-xl">→</span>
-              </a>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -195,7 +365,7 @@ function Label({ children }: { children: React.ReactNode }) {
   return <label className="text-sm font-semibold text-navy">{children}</label>;
 }
 
-function Field({ label, name, type = "text", placeholder, error }: { label: string; name: string; type?: string; placeholder?: string; error?: string }) {
+function Field({ label, name, type = "text", placeholder, error, value, onChange }: { label: string; name: string; type?: string; placeholder?: string; error?: string; value: string; onChange: (v: string) => void }) {
   return (
     <div>
       <Label>{label}</Label>
@@ -203,6 +373,8 @@ function Field({ label, name, type = "text", placeholder, error }: { label: stri
         type={type}
         name={name}
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
       />
       {error && <p className="mt-1.5 text-xs text-destructive">{error}</p>}
@@ -210,13 +382,14 @@ function Field({ label, name, type = "text", placeholder, error }: { label: stri
   );
 }
 
-function Select({ label, name, options, error, placeholder }: { label: string; name: string; options: string[]; error?: string; placeholder: string }) {
+function Select({ label, name, options, error, placeholder, value, onChange }: { label: string; name: string; options: string[]; error?: string; placeholder: string; value: string; onChange: (v: string) => void }) {
   return (
     <div>
       <Label>{label}</Label>
       <select
         name={name}
-        defaultValue=""
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
       >
         <option value="" disabled>{placeholder}</option>
@@ -227,18 +400,3 @@ function Select({ label, name, options, error, placeholder }: { label: string; n
   );
 }
 
-function InfoCard({ icon: Icon, title, children }: { icon: React.ElementType; title: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-card-soft">
-      <div className="flex items-start gap-4">
-        <span className="grid h-11 w-11 place-items-center rounded-xl gradient-primary text-primary-foreground shrink-0">
-          <Icon className="h-5 w-5" />
-        </span>
-        <div className="min-w-0">
-          <div className="font-semibold text-navy">{title}</div>
-          <div className="mt-1 text-sm text-muted-foreground leading-relaxed">{children}</div>
-        </div>
-      </div>
-    </div>
-  );
-}

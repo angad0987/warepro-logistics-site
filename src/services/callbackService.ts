@@ -1,4 +1,5 @@
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkbuBBcfRZMpUHB8N-R1__Ud4PkmMeSAv6hUufTVZEgO7do3zRHDTEqA20jZTcuLWDBQ/exec";
+/* eslint-disable prettier/prettier */
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-gfQRgIbtuFwRAFE_20wce7SYjB3XnEpOY7Nc1OxiTDCaZdaftUWHmCPrdEKZoFjt/exec";
 
 export interface CallbackSuccessResponse {
   success: true;
@@ -43,9 +44,15 @@ export type CallbackResponse =
 export async function submitCallbackRequest(data: {
   name: string;
   business: string;
+  city:string;
   phone: string;
   email: string;
   token: string;
+  formType: string;
+  companyName?: string;
+  monthlyOrder?: string;
+  warehouseType?: string;
+  message?: string;
 }): Promise<CallbackResponse> {
   const response = await fetch(APPS_SCRIPT_URL, {
     method: "POST",

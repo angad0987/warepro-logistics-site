@@ -7,7 +7,8 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { DetailModal } from "@/components/DetailModal";
 import { services, servicesPage, type ServiceItem } from "@/content/services";
-import servicesLogo from "@/assets/serviceslogo.png";
+import img3pl from "@/assets/3pl.png";
+import imgB2b from "@/assets/b2b.png";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/services")({
 
 function Services() {
   const [active, setActive] = useState<ServiceItem | null>(null);
+  const [flow, setFlow] = useState<"3PL" | "B2B">("3PL");
 
   return (
     <>
@@ -75,8 +77,29 @@ function Services() {
             <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy font-heading">{servicesPage.workflowHeadline}</h2>
             <p className="mt-3 text-muted-foreground text-lg">{servicesPage.workflowSubheadline}</p>
           </Reveal>
-          <Reveal className="mt-12">
-            <img src={servicesLogo} alt="Service workflow" className="w-full max-w-5xl mx-auto object-contain" />
+          <div className="flex justify-center mt-10">
+            <div className="inline-flex rounded-lg border border-gray-200 bg-gray-50 p-1 gap-1">
+              {(["3PL", "B2B"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setFlow(tab)}
+                  className={`px-5 py-2 rounded-md text-sm font-semibold transition-all duration-300 ${
+                    flow === tab
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+          <Reveal className="mt-12" key={flow}>
+            <img
+              src={flow === "3PL" ? img3pl : imgB2b}
+              alt={`${flow} workflow`}
+              className="w-full max-w-5xl mx-auto object-contain"
+            />
           </Reveal>
         </div>
       </section>

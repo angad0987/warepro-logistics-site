@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { z } from "zod";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { ArrowRight, CheckCircle2, Send, Quote } from "lucide-react";
@@ -12,7 +12,13 @@ import { BRAND } from "@/lib/brand";
 import { HowItWorks } from "@/components/HowItWorks";
 import { IconCallouts } from "@/components/IconCallouts";
 import { DynamicIcon } from "@/lib/DynamicIcon";
-import { Turnstile } from "react-turnstile";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
+import {
+  GeoapifyContext,
+  GeoapifyGeocoderAutocomplete,
+} from "@geoapify/react-geocoder-autocomplete";
+import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+import "@/geoapify-overrides.css";
 import {
   hero,
   brandStory,
@@ -30,7 +36,9 @@ import flipkartLogo from "@/assets/flipkartlogo.png";
 import shopifyLogo from "@/assets/shopify-seeklogo.png";
 import woocommerceLogo from "@/assets/woocommerce-seeklogo.png";
 import meeshoLogo from "@/assets/meesho-seeklogo.png";
-const TURNSTILE_SITE_KEY = "0x4AAAAAAD-QgbU_QzuaLLUM";
+import { parse } from "path";
+
+const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
 const platformLogoMap: Record<string, string> = {
   amazonlogo: amazonLogo,
   flipkartlogo: flipkartLogo,
@@ -85,6 +93,7 @@ const quickSchema = z.object({
   businessType: z.string().min(1, "Select a business type"),
   phone: z.string().trim().min(8, "Valid phone required").max(20),
   email: z.string().trim().email("Valid email required"),
+  city: z.string().min(2, "City is required").max(100, "City is too long"),
 });
 
 function Home() {
@@ -133,12 +142,6 @@ function Home() {
               </ul>
 
               <div className="mt-10 flex flex-wrap gap-4">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]"
-                >
-                  {hero.ctaPrimary} <ArrowRight className="h-4 w-4" />
-                </Link>
                 <Link
                   to="/services"
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 backdrop-blur px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition-colors"
@@ -253,19 +256,22 @@ function Home() {
             <span className="text-xs font-semibold tracking-widest uppercase text-primary">
               {platformsSection.eyebrow}
             </span>
+            <span className="ml-2 inline-block rounded-full border border-navy/20 bg-navy/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-navy">
+              Coming Soon
+            </span>
             <h2 className="mt-3 text-3xl md:text-4xl font-bold text-navy font-heading">
               {platformsSection.headline}
             </h2>
             <p className="mt-3 text-muted-foreground">{platformsSection.subheadline}</p>
           </Reveal>
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10">
             {platforms.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.05}>
-                <div className="flex items-center justify-center h-32">
+                <div className="flex items-center justify-center h-36 rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
                   <img
                     src={platformLogoMap[p.logo]}
                     alt={p.name}
-                    className={`max-w-full object-contain ${p.name === "Flipkart" ? "h-28" : "h-16"}`}
+                    className={`max-w-full object-contain ${p.name === "Flipkart" ? "h-32" : "h-20"}`}
                   />
                 </div>
               </Reveal>
@@ -281,29 +287,22 @@ function Home() {
             <span className="text-xs font-semibold tracking-widest uppercase text-primary">
               {testimonialsSection.eyebrow}
             </span>
+            <span className="ml-2 inline-block rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+              Coming Soon
+            </span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy font-heading">
               {testimonialsSection.headline}
             </h2>
+            <p className="mt-3 text-muted-foreground text-lg">{testimonialsSection.subheadline}</p>
           </Reveal>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <figure className="h-full rounded-2xl border border-border bg-card p-7 shadow-card-soft">
-                  <div className="h-10 w-24 rounded bg-muted grid place-items-center text-xs text-muted-foreground">
-                    LOGO
-                  </div>
-                  <Quote className="mt-6 h-8 w-8 text-primary/40" />
-                  <blockquote className="mt-3 text-foreground leading-relaxed">
-                    "{t.quote}"
-                  </blockquote>
-                  <figcaption className="mt-6 pt-6 border-t border-border">
-                    <div className="font-semibold text-navy">{t.name}</div>
-                    <div className="text-sm text-muted-foreground">{t.role}</div>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mt-14" delay={0.1}>
+            <div className="max-w-lg mx-auto rounded-2xl border border-dashed border-border bg-card p-10 text-center">
+              <Quote className="mx-auto h-10 w-10 text-primary/30" />
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                Client testimonials will appear here as we complete new partnerships.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -334,13 +333,14 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return mounted ? <>{children}</> : null;
-}
-
-function QuickEnquiry() {
+}function QuickEnquiry() {
   const [name, setName] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const selectedPlaceRef = useRef<any>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -354,6 +354,9 @@ function QuickEnquiry() {
     setEmail("");
     setErrors({});
     setErrorMessage("");
+    setCity("");
+    setSelectedPlace(null);
+    selectedPlaceRef.current = null;
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -365,7 +368,7 @@ function QuickEnquiry() {
 
     if (isSubmitting) return;
 
-    const data = { name, businessType, phone, email };
+    const data = { name, businessType, phone, email, city };
     const parsed = quickSchema.safeParse(data);
 
     if (!parsed.success) {
@@ -386,10 +389,12 @@ function QuickEnquiry() {
       const result = await submitCallbackRequest({
         name: parsed.data.name,
         business: parsed.data.businessType,
+        city: parsed.data.city,
         phone: parsed.data.phone,
         email: parsed.data.email,
         token: token,
-      })
+        formType: "QUICK_ENQUIRY"
+      });
 
       if (result.success) {
         resetForm();
@@ -431,6 +436,8 @@ function QuickEnquiry() {
     }
   };
 
+
+
   return (
     <div className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl p-6 md:p-8 shadow-elegant">
       <div className="text-white">
@@ -453,88 +460,120 @@ function QuickEnquiry() {
           </button>
         </div>
       ) : (
-        <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
-          <div>
-            <input
-              name="name"
-              placeholder="Your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
-            />
-            {errors.name && <p className="mt-1 text-xs text-primary">{errors.name}</p>}
-          </div>
-          <div>
-            <select
-              name="businessType"
-              value={businessType}
-              onChange={(e) => setBusinessType(e.target.value)}
-              className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white outline-none focus:border-primary"
-            >
-              <option value="" disabled className="text-navy">
-                Business type
-              </option>
-              {quickEnquiry.businessTypes.map((o) => (
-                <option key={o} value={o} className="text-navy">
-                  {o}
-                </option>
-              ))}
-            </select>
-            {errors.businessType && (
-              <p className="mt-1 text-xs text-primary">{errors.businessType}</p>
-            )}
-          </div>
-          <div>
-            <input
-              name="phone"
-              type="tel"
-              placeholder="Phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
-            />
-            {errors.phone && <p className="mt-1 text-xs text-primary">{errors.phone}</p>}
-          </div>
-          <div>
-            <input
-              name="email"
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
-            />
-            {errors.email && <p className="mt-1 text-xs text-primary">{errors.email}</p>}
-          </div>
-          {errorMessage && (
-            <div className="rounded-xl bg-red-500/15 border border-red-500/30 p-3 text-sm text-red-300">
-              {errorMessage}
+        <GeoapifyContext apiKey={GEOAPIFY_API_KEY}>
+          <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
+            <div>
+              <input
+                name="name"
+                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
+              />
+              {errors.name && <p className="mt-1 text-xs text-primary">{errors.name}</p>}
             </div>
-          )}
-          <ClientOnly>
-            <Turnstile
-              sitekey={TURNSTILE_SITE_KEY}
-              onVerify={(token) => {
-                setToken(token);
+            <div>
+              <select
+                name="businessType"
+                value={businessType}
+                onChange={(e) => setBusinessType(e.target.value)}
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white outline-none focus:border-primary"
+              >
+                <option value="" disabled className="text-navy">
+                  Business type
+                </option>
+                {quickEnquiry.businessTypes.map((o) => (
+                  <option key={o} value={o} className="text-navy">
+                    {o}
+                  </option>
+                ))}
+              </select>
+              {errors.businessType && (
+                <p className="mt-1 text-xs text-primary">{errors.businessType}</p>
+              )}
+            </div>
+            <div
+              onBlur={() => {
+                setTimeout(() => {
+                  if (!selectedPlaceRef.current) setCity("");
+                }, 200);
               }}
-              onExpire={() => {
-                setToken("");
-              }}
-              onError={() => {
-                setToken("");
-              }}
-            />
-          </ClientOnly>
-          <button
-            type="submit"
-            disabled={!token || isSubmitting}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-          >
-            {isSubmitting ? quickEnquiry.submittingLabel : quickEnquiry.buttonLabel}
-            {!isSubmitting && <Send className="h-4 w-4" />}
-          </button>
-          <p className="text-[11px] text-white/60 text-center">{quickEnquiry.privacyNotice}</p>
-        </form>
+            >
+              <GeoapifyGeocoderAutocomplete
+                placeholder="Enter your city"
+                type="city"
+                filterByCountryCode={["in"]}
+                limit={5}
+                debounceDelay={500}
+                skipIcons={true}
+                value={city}
+                placeSelect={(place) => {
+                  if (!place) return;
+                  setSelectedPlace(place);
+                  selectedPlaceRef.current = place;
+                  setCity(place.properties.city ?? "");
+                }}
+                onUserInput={(value) => {
+                  setSelectedPlace(null);
+                  selectedPlaceRef.current = null;
+                  setCity(value);
+                }}
+                onClear={() => {
+                  setSelectedPlace(null);
+                  selectedPlaceRef.current = null;
+                  setCity("");
+                }}
+              />
+
+              {errors.city && <p className="mt-1 text-xs text-primary">{errors.city}</p>}
+            </div>
+            <div>
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
+              />
+              {errors.phone && <p className="mt-1 text-xs text-primary">{errors.phone}</p>}
+            </div>
+            <div>
+              <input
+                name="email"
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
+              />
+              {errors.email && <p className="mt-1 text-xs text-primary">{errors.email}</p>}
+            </div>
+            {errorMessage && (
+              <div className="rounded-xl bg-red-500/15 border border-red-500/30 p-3 text-sm text-red-300">
+                {errorMessage}
+              </div>
+            )}
+            <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
+            <button
+              type="submit"
+              disabled={!token || isSubmitting}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              {isSubmitting ? quickEnquiry.submittingLabel : quickEnquiry.buttonLabel}
+              {!isSubmitting && <Send className="h-4 w-4" />}
+            </button>
+            <div className="flex justify-center">
+              <a
+                href={BRAND.phoneHref}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-8 py-3 text-sm font-semibold text-white hover:bg-steel transition-all"
+              >
+                Quick Call
+              </a>
+            </div>
+            <p className="text-[11px] text-white/60 text-center">{quickEnquiry.privacyNotice}</p>
+          </form>
+        </GeoapifyContext>
       )}
     </div>
   );
