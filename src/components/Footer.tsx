@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { PackageCheck, Mail, Phone, MapPin } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
+import { newsletter } from "@/content/homeSections";
 import { footerCompanyLinks, footerServicesLinks, footerDescription, footerTagline } from "@/content/nav";
 
 const socialLinks = [
