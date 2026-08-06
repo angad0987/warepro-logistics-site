@@ -2,6 +2,7 @@ import {
   Warehouse, Boxes, Package, ShoppingCart, Truck, RotateCcw, PackageOpen, Layers,
   ShoppingBag, Store, Utensils, Cpu, Shirt, Factory, Car, HeartPulse,
   ShieldCheck, Activity, Zap, Users, DollarSign, Compass, Target, Sparkles,
+  PackageCheck, ClipboardList, Clock, Gauge, Network, MapPin,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -9,6 +10,7 @@ const iconMap: Record<string, LucideIcon> = {
   Warehouse, Boxes, Package, ShoppingCart, Truck, RotateCcw, PackageOpen, Layers,
   ShoppingBag, Store, Utensils, Cpu, Shirt, Factory, Car, HeartPulse,
   ShieldCheck, Activity, Zap, Users, DollarSign, Compass, Target, Sparkles,
+  PackageCheck, ClipboardList, Clock, Gauge, Network, MapPin,
 };
 
 export function getIcon(name: string): LucideIcon {
