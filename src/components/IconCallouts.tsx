@@ -4,7 +4,7 @@ import { whyChooseUs } from "@/content/why-choose-us";
 
 export function IconCallouts({
   eyebrow = "Why partner with us",
-  title = "Built for modern suplly chain.",
+  title = "Built for modern supply chain.",
   intro,
   variant = "light",
 }: {
