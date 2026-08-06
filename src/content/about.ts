@@ -39,9 +39,8 @@ export const story: StoryContent = {
   icon: "Sparkles",
   title: "Our Story",
   paragraphs: [
-    "CoreWarehousing started with a clear conviction: modern brands were being underserved by outdated warehousing options. The team came together to build an alternative — one that pairs disciplined operations with the technology brands expect today.",
-    "Since day one, we've focused on operational excellence: accurate inbound receipt, disciplined inventory practices, dependable dispatch and professional support. Today we serve brands across eCommerce, retail, FMCG, electronics, fashion, manufacturing, consumer goods, automotive and healthcare.",
-    "Everything we do is grounded in one belief — that your logistics partner should feel like an extension of your own team.",
+    "We don't see warehousing just as a storage instead we see it as the backbone of every successful supply chain. Every pallet stored, every carton handled, and every shipment dispatched plays a vital role in keeping businesses moving forward.",
+    "Core Warehousing was created to redefine how businesses experience warehousing. We believe storage is more than space. It's the foundation of an efficient supply chain. By combining trusted warehouse partnerships with standardized operations and smart inventory management, we help businesses grow with confidence."
   ],
   cta: "Partner with us",
 };

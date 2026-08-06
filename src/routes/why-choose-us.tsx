@@ -8,7 +8,7 @@ export const Route = createFileRoute("/why-choose-us")({
   head: () => ({
     meta: [
       { title: "Why Choose CoreWarehousing | Reliable, Scalable, Tech-Driven 3PL" },
-      { name: "description", content: "Six reasons brands choose CoreWarehousing: reliable operations, scalable solutions, technology-driven processes, faster fulfillment, professional support and cost-effectiveness." },
+      { name: "description", content: "Six reasons brands choose CoreWarehousing: reliable operations, scalable solutions,fulfillment, professional support and cost-effectiveness." },
       { property: "og:title", content: "Why Choose CoreWarehousing" },
       { property: "og:description", content: "The reasons growing brands trust us with their warehousing and fulfillment." },
       { property: "og:url", content: "/why-choose-us" },

@@ -1,7 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { Turnstile } from "react-turnstile";
 import { useEffect, useState} from "react";
+import { ENV } from "@/config/environment";
 
-const TURNSTILE_SITE_KEY = "0x4AAAAAAD-QgbU_QzuaLLUM";
+
+const TURNSTILE_SITE_KEY = ENV.TURNSTILE_SITE_KEY;
 
 type Props = {
   onVerify: (token: string) => void;

@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-gfQRgIbtuFwRAFE_20wce7SYjB3XnEpOY7Nc1OxiTDCaZdaftUWHmCPrdEKZoFjt/exec";
+
+import { ENV } from "@/config/environment";
+
+
+const APPS_SCRIPT_URL = ENV.API_URL ;
 
 export interface CallbackSuccessResponse {
   success: true;

@@ -33,6 +33,7 @@ import { platforms } from "@/content/platforms";
 import { testimonials } from "@/content/testimonials";
 import amazonLogo from "@/assets/amazonlogo.png";
 import flipkartLogo from "@/assets/flipkartlogo.png";
+import myntraLogo from "@/assets/myntra.png";
 import shopifyLogo from "@/assets/shopify-seeklogo.png";
 import woocommerceLogo from "@/assets/woocommerce-seeklogo.png";
 import meeshoLogo from "@/assets/meesho-seeklogo.png";
@@ -42,9 +43,11 @@ const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
 const platformLogoMap: Record<string, string> = {
   amazonlogo: amazonLogo,
   flipkartlogo: flipkartLogo,
+  myntra: myntraLogo,
   "shopify-seeklogo": shopifyLogo,
   "woocommerce-seeklogo": woocommerceLogo,
   "meesho-seeklogo": meeshoLogo,
+  others: "",
 };
 
 export const Route = createFileRoute("/")({
@@ -111,7 +114,7 @@ function Home() {
         <div className="absolute inset-0 gradient-hero" />
         <div className="absolute inset-0 bg-navy/50" />
 
-        <div className="container-x relative z-10 pt-28 pb-20 md:pt-32">
+        <div className="container-x relative z-10 pt-12 pb-20 md:pt-16">
           <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -122,7 +125,7 @@ function Home() {
                 <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
                 {hero.badge}
               </span>
-              <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight font-heading">
+              <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-heading leading-tight text-balance">
                 {hero.headline}
                 <span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">
                   {hero.headlineHighlight}
@@ -264,15 +267,19 @@ function Home() {
             </h2>
             <p className="mt-3 text-muted-foreground">{platformsSection.subheadline}</p>
           </Reveal>
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10">
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8">
             {platforms.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.05}>
                 <div className="flex items-center justify-center h-36 rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
-                  <img
-                    src={platformLogoMap[p.logo]}
-                    alt={p.name}
-                    className={`max-w-full object-contain ${p.name === "Flipkart" ? "h-32" : "h-20"}`}
-                  />
+                  {p.name === "Others" ? (
+                    <span className="text-lg font-bold text-muted-foreground">Others</span>
+                  ) : (
+                    <img
+                      src={platformLogoMap[p.logo]}
+                      alt={p.name}
+                      className={`max-w-full object-contain ${p.name === "Flipkart" ? "h-32" : "h-20"}`}
+                    />
+                  )}
                 </div>
               </Reveal>
             ))}
