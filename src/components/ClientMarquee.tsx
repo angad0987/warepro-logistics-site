@@ -52,7 +52,7 @@ export function ClientMarquee() {
             {loop.map((p, i) => (
               <div
                 key={`${p.name}-${i}`}
-                className="grid h-28 w-52 shrink-0 place-items-center rounded-[20px] border border-border bg-card p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant"
+                className="grid h-28 w-52 shrink-0 place-items-center rounded-[20px] border border-border bg-card p-6 shadow-card-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant"
               >
                 <img
                   src={logoMap[p.logo]}
