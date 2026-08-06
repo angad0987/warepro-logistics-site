@@ -27,10 +27,57 @@ const socialLinks = [
   },
 ];
 
+function NewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [done, setDone] = useState(false);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (!email.trim()) return;
+        window.location.href = `mailto:${BRAND.email}?subject=${encodeURIComponent("Newsletter signup")}&body=${encodeURIComponent(`Please add ${email} to the CoreWarehousing mailing list.`)}`;
+        setDone(true);
+        setEmail("");
+      }}
+      className="grid w-full max-w-md grid-cols-[minmax(0,1fr)_auto] gap-3"
+    >
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder={newsletter.placeholder}
+        aria-label={newsletter.placeholder}
+        className="min-w-0 rounded-full glass-panel px-5 py-3 text-sm text-white placeholder:text-white/45 outline-none transition-colors focus:border-primary"
+      />
+      <button
+        type="submit"
+        className="shrink-0 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-transform duration-300 hover:scale-[1.03]"
+      >
+        {newsletter.button}
+      </button>
+      {done && <p className="col-span-2 text-xs text-primary">{newsletter.success}</p>}
+    </form>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="gradient-dark text-white/80 mt-24">
+      <div className="border-b border-white/10">
+        <div className="container-x grid gap-6 py-12 md:grid-cols-2 md:items-center">
+          <div className="min-w-0">
+            <h3 className="font-heading text-2xl font-bold text-white">{newsletter.title}</h3>
+            <p className="mt-2 text-sm text-white/60">{newsletter.desc}</p>
+          </div>
+          <div className="flex md:justify-end">
+            <NewsletterForm />
+          </div>
+        </div>
+      </div>
       <div className="container-x py-16 grid gap-12 md:grid-cols-4">
+
         <div className="md:col-span-1">
           <Link to="/" className="flex items-center gap-2">
             <span className="grid h-10 w-10 place-items-center rounded-xl gradient-primary text-primary-foreground">
