@@ -4,13 +4,19 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { z } from "zod";
 import { submitCallbackRequest } from "@/services/callbackService";
-import { ArrowRight, CheckCircle2, Send, Quote } from "lucide-react";
+import { ArrowRight, CheckCircle2, Send, ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-warehouse.jpg";
 import fleetImg from "@/assets/fleet.jpg";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
-import { HowItWorks } from "@/components/HowItWorks";
 import { IconCallouts } from "@/components/IconCallouts";
+import { BentoOperations } from "@/components/BentoOperations";
+import { WarehouseJourney } from "@/components/WarehouseJourney";
+import { ShowcaseParallax } from "@/components/ShowcaseParallax";
+import { KpiStats } from "@/components/KpiStats";
+import { ClientMarquee } from "@/components/ClientMarquee";
+import { TestimonialsMarquee } from "@/components/TestimonialsMarquee";
+import { InteractiveCTA } from "@/components/InteractiveCTA";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 import {
@@ -23,32 +29,11 @@ import {
   hero,
   brandStory,
   servicesOverview,
-  platformsSection,
-  testimonialsSection,
-  ctaSection,
   quickEnquiry,
 } from "@/content/home";
 import { services } from "@/content/services";
-import { platforms } from "@/content/platforms";
-import { testimonials } from "@/content/testimonials";
-import amazonLogo from "@/assets/amazonlogo.png";
-import flipkartLogo from "@/assets/flipkartlogo.png";
-import myntraLogo from "@/assets/myntra.png";
-import shopifyLogo from "@/assets/shopify-seeklogo.png";
-import woocommerceLogo from "@/assets/woocommerce-seeklogo.png";
-import meeshoLogo from "@/assets/meesho-seeklogo.png";
-import { parse } from "path";
 
 const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
-const platformLogoMap: Record<string, string> = {
-  amazonlogo: amazonLogo,
-  flipkartlogo: flipkartLogo,
-  myntra: myntraLogo,
-  "shopify-seeklogo": shopifyLogo,
-  "woocommerce-seeklogo": woocommerceLogo,
-  "meesho-seeklogo": meeshoLogo,
-  others: "",
-};
 
 export const Route = createFileRoute("/")({
   head: () => ({
