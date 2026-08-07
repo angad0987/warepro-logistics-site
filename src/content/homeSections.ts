@@ -45,7 +45,7 @@ export interface JourneyStep {
 export const journeySection = {
   eyebrow: "The journey",
   headline: "From inbound dock to customer doorstep.",
-  subheadline: "Six connected stages, one continuous chain of custody — with visibility at every handover.",
+  subheadline: "Two distinct flows — full 3PL fulfillment and streamlined B2B bulk movement.",
 };
 
 export const journeySteps: JourneyStep[] = [
@@ -56,6 +56,13 @@ export const journeySteps: JourneyStep[] = [
   { title: "Packing", desc: "Right-sized, protected and labelled to marketplace and retailer compliance standards.", icon: "Package", image: "packing" },
   { title: "Dispatch", desc: "Manifested and handed to vetted carriers with same-day dispatch capability.", icon: "Truck", image: "dispatch" },
 ];
+
+export const journeyStepsB2B: JourneyStep[] = [
+  { title: "Inbound", desc: "Bulk shipments received, inspected and staged in a single controlled handover.", icon: "PackageCheck", image: "receiving" },
+  { title: "Storage", desc: "Pallets and cartons stored in bulk locations tuned for fast, high-volume turnover.", icon: "Warehouse", image: "storage" },
+  { title: "Dispatch", desc: "Scheduled FTL and LTL loads released on time to retailers and distributors.", icon: "Truck", image: "dispatch" },
+];
+
 
 export const showcaseSection = {
   eyebrow: "Infrastructure",
