@@ -268,8 +268,7 @@ function Home() {
       {/* WHY CHOOSE US */}
       <IconCallouts variant="dark" />
 
-      {/* KPI STATISTICS */}
-      <KpiStats />
+
 
       {/* TRUSTED CLIENTS */}
       <ClientMarquee />
