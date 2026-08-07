@@ -76,10 +76,10 @@ export interface TestimonialsSectionContent {
 }
 
 export const testimonialsSection: TestimonialsSectionContent = {
-  eyebrow: "Why clients stay",
-  headline: "Commitments we put in writing.",
+  eyebrow: "Trusted by brands",
+  headline: "Real results, coming soon.",
   subheadline:
-    "Instead of quoting anonymous reviews, here is exactly what every CoreWarehousing account is held to from day one.",
+    "We are collecting verified success stories from our partners. Check back shortly.",
 };
 
 export interface CTASectionContent {
