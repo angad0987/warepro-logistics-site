@@ -10,10 +10,8 @@ import fleetImg from "@/assets/fleet.jpg";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
 import { IconCallouts } from "@/components/IconCallouts";
-import { BentoOperations } from "@/components/BentoOperations";
 import { WarehouseJourney } from "@/components/WarehouseJourney";
 import { ShowcaseParallax } from "@/components/ShowcaseParallax";
-import { KpiStats } from "@/components/KpiStats";
 import { ClientMarquee } from "@/components/ClientMarquee";
 import { TestimonialsMarquee } from "@/components/TestimonialsMarquee";
 import { InteractiveCTA } from "@/components/InteractiveCTA";
@@ -211,11 +209,9 @@ function Home() {
         </div>
       </section>
 
-      {/* BENTO OPERATIONS GRID */}
-      <BentoOperations />
-
       {/* ANIMATED WAREHOUSE JOURNEY */}
       <WarehouseJourney />
+
 
       {/* FULL-WIDTH PARALLAX SHOWCASE */}
       <ShowcaseParallax />
@@ -270,8 +266,7 @@ function Home() {
       {/* WHY CHOOSE US */}
       <IconCallouts variant="dark" />
 
-      {/* KPI STATISTICS */}
-      <KpiStats />
+
 
       {/* TRUSTED CLIENTS */}
       <ClientMarquee />
