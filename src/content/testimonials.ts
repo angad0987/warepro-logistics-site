@@ -1,33 +1,27 @@
-export interface TrustPillar {
-  icon: string;
-  title: string;
-  detail: string;
+export interface TestimonialItem {
+  name: string;
+  role: string;
+  quote: string;
 }
 
-/** Verifiable service commitments — no invented client quotes. */
-export const trustPillars: TrustPillar[] = [
+/** Placeholder state — no fabricated client quotes or fake reviews. */
+export const testimonials: TestimonialItem[] = [
   {
-    icon: "ShieldCheck",
-    title: "Written SLAs on every account",
-    detail:
-      "Order cut-offs, dispatch windows and accuracy targets are agreed in writing before go-live, and reviewed with you every month.",
+    name: "Coming Soon",
+    role: "Verified Client Reviews",
+    quote:
+      "Client testimonials are being collected and verified. Once approved, they will appear here.",
   },
   {
-    icon: "ClipboardList",
-    title: "Cycle-counted inventory",
-    detail:
-      "Scheduled cycle counts and reconciliation reports keep stock records aligned with what is physically on the racks.",
+    name: "Coming Soon",
+    role: "Verified Client Reviews",
+    quote:
+      "We are gathering real success stories from our partners. Check back shortly for updates.",
   },
   {
-    icon: "Clock",
-    title: "Same-day dispatch on in-cut-off orders",
-    detail:
-      "Orders received before the agreed cut-off are picked, packed and handed to the carrier the same working day.",
-  },
-  {
-    icon: "PackageCheck",
-    title: "Marketplace-compliant packing",
-    detail:
-      "Labelling, packaging and documentation prepared to Amazon, Flipkart, Meesho and D2C courier requirements.",
+    name: "Coming Soon",
+    role: "Verified Client Reviews",
+    quote:
+      "No testimonials to display yet. This section will be updated with genuine client feedback soon.",
   },
 ];
