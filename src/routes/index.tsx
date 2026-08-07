@@ -211,11 +211,9 @@ function Home() {
         </div>
       </section>
 
-      {/* BENTO OPERATIONS GRID */}
-      <BentoOperations />
-
       {/* ANIMATED WAREHOUSE JOURNEY */}
       <WarehouseJourney />
+
 
       {/* FULL-WIDTH PARALLAX SHOWCASE */}
       <ShowcaseParallax />
