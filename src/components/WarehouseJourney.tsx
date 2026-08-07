@@ -1,17 +1,22 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 import { DynamicIcon } from "@/lib/DynamicIcon";
-import { journeySection, journeySteps } from "@/content/homeSections";
+import { journeySection, journeySteps, journeyStepsB2B } from "@/content/homeSections";
 import { opImages } from "@/lib/opImages";
 
+type Flow = "3PL" | "B2B";
+
 export function WarehouseJourney() {
+  const [flow, setFlow] = useState<Flow>("3PL");
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 70%", "end 60%"],
   });
   const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
+
+  const steps = flow === "3PL" ? journeySteps : journeyStepsB2B;
 
   return (
     <section className="relative section-y overflow-hidden gradient-dark text-white">
@@ -33,9 +38,27 @@ export function WarehouseJourney() {
           <p className="mt-5 text-base md:text-lg text-white/65 leading-relaxed">
             {journeySection.subheadline}
           </p>
+
+          <div className="mt-8 inline-flex rounded-full border border-white/15 bg-white/5 p-1">
+            {(["3PL", "B2B"] as Flow[]).map((f) => (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFlow(f)}
+                className={
+                  "rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 " +
+                  (flow === f
+                    ? "bg-primary text-primary-foreground"
+                    : "text-white/60 hover:text-white")
+                }
+              >
+                {f === "3PL" ? "3PL Fulfillment" : "B2B Bulk"}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
-        <div ref={containerRef} className="relative mt-16 md:mt-20">
+        <div ref={containerRef} key={flow} className="relative mt-16 md:mt-20">
           {/* progress rail */}
           <div className="pointer-events-none absolute left-[27px] top-2 bottom-2 w-px bg-white/10 md:left-1/2 md:-translate-x-1/2">
             <motion.div
@@ -45,7 +68,7 @@ export function WarehouseJourney() {
           </div>
 
           <ol className="space-y-12 md:space-y-20">
-            {journeySteps.map((step, i) => (
+            {steps.map((step, i) => (
               <motion.li
                 key={step.title}
                 initial={{ opacity: 0, y: 40 }}
