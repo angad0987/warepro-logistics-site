@@ -21,7 +21,6 @@ const logoMap: Record<string, string> = {
 
 export function ClientMarquee() {
   const items = platforms.filter((p) => logoMap[p.logo]);
-  const loop = [...items, ...items];
 
   return (
     <section className="section-y">
@@ -44,25 +43,21 @@ export function ClientMarquee() {
           </h2>
           <p className="mt-4 text-muted-foreground leading-relaxed">{platformsSection.subheadline}</p>
         </motion.div>
-      </div>
 
-      <div className="fade-edges relative mt-14 overflow-hidden">
-        <div className="marquee-track flex w-max">
-          <div className="animate-marquee flex w-max items-center gap-5 pr-5">
-            {loop.map((p, i) => (
-              <div
-                key={`${p.name}-${i}`}
-                className="grid h-28 w-52 shrink-0 place-items-center rounded-[20px] border border-border bg-card p-6 shadow-card-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant"
-              >
-                <img
-                  src={logoMap[p.logo]}
-                  alt={p.name}
-                  loading="lazy"
-                  className="max-h-14 max-w-full object-contain opacity-70 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
-                />
-              </div>
-            ))}
-          </div>
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-10 sm:gap-x-16">
+          {items.map((p, i) => (
+            <motion.img
+              key={p.name}
+              src={logoMap[p.logo]}
+              alt={p.name}
+              loading="lazy"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="h-9 w-auto max-w-[9rem] object-contain sm:h-11"
+            />
+          ))}
         </div>
       </div>
     </section>
