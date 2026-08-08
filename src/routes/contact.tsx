@@ -321,14 +321,15 @@ function Contact() {
                       </div>
 
                       <div className="rounded-2xl border border-border bg-card p-5 shadow-card-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-elegant group-hover:border-primary/40">
-                        <div className="flex items-start justify-between gap-3">
+                        <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-2 sm:gap-3">
                           <div className="min-w-0">
                             <div className="font-semibold text-navy">{s.title}</div>
                             <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                           </div>
-                          <span className="shrink-0 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold text-primary whitespace-nowrap">
+                          <span className="shrink-0 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold text-primary">
                             {s.badge}
                           </span>
+
                         </div>
                       </div>
                     </motion.div>
