@@ -295,7 +295,7 @@ function Contact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="space-y-4 lg:-mt-8">
+            <div className="min-w-0 space-y-4 lg:-mt-8">
               <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
                 <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">What Happens Next?</h2>
                 <p className="mt-4 text-muted-foreground">From your enquiry to warehouse onboarding, here's exactly what you can expect.</p>
