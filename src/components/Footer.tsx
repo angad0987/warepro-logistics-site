@@ -67,17 +67,6 @@ function NewsletterForm() {
 export function Footer() {
   return (
     <footer className="gradient-dark text-white/80 mt-24">
-      <div className="border-b border-white/10">
-        <div className="container-x grid gap-6 py-12 md:grid-cols-2 md:items-center">
-          <div className="min-w-0">
-            <h3 className="font-heading text-2xl font-bold text-white">{newsletter.title}</h3>
-            <p className="mt-2 text-sm text-white/60">{newsletter.desc}</p>
-          </div>
-          <div className="flex md:justify-end">
-            <NewsletterForm />
-          </div>
-        </div>
-      </div>
       <div className="container-x py-16 grid gap-12 md:grid-cols-4">
 
         <div className="md:col-span-1">

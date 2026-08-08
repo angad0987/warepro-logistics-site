@@ -109,7 +109,7 @@ function Home() {
                 <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
                 {hero.badge}
               </span>
-              <h1 className="mt-7 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight font-heading leading-[1.05] text-balance">
+              <h1 className="mt-7 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-heading leading-[1.1] text-balance">
                 {hero.headline}
                 <span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">
                   {hero.headlineHighlight}
