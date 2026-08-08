@@ -390,17 +390,17 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl p-6 md:p-8 shadow-elegant">
+    <div className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl p-5 md:p-6 shadow-elegant">
       <div className="text-white">
-        <div className="text-xs font-semibold tracking-widest uppercase text-primary">
+        <div className="text-[11px] font-semibold tracking-widest uppercase text-primary">
           {quickEnquiry.eyebrow}
         </div>
-        <h3 className="mt-2 text-2xl font-bold font-heading">{quickEnquiry.headline}</h3>
-        <p className="mt-2 text-sm text-white/75">{quickEnquiry.subheadline}</p>
+        <h3 className="mt-1.5 text-xl font-bold font-heading">{quickEnquiry.headline}</h3>
+        <p className="mt-1 text-sm text-white/75">{quickEnquiry.subheadline}</p>
       </div>
       {submitted ? (
-        <div className="mt-6 rounded-xl bg-white/10 border border-white/20 p-5 text-white">
-          <div className="flex items-center gap-2 font-semibold">
+        <div className="mt-5 rounded-xl bg-white/10 border border-white/20 p-4 text-white">
+          <div className="flex items-center gap-2 font-semibold text-sm">
             <CheckCircle2 className="h-5 w-5 text-primary" /> {quickEnquiry.successMessage}
           </div>
           <button
@@ -412,14 +412,14 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
         </div>
       ) : (
         <GeoapifyContext apiKey={GEOAPIFY_API_KEY}>
-          <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
+          <form onSubmit={onSubmit} className="mt-5 space-y-3" noValidate>
             <div>
               <input
                 name="name"
                 placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
               />
               {errors.name && <p className="mt-1 text-xs text-primary">{errors.name}</p>}
             </div>
@@ -428,7 +428,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
                 name="businessType"
                 value={businessType}
                 onChange={(e) => setBusinessType(e.target.value)}
-                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white outline-none focus:border-primary"
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white outline-none focus:border-primary"
               >
                 <option value="" disabled className="text-navy">
                   Business type
@@ -485,7 +485,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
                 placeholder="Phone number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
               />
               {errors.phone && <p className="mt-1 text-xs text-primary">{errors.phone}</p>}
             </div>
@@ -496,7 +496,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
+                className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
               />
               {errors.email && <p className="mt-1 text-xs text-primary">{errors.email}</p>}
             </div>
@@ -509,7 +509,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
             <button
               type="submit"
               disabled={!token || isSubmitting}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {isSubmitting ? quickEnquiry.submittingLabel : quickEnquiry.buttonLabel}
               {!isSubmitting && <Send className="h-4 w-4" />}
@@ -517,7 +517,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
             <div className="flex justify-center">
               <a
                 href={BRAND.phoneHref}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-8 py-3 text-sm font-semibold text-white hover:bg-steel transition-all"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-2.5 text-sm font-semibold text-white hover:bg-steel transition-all"
               >
                 Quick Call
               </a>
