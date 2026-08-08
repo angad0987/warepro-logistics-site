@@ -275,7 +275,7 @@ function Contact() {
                     </div>
                   )}
 
-                  <div className="sm:col-span-2">
+                  <div className="sm:col-span-2 min-w-0 overflow-x-auto">
                     <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
                   </div>
 
