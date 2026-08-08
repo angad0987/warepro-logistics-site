@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { PackageCheck, Mail, Phone, MapPin } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
-import { newsletter } from "@/content/homeSections";
 import { footerCompanyLinks, footerServicesLinks, footerDescription, footerTagline } from "@/content/nav";
 
 const socialLinks = [
@@ -28,41 +26,6 @@ const socialLinks = [
     path: "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
   },
 ];
-
-function NewsletterForm() {
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
-
-  return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (!email.trim()) return;
-        window.location.href = `mailto:${BRAND.email}?subject=${encodeURIComponent("Newsletter signup")}&body=${encodeURIComponent(`Please add ${email} to the CoreWarehousing mailing list.`)}`;
-        setDone(true);
-        setEmail("");
-      }}
-      className="grid w-full max-w-md grid-cols-[minmax(0,1fr)_auto] gap-3"
-    >
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={newsletter.placeholder}
-        aria-label={newsletter.placeholder}
-        className="min-w-0 rounded-full glass-panel px-5 py-3 text-sm text-white placeholder:text-white/45 outline-none transition-colors focus:border-primary"
-      />
-      <button
-        type="submit"
-        className="shrink-0 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-transform duration-300 hover:scale-[1.03]"
-      >
-        {newsletter.button}
-      </button>
-      {done && <p className="col-span-2 text-xs text-primary">{newsletter.success}</p>}
-    </form>
-  );
-}
 
 export function Footer() {
   return (
