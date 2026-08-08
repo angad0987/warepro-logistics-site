@@ -184,9 +184,9 @@ function Contact() {
       </section>
 
       <section className="py-20">
-        <div className="container-x grid lg:grid-cols-[1.4fr_1fr] gap-14">
+        <div className="container-x grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-14">
           <Reveal>
-            <div className="rounded-3xl border border-border bg-card p-7 md:p-10 shadow-card-soft">
+            <div className="min-w-0 rounded-3xl border border-border bg-card p-5 sm:p-7 md:p-10 shadow-card-soft">
               <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">{contactPage.formTitle}</h2>
               <p className="mt-2 text-muted-foreground">
                 {contactPage.formDescription}
