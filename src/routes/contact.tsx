@@ -184,9 +184,9 @@ function Contact() {
       </section>
 
       <section className="py-20">
-        <div className="container-x grid lg:grid-cols-[1.4fr_1fr] gap-14">
+        <div className="container-x grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-14">
           <Reveal>
-            <div className="rounded-3xl border border-border bg-card p-7 md:p-10 shadow-card-soft">
+            <div className="min-w-0 rounded-3xl border border-border bg-card p-5 sm:p-7 md:p-10 shadow-card-soft">
               <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">{contactPage.formTitle}</h2>
               <p className="mt-2 text-muted-foreground">
                 {contactPage.formDescription}
@@ -275,7 +275,7 @@ function Contact() {
                     </div>
                   )}
 
-                  <div className="sm:col-span-2">
+                  <div className="sm:col-span-2 min-w-0 overflow-x-auto">
                     <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
                   </div>
 
@@ -295,7 +295,7 @@ function Contact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="space-y-4 lg:-mt-8">
+            <div className="min-w-0 space-y-4 lg:-mt-8">
               <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
                 <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">What Happens Next?</h2>
                 <p className="mt-4 text-muted-foreground">From your enquiry to warehouse onboarding, here's exactly what you can expect.</p>
@@ -321,14 +321,15 @@ function Contact() {
                       </div>
 
                       <div className="rounded-2xl border border-border bg-card p-5 shadow-card-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-elegant group-hover:border-primary/40">
-                        <div className="flex items-start justify-between gap-3">
+                        <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-2 sm:gap-3">
                           <div className="min-w-0">
                             <div className="font-semibold text-navy">{s.title}</div>
                             <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                           </div>
-                          <span className="shrink-0 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold text-primary whitespace-nowrap">
+                          <span className="shrink-0 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold text-primary">
                             {s.badge}
                           </span>
+
                         </div>
                       </div>
                     </motion.div>
