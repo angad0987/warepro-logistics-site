@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { getIcon } from "@/lib/icons";
-import fleetImg from "@/assets/fleet.jpg";
+import ourStory2 from "@/assets/ourStory2.png";
 import { aboutPage, visionMission, story } from "@/content/about";
 
 export const Route = createFileRoute("/about")({
@@ -68,7 +68,7 @@ function About() {
       <section className="pb-24 md:pb-32">
         <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
           <Reveal>
-            <img src={fleetImg} alt="CoreWarehousing operations" loading="lazy" width={1280} height={800} className="rounded-3xl shadow-elegant w-full" />
+            <img src={ourStory2} alt="CoreWarehousing operations" loading="lazy" width={1280} height={800} className="rounded-3xl shadow-elegant w-full" />
           </Reveal>
           <Reveal delay={0.1}>
             <div className="grid h-12 w-12 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">

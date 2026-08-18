@@ -19,12 +19,12 @@ export const visionMission: VisionMissionContent = {
   vision: {
     icon: "Compass",
     title: "Our Vision",
-    text: "To be the most trusted warehousing and 3PL partner for growing brands — recognized for reliability, transparency and operational excellence at every scale.",
+    text: "To become the trusted partner behind growing businesses, giving them confidence that their inventory is safe, their operations are reliable, and their business is always moving forward.",
   },
   mission: {
     icon: "Target",
     title: "Our Mission",
-    text: "To simplify warehousing and fulfillment for B2B and D2C brands — combining professional operations, marketplace integrations and hands-on support so our clients can focus on growth.",
+    text: "To take the complexity out of warehousing, protect what businesses value, and give them the confidence to keep growing.",
   },
 };
 

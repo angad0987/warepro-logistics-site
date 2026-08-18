@@ -26,6 +26,13 @@ export const servicesPage: ServicesPageContent = {
   workflowSubheadline: "From inbound to delivery — a single integrated supply chain.",
 };
 
+import imgInventoryManagement from "@/assets/Inventory Management.png";
+import imgECommFulfillment from "@/assets/E-commfulfillment.png";
+import imgB2BFulfillment from "@/assets/B2Bfulfillment-.png";
+import imgReverseLogistics from "@/assets/Reverselogistics.png";
+import imgCrossDocking from "@/assets/crossdocking.png";
+import imgTransportation from "@/assets/transportation&distribution.png";
+
 export const services: ServiceItem[] = [
   {
     icon: "Warehouse",
@@ -43,7 +50,7 @@ export const services: ServiceItem[] = [
     desc: "SKU-level accuracy with cycle counts, reconciliation and manual MIS handled by our operations team.",
     long: "Track every SKU in real time with our WMS-backed inventory workflows. Routine cycle counts, reconciliation and shrinkage reports give you the visibility you need to plan replenishment and prevent stock-outs.",
     bullets: ["Real-time SKU tracking", "Daily & weekly cycle counts", "Batch & expiry management", "Reconciliation reports", "Low-stock alerts"],
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&auto=format&fit=crop",
+    image: imgInventoryManagement,
   },
   {
     icon: "Package",
@@ -52,7 +59,7 @@ export const services: ServiceItem[] = [
     desc: "Bulk order processing, palletized dispatch and retailer-compliant labelling for distributors and wholesalers.",
     long: "High-volume B2B order processing with palletized dispatch, retailer-compliant labelling and full ASN documentation. Purpose-built for distributors, wholesalers and modern trade partners across India.",
     bullets: ["Palletized bulk dispatch", "Retailer-compliant labels", "ASN & GRN documentation", "Modern trade ready", "Dedicated B2B lanes"],
-    image: "https://images.unsplash.com/photo-1601598851547-4302969d0614?w=1200&auto=format&fit=crop",
+    image: imgB2BFulfillment,
   },
   {
     icon: "ShoppingCart",
@@ -61,7 +68,7 @@ export const services: ServiceItem[] = [
     desc: "Pick, pack and ship across Amazon, Flipkart, Shopify, WooCommerce and Meesho with same-day dispatch.",
     long: "Native marketplace integrations, automated order flow and same-day dispatch cut-offs help you delight customers on every channel — Amazon, Flipkart, Shopify, WooCommerce and Meesho all handled from one operational hub.",
     bullets: ["Amazon, Flipkart, Meesho ready", "Shopify & WooCommerce sync", "Same-day dispatch cut-off", "Branded packaging options", "Returns handling included"],
-    image: "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=1200&auto=format&fit=crop",
+    image: imgECommFulfillment,
   },
   {
     icon: "Truck",
@@ -70,7 +77,7 @@ export const services: ServiceItem[] = [
     desc: "PTL, FTL and last-mile distribution nationwide via our vetted carrier network.",
     long: "Move product across India through our vetted carrier network. Whether you need PTL, FTL, express or last-mile, we route your shipments for the best balance of cost, speed and reliability — with a single point of accountability.",
     bullets: ["PTL, FTL & express modes", "Last-mile delivery network", "Route optimization", "Vetted carrier partners", "Single point of contact"],
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1200&auto=format&fit=crop",
+    image: imgTransportation,
   },
   {
     icon: "RotateCcw",
@@ -79,7 +86,7 @@ export const services: ServiceItem[] = [
     desc: "Returns processing, quality checks, refurbishment and restocking with full audit trail.",
     long: "End-to-end returns handling — from pickup coordination to inspection, refurbishment and restocking. Recover as much value as possible while giving your customers a smooth returns experience.",
     bullets: ["Returns pickup coordination", "Quality inspection & grading", "Refurbishment workflows", "Restocking & disposal", "Full return audit trail"],
-    image: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?w=1200&auto=format&fit=crop",
+    image: imgReverseLogistics,
   },
   {
     icon: "PackageOpen",
@@ -97,6 +104,6 @@ export const services: ServiceItem[] = [
     desc: "Direct dock-to-dock transfers to cut dwell time, reduce handling and speed up delivery.",
     long: "Move inbound freight directly to outbound trucks with minimal dwell time. Ideal for high-velocity SKUs, promotional launches and time-sensitive B2B distribution — cut inventory costs and speed up delivery cycles.",
     bullets: ["Dock-to-dock transfers", "Reduced handling", "Faster time-to-shelf", "Lower inventory holding", "Ideal for promotions"],
-    image: "https://images.unsplash.com/photo-1586528116493-a029325540fa?w=1200&auto=format&fit=crop",
+    image: imgCrossDocking,
   },
 ];

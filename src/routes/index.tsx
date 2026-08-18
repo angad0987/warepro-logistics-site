@@ -6,7 +6,7 @@ import { z } from "zod";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { ArrowRight, CheckCircle2, Send, ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-warehouse.jpg";
-import fleetImg from "@/assets/fleet.jpg";
+import ourStory2 from "@/assets/ourStory2.png";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
 import { IconCallouts } from "@/components/IconCallouts";
@@ -103,7 +103,7 @@ function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
               <span className="inline-flex items-center gap-2 rounded-full glass-panel px-4 py-1.5 text-xs font-medium">
                 <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
@@ -169,7 +169,7 @@ function Home() {
           <Reveal>
             <div className="group overflow-hidden rounded-[26px] shadow-elegant">
               <img
-                src={fleetImg}
+                src={ourStory2}
                 alt="CoreWarehousing operations"
                 loading="lazy"
                 width={1280}
@@ -517,7 +517,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
             <div className="flex justify-center">
               <a
                 href={BRAND.phoneHref}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-2.5 text-sm font-semibold text-white hover:bg-steel transition-all"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-steel transition-all"
               >
                 Quick Call
               </a>

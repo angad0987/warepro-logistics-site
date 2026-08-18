@@ -77,7 +77,7 @@ export const formLabels: ContactFormLabels = {
   warehouseNeeds: "Warehouse Needs",
   warehouseNeedsPlaceholder: "Select requirement",
   phone: "Contact Number",
-  phonePlaceholder: "+91 98765 43210",
+  phonePlaceholder: "+91 8860010906",
   email: "Email",
   emailPlaceholder: "you@company.com",
   messageLabel: "Anything else? (optional)",
