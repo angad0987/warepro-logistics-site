@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Briefcase, MapPin, Clock } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
+import { TalentNetwork } from "@/components/careers/TalentNetwork";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { BRAND } from "@/lib/brand";
 import { careersPage, jobOpenings, GOOGLE_FORM_URL, type JobOpening } from "@/content/careers";
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/careers")({
 
 /** Single place that decides where "apply" goes. */
 function applyHref() {
-  return GOOGLE_FORM_URL || `mailto:${BRAND.email}?subject=Application%20—%20CoreWarehousing`;
+  return GOOGLE_FORM_URL || "#talent-network";
 }
 
 function ApplyButton({ label, className = "" }: { label: string; className?: string }) {
@@ -135,32 +136,6 @@ function OpenPositions() {
   );
 }
 
-function GeneralApplication() {
-  return (
-    <section className="py-16 md:py-20">
-      <div className="container-x">
-        <Reveal>
-          <div className="rounded-2xl border border-border bg-card p-8 md:p-10 shadow-card-soft">
-            <h2 className="text-2xl md:text-3xl font-bold font-heading tracking-tight">{careersPage.generalTitle}</h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">{careersPage.generalText}</p>
-            <ApplyButton label={careersPage.generalCta} className="mt-6" />
-            {GOOGLE_FORM_URL ? (
-              <div className="mt-8 min-w-0 overflow-hidden rounded-xl border border-border">
-                <iframe
-                  src={GOOGLE_FORM_URL}
-                  title="CoreWarehousing application form"
-                  className="h-[720px] w-full"
-                  loading="lazy"
-                />
-              </div>
-            ) : null}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function ApplicationCTA() {
   return (
     <section className="pb-24">
@@ -183,8 +158,9 @@ function CareersPage() {
       <CareersHero />
       <WhyJoin />
       <OpenPositions />
-      <GeneralApplication />
+      <TalentNetwork />
       <ApplicationCTA />
     </>
   );
 }
+
