@@ -135,32 +135,6 @@ function OpenPositions() {
   );
 }
 
-function GeneralApplication() {
-  return (
-    <section className="py-16 md:py-20">
-      <div className="container-x">
-        <Reveal>
-          <div className="rounded-2xl border border-border bg-card p-8 md:p-10 shadow-card-soft">
-            <h2 className="text-2xl md:text-3xl font-bold font-heading tracking-tight">{careersPage.generalTitle}</h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">{careersPage.generalText}</p>
-            <ApplyButton label={careersPage.generalCta} className="mt-6" />
-            {GOOGLE_FORM_URL ? (
-              <div className="mt-8 min-w-0 overflow-hidden rounded-xl border border-border">
-                <iframe
-                  src={GOOGLE_FORM_URL}
-                  title="CoreWarehousing application form"
-                  className="h-[720px] w-full"
-                  loading="lazy"
-                />
-              </div>
-            ) : null}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function ApplicationCTA() {
   return (
     <section className="pb-24">
@@ -183,8 +157,9 @@ function CareersPage() {
       <CareersHero />
       <WhyJoin />
       <OpenPositions />
-      <GeneralApplication />
+      <TalentNetwork />
       <ApplicationCTA />
     </>
   );
 }
+
