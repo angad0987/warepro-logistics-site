@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Briefcase, MapPin, Clock } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
+import { TalentNetwork } from "@/components/careers/TalentNetwork";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { BRAND } from "@/lib/brand";
 import { careersPage, jobOpenings, GOOGLE_FORM_URL, type JobOpening } from "@/content/careers";
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/careers")({
 
 /** Single place that decides where "apply" goes. */
 function applyHref() {
-  return GOOGLE_FORM_URL || `mailto:${BRAND.email}?subject=Application%20—%20CoreWarehousing`;
+  return GOOGLE_FORM_URL || "#talent-network";
 }
 
 function ApplyButton({ label, className = "" }: { label: string; className?: string }) {
