@@ -13,13 +13,10 @@ export interface CareerApplicationInput {
   email: string;
   phone: string;
   location: string;
-  areaOfInterest: string;
-  experience: string;
-  currentJobTitle?: string;
+  qualification: string;
   linkedin?: string;
-  portfolio?: string;
-  about?: string;
   resume?: File | null;
+  coverLetter?: File | null;
 }
 
 export interface CareerApplicationResult {
@@ -38,6 +35,15 @@ async function fileToBase64(file: File): Promise<string> {
   return btoa(binary);
 }
 
+async function filePayload(file: File) {
+  return {
+    fileName: file.name,
+    mimeType: file.type,
+    size: file.size,
+    data: await fileToBase64(file),
+  };
+}
+
 export async function submitCareerApplication(
   input: CareerApplicationInput,
 ): Promise<CareerApplicationResult> {
@@ -47,22 +53,12 @@ export async function submitCareerApplication(
     email: input.email,
     phone: input.phone,
     location: input.location,
-    areaOfInterest: input.areaOfInterest,
-    experience: input.experience,
-    currentJobTitle: input.currentJobTitle ?? "",
+    qualification: input.qualification,
     linkedin: input.linkedin ?? "",
-    portfolio: input.portfolio ?? "",
-    about: input.about ?? "",
   };
 
-  if (input.resume) {
-    payload["resume"] = {
-      fileName: input.resume.name,
-      mimeType: input.resume.type,
-      size: input.resume.size,
-      data: await fileToBase64(input.resume),
-    };
-  }
+  if (input.resume) payload["resume"] = await filePayload(input.resume);
+  if (input.coverLetter) payload["coverLetter"] = await filePayload(input.coverLetter);
 
   const response = await fetch(ENV.API_URL, {
     method: "POST",
