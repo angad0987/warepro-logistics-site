@@ -14,9 +14,16 @@ export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Services — Warehousing, Fulfillment & Distribution | CoreWarehousing" },
-      { name: "description", content: "Eight integrated 3PL services: warehousing, inventory management, B2B & eCommerce fulfillment, transportation, reverse logistics, packaging, cross-docking." },
+      {
+        name: "description",
+        content:
+          "Eight integrated 3PL services: warehousing, inventory management, B2B & eCommerce fulfillment, transportation, reverse logistics, packaging, cross-docking.",
+      },
       { property: "og:title", content: "Services | CoreWarehousing" },
-      { property: "og:description", content: "Explore our full range of warehousing and 3PL fulfillment services." },
+      {
+        property: "og:description",
+        content: "Explore our full range of warehousing and 3PL fulfillment services.",
+      },
       { property: "og:url", content: "/services" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,9 +42,18 @@ function Services() {
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 gradient-dark text-white overflow-hidden">
         <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_30%_30%,oklch(0.85_0.18_92_/_0.4),transparent_50%)]" />
         <div className="container-x relative">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">{servicesPage.heroEyebrow}</span>
-            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">{servicesPage.heroHeadline}</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
+          >
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+              {servicesPage.heroEyebrow}
+            </span>
+            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">
+              {servicesPage.heroHeadline}
+            </h1>
             <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed">
               {servicesPage.heroSubheadline}
             </p>
@@ -73,8 +89,12 @@ function Services() {
       <section className="py-20 md:py-28">
         <div className="container-x">
           <Reveal className="text-center max-w-4xl mx-auto">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">{servicesPage.workflowEyebrow}</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy font-heading">{servicesPage.workflowHeadline}</h2>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+              {servicesPage.workflowEyebrow}
+            </span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy font-heading">
+              {servicesPage.workflowHeadline}
+            </h2>
             <p className="mt-3 text-muted-foreground text-lg">{servicesPage.workflowSubheadline}</p>
           </Reveal>
           <div className="flex justify-center mt-10">

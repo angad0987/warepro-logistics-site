@@ -54,7 +54,8 @@ export interface ServicesOverviewContent {
 export const servicesOverview: ServicesOverviewContent = {
   eyebrow: "What we do",
   headline: "End-to-end logistics, under one roof.",
-  subheadline: "Eight integrated services covering the full journey from inbound receipt to last-mile delivery.",
+  subheadline:
+    "Eight integrated services covering the full journey from inbound receipt to last-mile delivery.",
 };
 
 export interface PlatformsSectionContent {
@@ -66,7 +67,8 @@ export interface PlatformsSectionContent {
 export const platformsSection: PlatformsSectionContent = {
   eyebrow: "Integrations",
   headline: "Plug into the platforms you already sell on.",
-  subheadline: "Native marketplace integrations launching soon — seamless order flow and inventory sync, right out of the box.",
+  subheadline:
+    "Native marketplace integrations launching soon — seamless order flow and inventory sync, right out of the box.",
 };
 
 export interface TestimonialsSectionContent {
@@ -78,8 +80,7 @@ export interface TestimonialsSectionContent {
 export const testimonialsSection: TestimonialsSectionContent = {
   eyebrow: "Trusted by brands",
   headline: "Real results, coming soon.",
-  subheadline:
-    "We are collecting verified success stories from our partners. Check back shortly.",
+  subheadline: "We are collecting verified success stories from our partners. Check back shortly.",
 };
 
 export interface CTASectionContent {
@@ -90,7 +91,8 @@ export interface CTASectionContent {
 
 export const ctaSection: CTASectionContent = {
   headline: "Ready to simplify your warehousing?",
-  subheadline: "Every business has unique storage and fulfillment needs. Tell us about yours and get a tailored solution.",
+  subheadline:
+    "Every business has unique storage and fulfillment needs. Tell us about yours and get a tailored solution.",
   cta: "Request Quote",
 };
 
@@ -111,9 +113,17 @@ export const quickEnquiry: QuickEnquiryContent = {
   eyebrow: "Quick Enquiry",
   headline: "Get a callback or quick call us.",
   subheadline: "Tell us who you are — our team responds fast.",
-  businessTypes: ["D2C / eCommerce Brand", "B2B Distributor", "Manufacturer", "Retailer", "3PL Partner", "Other"],
+  businessTypes: [
+    "D2C / eCommerce Brand",
+    "B2B Distributor",
+    "Manufacturer",
+    "Retailer",
+    "3PL Partner",
+    "Other",
+  ],
   buttonLabel: "Request Callback",
-  successMessage: "Thank you! Your callback request has been submitted successfully. Our team will contact you shortly.",
+  successMessage:
+    "Thank you! Your callback request has been submitted successfully. Our team will contact you shortly.",
   errorApiMessage: "Unable to submit your request. Please try again.",
   errorNetworkMessage: "Something went wrong. Please check your internet connection and try again.",
   submittingLabel: "Submitting...",

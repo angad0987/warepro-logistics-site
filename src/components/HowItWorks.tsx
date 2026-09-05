@@ -11,23 +11,51 @@ interface Step {
 }
 
 const steps3PL: Step[] = [
-  { icon: PackageCheck, title: "Receiving", desc: "Goods arrive, scanned, quality-checked and logged into our system." },
-  { icon: Boxes, title: "Inventory", desc: "SKUs organized and tracked in real time across our warehouse." },
+  {
+    icon: PackageCheck,
+    title: "Receiving",
+    desc: "Goods arrive, scanned, quality-checked and logged into our system.",
+  },
+  {
+    icon: Boxes,
+    title: "Inventory",
+    desc: "SKUs organized and tracked in real time across our warehouse.",
+  },
   { icon: Boxes, title: "Storage", desc: "Items racked and stored for fast, accurate retrieval." },
-  { icon: ClipboardList, title: "Order Processing", desc: "Incoming orders verified and queued for fulfillment." },
-  { icon: Package, title: "Picking & Packing", desc: "Items picked, packed and barcode-verified for accuracy." },
-  { icon: Truck, title: "Dispatch", desc: "Loaded onto vetted carriers for FTL, LTL or last-mile delivery." },
+  {
+    icon: ClipboardList,
+    title: "Order Processing",
+    desc: "Incoming orders verified and queued for fulfillment.",
+  },
+  {
+    icon: Package,
+    title: "Picking & Packing",
+    desc: "Items picked, packed and barcode-verified for accuracy.",
+  },
+  {
+    icon: Truck,
+    title: "Dispatch",
+    desc: "Loaded onto vetted carriers for FTL, LTL or last-mile delivery.",
+  },
 ];
 
 const stepsB2B: Step[] = [
-  { icon: PackageCheck, title: "Inbound", desc: "Bulk shipments received, inspected and staged for storage." },
+  {
+    icon: PackageCheck,
+    title: "Inbound",
+    desc: "Bulk shipments received, inspected and staged for storage.",
+  },
   { icon: Boxes, title: "Storage", desc: "Pallets and cartons stored for efficient turnover." },
-  { icon: Truck, title: "Dispatch", desc: "Shipped out on schedule to business partners and retailers." },
+  {
+    icon: Truck,
+    title: "Dispatch",
+    desc: "Shipped out on schedule to business partners and retailers.",
+  },
 ];
 
 const subheadings: Record<FlowCategory, string> = {
   "3PL": "A six-step fulfillment flow for pick-pack-ship operations.",
-  "B2B": "A streamlined three-step flow for bulk business shipments.",
+  B2B: "A streamlined three-step flow for bulk business shipments.",
 };
 
 export function HowItWorks({ className = "" }: { className?: string }) {
@@ -46,9 +74,7 @@ export function HowItWorks({ className = "" }: { className?: string }) {
           <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy">
             The flow behind your supply chain
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
-            {subheadings[activeTab]}
-          </p>
+          <p className="mt-4 text-muted-foreground text-lg">{subheadings[activeTab]}</p>
         </Reveal>
 
         <div className="flex justify-center mt-10">

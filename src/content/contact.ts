@@ -16,11 +16,14 @@ export interface ContactPageContent {
 export const contactPage: ContactPageContent = {
   eyebrow: "Get in touch",
   headline: "Let's build a smarter supply chain — together.",
-  subheadline: "Share your requirements and our team will respond within a few business hours with a tailored proposal.",
+  subheadline:
+    "Share your requirements and our team will respond within a few business hours with a tailored proposal.",
   formTitle: "Request a detailed quote",
-  formDescription: "A short form built to qualify your B2B / 3PL requirement — the more you share, the sharper our proposal.",
+  formDescription:
+    "A short form built to qualify your B2B / 3PL requirement — the more you share, the sharper our proposal.",
   successTitle: "Thanks — we received your request!",
-  successMessage: "Your detailed quote request has been submitted. Our team will reach out within a few business hours with a tailored proposal.",
+  successMessage:
+    "Your detailed quote request has been submitted. Our team will reach out within a few business hours with a tailored proposal.",
   successRetry: "Submit another request",
   submitLabel: "Send Request",
   submitLoadingLabel: "Sending...",

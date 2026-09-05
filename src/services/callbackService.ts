@@ -2,8 +2,7 @@
 
 import { ENV } from "@/config/environment";
 
-
-const APPS_SCRIPT_URL = ENV.API_URL ;
+const APPS_SCRIPT_URL = ENV.API_URL;
 
 export interface CallbackSuccessResponse {
   success: true;
@@ -48,7 +47,7 @@ export type CallbackResponse =
 export async function submitCallbackRequest(data: {
   name: string;
   business: string;
-  city:string;
+  city: string;
   phone: string;
   email: string;
   token: string;

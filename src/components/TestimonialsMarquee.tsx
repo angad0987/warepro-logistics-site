@@ -62,7 +62,9 @@ export function TestimonialsMarquee() {
                     {initials(t.name)}
                   </span>
                   <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold text-white">{t.name}</span>
+                    <span className="block truncate text-sm font-semibold text-white">
+                      {t.name}
+                    </span>
                     <span className="block truncate text-xs text-white/55">{t.role}</span>
                   </span>
                 </figcaption>

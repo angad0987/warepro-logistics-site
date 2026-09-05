@@ -27,9 +27,39 @@ export const whyChooseUsPage: WhyChooseUsPageContent = {
 };
 
 export const whyChooseUs: WhyChooseUsItem[] = [
-  { id: "reliable", icon: "ShieldCheck", microLabel: "SECURITY", title: "Reliable Operations", bullets: ["Disciplined SLAs", "Daily accountability"] },
-  { id: "scalable", icon: "Activity", microLabel: "SCALE", title: "Scalable Solutions", bullets: ["Flex capacity", "No lock-in"] },
-  { id: "speed", icon: "Zap", microLabel: "SPEED", title: "Fulfillment", bullets: ["Same-day dispatch", "Optimized pick-pack"] },
-  { id: "support", icon: "Users", microLabel: "SUPPORT", title: "Professional Support", bullets: ["Dedicated managers", "Responsive comms"] },
-  { id: "value", icon: "DollarSign", microLabel: "VALUE", title: "Cost-Effective", bullets: ["Transparent pricing", "Volume-based tiers"] },
+  {
+    id: "reliable",
+    icon: "ShieldCheck",
+    microLabel: "SECURITY",
+    title: "Reliable Operations",
+    bullets: ["Disciplined SLAs", "Daily accountability"],
+  },
+  {
+    id: "scalable",
+    icon: "Activity",
+    microLabel: "SCALE",
+    title: "Scalable Solutions",
+    bullets: ["Flex capacity", "No lock-in"],
+  },
+  {
+    id: "speed",
+    icon: "Zap",
+    microLabel: "SPEED",
+    title: "Fulfillment",
+    bullets: ["Same-day dispatch", "Optimized pick-pack"],
+  },
+  {
+    id: "support",
+    icon: "Users",
+    microLabel: "SUPPORT",
+    title: "Professional Support",
+    bullets: ["Dedicated managers", "Responsive comms"],
+  },
+  {
+    id: "value",
+    icon: "DollarSign",
+    microLabel: "VALUE",
+    title: "Cost-Effective",
+    bullets: ["Transparent pricing", "Volume-based tiers"],
+  },
 ];

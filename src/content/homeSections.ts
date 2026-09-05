@@ -28,11 +28,41 @@ export const bentoCards: BentoCard[] = [
     image: "storage",
     featured: true,
   },
-  { id: "receiving", icon: "PackageCheck", title: "Receiving", desc: "Inbound scanned, quality-checked and logged the day it lands.", image: "receiving" },
-  { id: "inventory", icon: "Boxes", title: "Inventory", desc: "SKU-level accuracy with cycle counts and reconciliation.", image: "inventory" },
-  { id: "picking", icon: "ClipboardList", title: "Picking", desc: "Barcode-verified picking paths tuned for speed and accuracy.", image: "picking" },
-  { id: "packing", icon: "Package", title: "Packing", desc: "Compliant labelling, kitting and protective packaging.", image: "packing" },
-  { id: "dispatch", icon: "Truck", title: "Dispatch", desc: "Vetted carriers for FTL, LTL and last-mile delivery.", image: "dispatch" },
+  {
+    id: "receiving",
+    icon: "PackageCheck",
+    title: "Receiving",
+    desc: "Inbound scanned, quality-checked and logged the day it lands.",
+    image: "receiving",
+  },
+  {
+    id: "inventory",
+    icon: "Boxes",
+    title: "Inventory",
+    desc: "SKU-level accuracy with cycle counts and reconciliation.",
+    image: "inventory",
+  },
+  {
+    id: "picking",
+    icon: "ClipboardList",
+    title: "Picking",
+    desc: "Barcode-verified picking paths tuned for speed and accuracy.",
+    image: "picking",
+  },
+  {
+    id: "packing",
+    icon: "Package",
+    title: "Packing",
+    desc: "Compliant labelling, kitting and protective packaging.",
+    image: "packing",
+  },
+  {
+    id: "dispatch",
+    icon: "Truck",
+    title: "Dispatch",
+    desc: "Vetted carriers for FTL, LTL and last-mile delivery.",
+    image: "dispatch",
+  },
 ];
 
 export interface JourneyStep {
@@ -49,20 +79,64 @@ export const journeySection = {
 };
 
 export const journeySteps: JourneyStep[] = [
-  { title: "Receiving", desc: "Shipments unloaded, scanned, inspected and posted to stock within hours of arrival.", icon: "PackageCheck", image: "receiving" },
-  { title: "Inventory", desc: "Every SKU tracked, batched and cycle-counted so your stock position is always trustworthy.", icon: "Boxes", image: "inventory" },
-  { title: "Storage", desc: "Goods slotted into racked, floor or bulk locations optimised for turnover and retrieval speed.", icon: "Warehouse", image: "storage" },
-  { title: "Picking", desc: "Orders released to optimised pick paths and verified by barcode at every touch.", icon: "ClipboardList", image: "picking" },
-  { title: "Packing", desc: "Right-sized, protected and labelled to marketplace and retailer compliance standards.", icon: "Package", image: "packing" },
-  { title: "Dispatch", desc: "Manifested and handed to vetted carriers with same-day dispatch capability.", icon: "Truck", image: "dispatch" },
+  {
+    title: "Receiving",
+    desc: "Shipments unloaded, scanned, inspected and posted to stock within hours of arrival.",
+    icon: "PackageCheck",
+    image: "receiving",
+  },
+  {
+    title: "Inventory",
+    desc: "Every SKU tracked, batched and cycle-counted so your stock position is always trustworthy.",
+    icon: "Boxes",
+    image: "inventory",
+  },
+  {
+    title: "Storage",
+    desc: "Goods slotted into racked, floor or bulk locations optimised for turnover and retrieval speed.",
+    icon: "Warehouse",
+    image: "storage",
+  },
+  {
+    title: "Picking",
+    desc: "Orders released to optimised pick paths and verified by barcode at every touch.",
+    icon: "ClipboardList",
+    image: "picking",
+  },
+  {
+    title: "Packing",
+    desc: "Right-sized, protected and labelled to marketplace and retailer compliance standards.",
+    icon: "Package",
+    image: "packing",
+  },
+  {
+    title: "Dispatch",
+    desc: "Manifested and handed to vetted carriers with same-day dispatch capability.",
+    icon: "Truck",
+    image: "dispatch",
+  },
 ];
 
 export const journeyStepsB2B: JourneyStep[] = [
-  { title: "Inbound", desc: "Bulk shipments received, inspected and staged in a single controlled handover.", icon: "PackageCheck", image: "receiving" },
-  { title: "Storage", desc: "Pallets and cartons stored in bulk locations tuned for fast, high-volume turnover.", icon: "Warehouse", image: "storage" },
-  { title: "Dispatch", desc: "Scheduled FTL and LTL loads released on time to retailers and distributors.", icon: "Truck", image: "dispatch" },
+  {
+    title: "Inbound",
+    desc: "Bulk shipments received, inspected and staged in a single controlled handover.",
+    icon: "PackageCheck",
+    image: "receiving",
+  },
+  {
+    title: "Storage",
+    desc: "Pallets and cartons stored in bulk locations tuned for fast, high-volume turnover.",
+    icon: "Warehouse",
+    image: "storage",
+  },
+  {
+    title: "Dispatch",
+    desc: "Scheduled FTL and LTL loads released on time to retailers and distributors.",
+    icon: "Truck",
+    image: "dispatch",
+  },
 ];
-
 
 export const showcaseSection = {
   eyebrow: "Infrastructure",

@@ -8,7 +8,10 @@ function useCountUp(target: number, active: boolean, decimals = 0, duration = 16
   const [value, setValue] = useState(0);
   useEffect(() => {
     if (!active) return;
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       setValue(target);
       return;
     }
@@ -29,7 +32,8 @@ function useCountUp(target: number, active: boolean, decimals = 0, duration = 16
 function KpiCard({ item, index, active }: { item: KpiItem; index: number; active: boolean }) {
   const value = useCountUp(item.value, active, item.decimals ?? 0);
   const display =
-    (item.decimals ? value.toFixed(item.decimals) : Math.round(value).toLocaleString("en-IN")) + item.suffix;
+    (item.decimals ? value.toFixed(item.decimals) : Math.round(value).toLocaleString("en-IN")) +
+    item.suffix;
 
   return (
     <motion.div

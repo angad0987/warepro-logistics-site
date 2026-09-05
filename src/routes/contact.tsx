@@ -1,11 +1,25 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import { z } from "zod";
-import { ClipboardList, SearchCheck, PhoneCall, FileText, Warehouse, Send, CheckCircle2 } from "lucide-react";
+import {
+  ClipboardList,
+  SearchCheck,
+  PhoneCall,
+  FileText,
+  Warehouse,
+  Send,
+  CheckCircle2,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
-import { contactPage, formLabels, businessTypes, volumeOptions, warehouseNeeds } from "@/content/contact";
+import {
+  contactPage,
+  formLabels,
+  businessTypes,
+  volumeOptions,
+  warehouseNeeds,
+} from "@/content/contact";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 import {
@@ -21,9 +35,16 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact & Get a Quote | CoreWarehousing" },
-      { name: "description", content: "Request a tailored B2B/3PL warehousing quote. Reach CoreWarehousing by form, phone, email or WhatsApp — fast response guaranteed." },
+      {
+        name: "description",
+        content:
+          "Request a tailored B2B/3PL warehousing quote. Reach CoreWarehousing by form, phone, email or WhatsApp — fast response guaranteed.",
+      },
       { property: "og:title", content: "Contact CoreWarehousing" },
-      { property: "og:description", content: "Get a tailored warehousing and fulfillment quote in under 24 hours." },
+      {
+        property: "og:description",
+        content: "Get a tailored warehousing and fulfillment quote in under 24 hours.",
+      },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -44,14 +65,44 @@ const schema = z.object({
 });
 
 const timelineSteps = [
-  { icon: ClipboardList, title: "Submit Your Requirement", desc: "Fill in the enquiry form with your warehousing, fulfilment or logistics requirements.", badge: "~2 minutes" },
-  { icon: SearchCheck, title: "Requirement Review", desc: "Our logistics specialists carefully review your business needs and operational requirements.", badge: "Within 2 Business Hours" },
-  { icon: PhoneCall, title: "Consultation Call", desc: "A warehouse expert contacts you to discuss inventory, storage, fulfilment and transportation requirements.", badge: "15–30 mins" },
-  { icon: FileText, title: "Receive Custom Proposal", desc: "We prepare a tailored quotation with pricing, storage recommendations and service options.", badge: "Same Day / Next Business Day" },
-  { icon: Warehouse, title: "Start Operations", desc: "After approval, inventory onboarding begins and your warehouse operations go live.", badge: "Fast Onboarding" },
+  {
+    icon: ClipboardList,
+    title: "Submit Your Requirement",
+    desc: "Fill in the enquiry form with your warehousing, fulfilment or logistics requirements.",
+    badge: "~2 minutes",
+  },
+  {
+    icon: SearchCheck,
+    title: "Requirement Review",
+    desc: "Our logistics specialists carefully review your business needs and operational requirements.",
+    badge: "Within 2 Business Hours",
+  },
+  {
+    icon: PhoneCall,
+    title: "Consultation Call",
+    desc: "A warehouse expert contacts you to discuss inventory, storage, fulfilment and transportation requirements.",
+    badge: "15–30 mins",
+  },
+  {
+    icon: FileText,
+    title: "Receive Custom Proposal",
+    desc: "We prepare a tailored quotation with pricing, storage recommendations and service options.",
+    badge: "Same Day / Next Business Day",
+  },
+  {
+    icon: Warehouse,
+    title: "Start Operations",
+    desc: "After approval, inventory onboarding begins and your warehouse operations go live.",
+    badge: "Fast Onboarding",
+  },
 ];
 
-const trustFeatures = ["Fast Response", "Dedicated Logistics Expert", "Tailored Pricing", "Scalable Warehousing"];
+const trustFeatures = [
+  "Fast Response",
+  "Dedicated Logistics Expert",
+  "Tailored Pricing",
+  "Scalable Warehousing",
+];
 
 function Contact() {
   const [name, setName] = useState("");
@@ -96,7 +147,17 @@ function Contact() {
 
     if (isSubmitting) return;
 
-    const data = { name, company, businessType, volume, warehouseNeeds: warehouseNeed, phone, email, city, message };
+    const data = {
+      name,
+      company,
+      businessType,
+      volume,
+      warehouseNeeds: warehouseNeed,
+      phone,
+      email,
+      city,
+      message,
+    };
     const parsed = schema.safeParse(data);
 
     if (!parsed.success) {
@@ -125,7 +186,7 @@ function Contact() {
         companyName: parsed.data.company,
         monthlyOrder: parsed.data.volume,
         warehouseType: parsed.data.warehouseNeeds,
-        message: parsed.data.message
+        message: parsed.data.message,
       });
 
       if (result.success) {
@@ -173,9 +234,18 @@ function Contact() {
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 gradient-dark text-white overflow-hidden">
         <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_30%_30%,oklch(0.85_0.18_92_/_0.4),transparent_50%)]" />
         <div className="container-x relative">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">{contactPage.eyebrow}</span>
-            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">{contactPage.headline}</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
+          >
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+              {contactPage.eyebrow}
+            </span>
+            <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight font-heading">
+              {contactPage.headline}
+            </h1>
             <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed">
               {contactPage.subheadline}
             </p>
@@ -187,34 +257,95 @@ function Contact() {
         <div className="container-x grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-14">
           <Reveal>
             <div className="min-w-0 rounded-3xl border border-border bg-card p-5 sm:p-7 md:p-10 shadow-card-soft">
-              <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">{contactPage.formTitle}</h2>
-              <p className="mt-2 text-muted-foreground">
-                {contactPage.formDescription}
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">
+                {contactPage.formTitle}
+              </h2>
+              <p className="mt-2 text-muted-foreground">{contactPage.formDescription}</p>
 
               {submitted ? (
                 <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/10 p-6 flex items-start gap-4">
                   <CheckCircle2 className="h-8 w-8 text-primary shrink-0" />
                   <div>
                     <h3 className="font-bold text-navy font-heading">{contactPage.successTitle}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{contactPage.successMessage}</p>
-                    <button onClick={() => setSubmitted(false)} className="mt-4 text-sm font-semibold text-primary">{contactPage.successRetry}</button>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {contactPage.successMessage}
+                    </p>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="mt-4 text-sm font-semibold text-primary"
+                    >
+                      {contactPage.successRetry}
+                    </button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={onSubmit} className="mt-8 grid sm:grid-cols-2 gap-5" noValidate>
-                  <Field label={formLabels.name} name="name" error={errors.name} placeholder={formLabels.namePlaceholder} value={name} onChange={setName} />
-                  <Field label={formLabels.company} name="company" error={errors.company} placeholder={formLabels.companyPlaceholder} value={company} onChange={setCompany} />
+                  <Field
+                    label={formLabels.name}
+                    name="name"
+                    error={errors.name}
+                    placeholder={formLabels.namePlaceholder}
+                    value={name}
+                    onChange={setName}
+                  />
+                  <Field
+                    label={formLabels.company}
+                    name="company"
+                    error={errors.company}
+                    placeholder={formLabels.companyPlaceholder}
+                    value={company}
+                    onChange={setCompany}
+                  />
 
-                  <Select label={formLabels.businessType} name="businessType" options={businessTypes} error={errors.businessType} placeholder={formLabels.businessTypePlaceholder} value={businessType} onChange={setBusinessType} />
-                  <Select label={formLabels.volume} name="volume" options={volumeOptions} error={errors.volume} placeholder={formLabels.volumePlaceholder} value={volume} onChange={setVolume} />
+                  <Select
+                    label={formLabels.businessType}
+                    name="businessType"
+                    options={businessTypes}
+                    error={errors.businessType}
+                    placeholder={formLabels.businessTypePlaceholder}
+                    value={businessType}
+                    onChange={setBusinessType}
+                  />
+                  <Select
+                    label={formLabels.volume}
+                    name="volume"
+                    options={volumeOptions}
+                    error={errors.volume}
+                    placeholder={formLabels.volumePlaceholder}
+                    value={volume}
+                    onChange={setVolume}
+                  />
 
                   <div className="sm:col-span-2">
-                    <Select label={formLabels.warehouseNeeds} name="warehouseNeeds" options={warehouseNeeds} error={errors.warehouseNeeds} placeholder={formLabels.warehouseNeedsPlaceholder} value={warehouseNeed} onChange={setWarehouseNeed} />
+                    <Select
+                      label={formLabels.warehouseNeeds}
+                      name="warehouseNeeds"
+                      options={warehouseNeeds}
+                      error={errors.warehouseNeeds}
+                      placeholder={formLabels.warehouseNeedsPlaceholder}
+                      value={warehouseNeed}
+                      onChange={setWarehouseNeed}
+                    />
                   </div>
 
-                  <Field label={formLabels.phone} name="phone" type="tel" error={errors.phone} placeholder={formLabels.phonePlaceholder} value={phone} onChange={setPhone} />
-                  <Field label={formLabels.email} name="email" type="email" error={errors.email} placeholder={formLabels.emailPlaceholder} value={email} onChange={setEmail} />
+                  <Field
+                    label={formLabels.phone}
+                    name="phone"
+                    type="tel"
+                    error={errors.phone}
+                    placeholder={formLabels.phonePlaceholder}
+                    value={phone}
+                    onChange={setPhone}
+                  />
+                  <Field
+                    label={formLabels.email}
+                    name="email"
+                    type="email"
+                    error={errors.email}
+                    placeholder={formLabels.emailPlaceholder}
+                    value={email}
+                    onChange={setEmail}
+                  />
 
                   <div className="sm:col-span-2">
                     <Label>City</Label>
@@ -254,7 +385,9 @@ function Contact() {
                         />
                       </GeoapifyContext>
                     </div>
-                    {errors.city && <p className="mt-1.5 text-xs text-destructive">{errors.city}</p>}
+                    {errors.city && (
+                      <p className="mt-1.5 text-xs text-destructive">{errors.city}</p>
+                    )}
                   </div>
 
                   <div className="sm:col-span-2">
@@ -284,10 +417,16 @@ function Contact() {
                     disabled={!token || isSubmitting}
                     className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant hover:scale-[1.01] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    {isSubmitting ? contactPage.submitLoadingLabel : contactPage.submitLabel} {!isSubmitting && <Send className="h-4 w-4" />}
+                    {isSubmitting ? contactPage.submitLoadingLabel : contactPage.submitLabel}{" "}
+                    {!isSubmitting && <Send className="h-4 w-4" />}
                   </button>
                   <p className="sm:col-span-2 text-xs text-muted-foreground text-center">
-                    {contactPage.privacyNote}
+                    We use the information you provide to respond to your enquiry and assist with
+                    your warehousing or logistics requirements. Please review our{" "}
+                    <Link to="/privacy-policy" className="underline hover:text-foreground/80">
+                      Privacy Policy
+                    </Link>{" "}
+                    to understand how we handle your information.
                   </p>
                 </form>
               )}
@@ -297,8 +436,12 @@ function Contact() {
           <Reveal delay={0.1}>
             <div className="min-w-0 space-y-4 lg:-mt-8">
               <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-                <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">What Happens Next?</h2>
-                <p className="mt-4 text-muted-foreground">From your enquiry to warehouse onboarding, here's exactly what you can expect.</p>
+                <h2 className="text-2xl md:text-3xl font-bold text-navy font-heading">
+                  What Happens Next?
+                </h2>
+                <p className="mt-4 text-muted-foreground">
+                  From your enquiry to warehouse onboarding, here's exactly what you can expect.
+                </p>
               </div>
 
               <div className="relative mt-6">
@@ -324,12 +467,13 @@ function Contact() {
                         <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-2 sm:gap-3">
                           <div className="min-w-0">
                             <div className="font-semibold text-navy">{s.title}</div>
-                            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                              {s.desc}
+                            </p>
                           </div>
                           <span className="shrink-0 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold text-primary">
                             {s.badge}
                           </span>
-
                         </div>
                       </div>
                     </motion.div>
@@ -366,7 +510,23 @@ function Label({ children }: { children: React.ReactNode }) {
   return <label className="text-sm font-semibold text-navy">{children}</label>;
 }
 
-function Field({ label, name, type = "text", placeholder, error, value, onChange }: { label: string; name: string; type?: string; placeholder?: string; error?: string; value: string; onChange: (v: string) => void }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  placeholder,
+  error,
+  value,
+  onChange,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+  error?: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
       <Label>{label}</Label>
@@ -383,7 +543,23 @@ function Field({ label, name, type = "text", placeholder, error, value, onChange
   );
 }
 
-function Select({ label, name, options, error, placeholder, value, onChange }: { label: string; name: string; options: string[]; error?: string; placeholder: string; value: string; onChange: (v: string) => void }) {
+function Select({
+  label,
+  name,
+  options,
+  error,
+  placeholder,
+  value,
+  onChange,
+}: {
+  label: string;
+  name: string;
+  options: string[];
+  error?: string;
+  placeholder: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
       <Label>{label}</Label>
@@ -393,11 +569,16 @@ function Select({ label, name, options, error, placeholder, value, onChange }: {
         onChange={(e) => onChange(e.target.value)}
         className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
       >
-        <option value="" disabled>{placeholder}</option>
-        {options.map((o) => <option key={o} value={o}>{o}</option>)}
+        <option value="" disabled>
+          {placeholder}
+        </option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
       </select>
       {error && <p className="mt-1.5 text-xs text-destructive">{error}</p>}
     </div>
   );
 }
-

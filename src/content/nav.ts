@@ -10,6 +10,7 @@ export const navLinks: NavLink[] = [
   { to: "/why-choose-us", label: "Why Us" },
   { to: "/about", label: "About" },
   { to: "/blog", label: "Blog" },
+  { to: "/careers", label: "Careers" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -43,6 +44,7 @@ export const footerServicesLinks: FooterColumn = {
 
 export const ctaLabel = "Get a Quote";
 
-export const footerDescription = "Reliable, scalable, technology-driven logistics for growing brands.";
+export const footerDescription =
+  "Reliable, scalable, technology-driven logistics for growing brands.";
 
 export const footerTagline = "Built for modern supply chains.";

@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Turnstile } from "react-turnstile";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { ENV } from "@/config/environment";
-
 
 const TURNSTILE_SITE_KEY = ENV.TURNSTILE_SITE_KEY;
 

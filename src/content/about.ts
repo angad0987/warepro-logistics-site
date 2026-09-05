@@ -7,7 +7,8 @@ export interface AboutPageContent {
 export const aboutPage: AboutPageContent = {
   eyebrow: "About us",
   headline: "A modern warehousing partner for ambitious brands.",
-  subheadline: "CoreWarehousing was built by supply-chain operators who believe growing brands deserve better logistics.",
+  subheadline:
+    "CoreWarehousing was built by supply-chain operators who believe growing brands deserve better logistics.",
 };
 
 export interface VisionMissionContent {
@@ -40,7 +41,7 @@ export const story: StoryContent = {
   title: "Our Story",
   paragraphs: [
     "We don't see warehousing just as a storage instead we see it as the backbone of every successful supply chain. Every pallet stored, every carton handled, and every shipment dispatched plays a vital role in keeping businesses moving forward.",
-    "Core Warehousing was created to redefine how businesses experience warehousing. We believe storage is more than space. It's the foundation of an efficient supply chain. By combining trusted warehouse partnerships with standardized operations and smart inventory management, we help businesses grow with confidence."
+    "Core Warehousing was created to redefine how businesses experience warehousing. We believe storage is more than space. It's the foundation of an efficient supply chain. By combining trusted warehouse partnerships with standardized operations and smart inventory management, we help businesses grow with confidence.",
   ],
   cta: "Partner with us",
 };

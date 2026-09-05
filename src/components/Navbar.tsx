@@ -30,7 +30,9 @@ export function Navbar() {
           <span className="grid h-14 w-14 place-items-center rounded-full overflow-hidden">
             <img src={logoImg} alt="CoreWarehousing" className="h-14 w-14 object-cover" />
           </span>
-          <span className={`font-heading text-xl font-bold tracking-tight ${scrolled ? "text-foreground" : "text-white"}`}>
+          <span
+            className={`font-heading text-xl font-bold tracking-tight ${scrolled ? "text-foreground" : "text-white"}`}
+          >
             Core<span>Warehousing</span>
           </span>
         </Link>
@@ -41,9 +43,13 @@ export function Navbar() {
               key={l.to}
               to={l.to}
               className={`text-sm font-medium transition-all ${
-                scrolled ? "text-foreground/80 hover:font-bold hover:underline" : "text-white/85 hover:font-bold hover:underline"
+                scrolled
+                  ? "text-foreground/80 hover:font-bold hover:underline"
+                  : "text-white/85 hover:font-bold hover:underline"
               }`}
-              activeProps={{ className: scrolled ? "font-bold underline" : "text-white font-bold underline" }}
+              activeProps={{
+                className: scrolled ? "font-bold underline" : "text-white font-bold underline",
+              }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}

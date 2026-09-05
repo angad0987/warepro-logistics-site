@@ -87,10 +87,18 @@ export function WarehouseJourney() {
                     Step {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-2 text-2xl md:text-3xl font-bold font-heading">{step.title}</h3>
-                  <p className="mt-3 text-sm md:text-base leading-relaxed text-white/60">{step.desc}</p>
+                  <p className="mt-3 text-sm md:text-base leading-relaxed text-white/60">
+                    {step.desc}
+                  </p>
                 </div>
 
-                <div className={i % 2 === 0 ? "col-span-2 md:col-span-1 md:pl-20" : "col-span-2 md:order-1 md:col-span-1 md:pr-20"}>
+                <div
+                  className={
+                    i % 2 === 0
+                      ? "col-span-2 md:col-span-1 md:pl-20"
+                      : "col-span-2 md:order-1 md:col-span-1 md:pr-20"
+                  }
+                >
                   <div className="gradient-outline overflow-hidden rounded-[22px] shadow-elegant">
                     <img
                       src={opImages[step.image]}
