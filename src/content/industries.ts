@@ -1,3 +1,8 @@
+import imgECommFulfillment from "@/assets/E-commfulfillment.png";
+import imgFMCG from "@/assets/FMCG.png";
+import imgElectronics from "@/assets/Electronics.png";
+import imgFashion from "@/assets/Fashion.png";
+
 export interface IndustryItem {
   icon: string;
   title: string;
@@ -43,8 +48,7 @@ export const industries: IndustryItem[] = [
       "Returns handling",
       "Peak-season scaling",
     ],
-    image:
-      "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=1200&auto=format&fit=crop",
+    image: imgECommFulfillment,
   },
   {
     icon: "Store",
@@ -75,7 +79,7 @@ export const industries: IndustryItem[] = [
       "Regional distribution",
       "Retailer-ready dispatch",
     ],
-    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop",
+    image: imgFMCG,
   },
   {
     icon: "Cpu",
@@ -90,8 +94,7 @@ export const industries: IndustryItem[] = [
       "Warranty return flows",
       "Insured storage",
     ],
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&auto=format&fit=crop",
+    image: imgElectronics,
   },
   {
     icon: "Shirt",
@@ -106,8 +109,7 @@ export const industries: IndustryItem[] = [
       "Returns QC & restock",
       "Seasonal ramp-up",
     ],
-    image:
-      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop",
+    image: imgFashion,
   },
   {
     icon: "Factory",

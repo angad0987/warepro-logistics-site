@@ -30,6 +30,10 @@ import {
   Network,
   MapPin,
   GraduationCap,
+  Eye,
+  TrendingUp,
+  Headset,
+  MonitorCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -65,6 +69,10 @@ const iconMap: Record<string, LucideIcon> = {
   Network,
   MapPin,
   GraduationCap,
+  Eye,
+  TrendingUp,
+  Headset,
+  MonitorCheck,
 };
 
 export function getIcon(name: string): LucideIcon {

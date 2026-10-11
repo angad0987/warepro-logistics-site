@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-warehouse.jpg";
 import ourStory2 from "@/assets/ourStory2.png";
 import { Reveal } from "@/components/Reveal";
+import { ProcessTeaser } from "@/components/ProcessTeaser";
 import { BRAND } from "@/lib/brand";
 import { IconCallouts } from "@/components/IconCallouts";
 import { WarehouseJourney } from "@/components/WarehouseJourney";
@@ -184,6 +185,9 @@ function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* HOW WE WORK — TEASER */}
+      <ProcessTeaser />
 
       {/* ANIMATED WAREHOUSE JOURNEY */}
       <WarehouseJourney />

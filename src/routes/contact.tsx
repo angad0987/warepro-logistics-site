@@ -9,6 +9,11 @@ import {
   Warehouse,
   Send,
   CheckCircle2,
+  MapPin,
+  Phone,
+  Mail,
+  Navigation,
+  Clock,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
@@ -19,6 +24,7 @@ import {
   businessTypes,
   volumeOptions,
   warehouseNeeds,
+  contactInfoCards,
 } from "@/content/contact";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
@@ -30,6 +36,10 @@ import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 import "@/geoapify-overrides.css";
 
 const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
+
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${BRAND.mapQuery}&z=16&output=embed`;
+const MAPS_SEARCH_URL = `https://www.google.com/maps/search/?api=1&query=${BRAND.mapQuery}`;
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${BRAND.mapQuery}`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -488,16 +498,115 @@ function Contact() {
       <section className="pb-24">
         <div className="container-x">
           <Reveal>
-            <div className="overflow-hidden rounded-3xl border border-border shadow-card-soft">
-              <iframe
-                title="CoreWarehousing location"
-                src={`https://www.google.com/maps?q=${BRAND.mapQuery}&output=embed`}
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[32fr_68fr] lg:gap-12">
+              <div className="min-w-0">
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+                  <MapPin className="h-3.5 w-3.5" />
+                  Our Office
+                </span>
+                <h2 className="mt-5 font-heading text-2xl font-bold text-navy md:text-3xl">
+                  Visit Our Office
+                </h2>
+                <p className="mt-3 text-muted-foreground">
+                  {BRAND.name} — {BRAND.tagline}
+                </p>
+
+                <ul className="mt-8 space-y-5">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
+                      <MapPin className="h-4.5 w-4.5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        {contactInfoCards.headOffice}
+                      </div>
+                      <p className="mt-1 leading-relaxed text-foreground">{BRAND.address}</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
+                      <Phone className="h-4.5 w-4.5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        {contactInfoCards.phone}
+                      </div>
+                      <a
+                        href={BRAND.phoneHref}
+                        className="mt-1 block hover:text-primary transition-colors"
+                      >
+                        {BRAND.phone}
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
+                      <Mail className="h-4.5 w-4.5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        {contactInfoCards.email}
+                      </div>
+                      <a
+                        href={`mailto:${BRAND.email}`}
+                        className="mt-1 block break-all hover:text-primary transition-colors"
+                      >
+                        {BRAND.email}
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
+                      <Clock className="h-4.5 w-4.5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        {contactInfoCards.businessHours}
+                      </div>
+                      <p className="mt-1 whitespace-pre-line leading-relaxed text-foreground">
+                        {contactInfoCards.businessHoursDetail}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+
+                <a
+                  href={DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]"
+                >
+                  <Navigation className="h-4 w-4" />
+                  Get Directions
+                </a>
+              </div>
+
+              <div className="relative min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft">
+                <iframe
+                  title="CoreWarehousing location"
+                  src={MAP_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, display: "block", minHeight: "360px" }}
+                  className="h-[360px] w-full sm:h-[440px] lg:h-[500px]"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <span className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-navy/90 px-3.5 py-1.5 text-xs font-semibold text-white shadow-elegant">
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
+                  {BRAND.name} Office
+                </span>
+                <a
+                  href={MAPS_SEARCH_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-navy shadow-elegant transition-transform hover:scale-[1.03]"
+                >
+                  <Navigation className="h-4 w-4" />
+                  Open in Maps
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

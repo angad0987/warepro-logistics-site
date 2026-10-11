@@ -1,9 +1,9 @@
 import receiving from "@/assets/op-receiving.jpg";
-import picking from "@/assets/op-picking.jpg";
-import packing from "@/assets/op-packing.jpg";
-import dispatch from "@/assets/op-dispatch.jpg";
-import storage from "@/assets/op-storage.jpg";
-import inventory from "@/assets/inventory.jpg";
+import picking from "@/assets/Picking.png";
+import packing from "@/assets/packing.png";
+import dispatch from "@/assets/dispatch.png";
+import storage from "@/assets/Storage.png";
+import inventory from "@/assets/Inventory.png";
 
 export const opImages: Record<string, string> = {
   receiving,

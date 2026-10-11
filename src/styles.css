@@ -302,6 +302,14 @@
     radial-gradient(52rem 30rem at 92% 12%, oklch(0.55 0.06 256 / 0.12), transparent 62%);
 }
 
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-marquee-slow,

@@ -19,7 +19,10 @@ export function WarehouseJourney() {
   const steps = flow === "3PL" ? journeySteps : journeyStepsB2B;
 
   return (
-    <section className="relative section-y overflow-hidden gradient-dark text-white">
+    <section
+      id="inventory-journey"
+      className="relative scroll-mt-24 section-y overflow-hidden gradient-dark text-white"
+    >
       <div className="pointer-events-none absolute -top-32 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
       <div className="container-x relative">
         <motion.div

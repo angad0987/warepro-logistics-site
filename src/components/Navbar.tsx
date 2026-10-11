@@ -4,7 +4,8 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BRAND } from "@/lib/brand";
 import { navLinks, ctaLabel } from "@/content/nav";
-import logoImg from "@/assets/logo.png";
+import logoImg from "@/assets/logo1.png";
+import logoScrolledImg from "@/assets/logo4.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,8 +28,12 @@ export function Navbar() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="grid h-14 w-14 place-items-center rounded-full overflow-hidden">
-            <img src={logoImg} alt="CoreWarehousing" className="h-14 w-14 object-cover" />
+          <span className="overflow-hidden">
+            <img
+              src={scrolled ? logoScrolledImg : logoImg}
+              alt="CoreWarehousing"
+              className="h-10 md:h-12 w-auto"
+            />
           </span>
           <span
             className={`font-heading text-xl font-bold tracking-tight ${scrolled ? "text-foreground" : "text-white"}`}

@@ -65,6 +65,37 @@ export const bentoCards: BentoCard[] = [
   },
 ];
 
+export interface ProcessTeaserStep {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+export const processTeaser = {
+  eyebrow: "How we work",
+  headline: "A simple process. Built for reliability.",
+  subheadline:
+    "Structured and transparent — from understanding your inventory to keeping it moving on time.",
+  steps: [
+    {
+      title: "Understand",
+      desc: "We map your SKUs, volumes and service levels to design the right setup.",
+      icon: "Compass",
+    },
+    {
+      title: "Execute",
+      desc: "Receiving, storage and fulfillment run to a documented, disciplined plan.",
+      icon: "Boxes",
+    },
+    {
+      title: "Deliver",
+      desc: "Orders dispatched on schedule, tracked and visible end to end.",
+      icon: "Truck",
+    },
+  ],
+  cta: "See Our Full Process",
+};
+
 export interface JourneyStep {
   title: string;
   desc: string;
