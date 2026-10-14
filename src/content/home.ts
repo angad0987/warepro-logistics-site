@@ -73,14 +73,20 @@ export const platformsSection: PlatformsSectionContent = {
 
 export interface TestimonialsSectionContent {
   eyebrow: string;
+  badge: string;
   headline: string;
   subheadline: string;
+  disclaimer: string;
 }
 
 export const testimonialsSection: TestimonialsSectionContent = {
-  eyebrow: "Trusted by brands",
-  headline: "Real results, coming soon.",
-  subheadline: "We are collecting verified success stories from our partners. Check back shortly.",
+  eyebrow: "What our clients can expect",
+  badge: "Verified stories coming soon",
+  headline: "Built around how growing businesses operate.",
+  subheadline:
+    "We're onboarding our first partners. Until their verified stories are published, these examples show the experience we're committed to delivering.",
+  disclaimer:
+    "These are illustrative examples, not statements from actual clients. Real client testimonials will replace them as partnerships grow.",
 };
 
 export interface CTASectionContent {

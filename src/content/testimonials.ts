@@ -1,27 +1,42 @@
 export interface TestimonialItem {
-  name: string;
-  role: string;
+  label: string;
   quote: string;
+  name?: string;
+  role?: string;
+  company?: string;
+  avatar?: string;
+  rating?: number;
+  isVerified: boolean;
 }
 
-/** Placeholder state — no fabricated client quotes or fake reviews. */
+/**
+ * Illustrative examples. No fabricated client names, companies, metrics or
+ * ratings. Flip `isVerified` to true and fill in name/role/company once a
+ * genuine, approved testimonial is available.
+ */
 export const testimonials: TestimonialItem[] = [
   {
-    name: "Coming Soon",
-    role: "Verified Client Reviews",
+    label: "01 — Reliability",
     quote:
-      "Client testimonials are being collected and verified. Once approved, they will appear here.",
+      "Consistent warehouse operations and responsive coordination can make a significant difference to growing businesses.",
+    isVerified: false,
   },
   {
-    name: "Coming Soon",
-    role: "Verified Client Reviews",
+    label: "02 — Flexibility",
     quote:
-      "We are gathering real success stories from our partners. Check back shortly for updates.",
+      "Flexible storage solutions make it easier to adapt as inventory volumes and business requirements change.",
+    isVerified: false,
   },
   {
-    name: "Coming Soon",
-    role: "Verified Client Reviews",
+    label: "03 — Visibility",
     quote:
-      "No testimonials to display yet. This section will be updated with genuine client feedback soon.",
+      "Clear inventory and dispatch processes give businesses greater confidence in their day-to-day operations.",
+    isVerified: false,
+  },
+  {
+    label: "04 — Operations",
+    quote:
+      "A dependable warehouse partner helps businesses focus on growth while keeping daily logistics organized.",
+    isVerified: false,
   },
 ];
