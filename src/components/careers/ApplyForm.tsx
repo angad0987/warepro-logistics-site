@@ -15,6 +15,7 @@ import {
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 import "@/geoapify-overrides.css";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { ENV } from "@/config/environment";
 import {
   Select,
   SelectContent,
@@ -23,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
+const GEOAPIFY_API_KEY = ENV.GEOAPIFY_API_KEY;
 
 const MAX_SIZE = 5 * 1024 * 1024;
 const ALLOWED = [

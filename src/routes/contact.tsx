@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { z } from "zod";
 import {
   ClipboardList,
@@ -28,6 +28,8 @@ import {
 } from "@/content/contact";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { ENV } from "@/config/environment";
+import { OFFICE_LOCATION } from "@/config/office";
 import {
   GeoapifyContext,
   GeoapifyGeocoderAutocomplete,
@@ -35,11 +37,10 @@ import {
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 import "@/geoapify-overrides.css";
 
-const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
+const OfficeMap = lazy(() => import("@/components/OfficeMap"));
 
-const MAP_EMBED_URL = `https://www.google.com/maps?q=${BRAND.mapQuery}&z=16&output=embed`;
-const MAPS_SEARCH_URL = `https://www.google.com/maps/search/?api=1&query=${BRAND.mapQuery}`;
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${BRAND.mapQuery}`;
+const MAPS_SEARCH_URL = OFFICE_LOCATION.mapsSearchUrl;
+const DIRECTIONS_URL = OFFICE_LOCATION.directionsUrl;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -367,7 +368,7 @@ function Contact() {
                         }, 200);
                       }}
                     >
-                      <GeoapifyContext apiKey={GEOAPIFY_API_KEY}>
+                      <GeoapifyContext apiKey={ENV.GEOAPIFY_API_KEY}>
                         <GeoapifyGeocoderAutocomplete
                           placeholder="Enter your city"
                           type="city"
@@ -582,26 +583,16 @@ function Contact() {
               </div>
 
               <div className="relative min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft">
-                <iframe
-                  title="CoreWarehousing location"
-                  src={MAP_EMBED_URL}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, display: "block", minHeight: "360px" }}
-                  className="h-[360px] w-full sm:h-[440px] lg:h-[500px]"
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-                <span className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-navy/90 px-3.5 py-1.5 text-xs font-semibold text-white shadow-elegant">
-                  <MapPin className="h-3.5 w-3.5 text-primary" />
-                  {BRAND.name} Office
-                </span>
+                <Suspense fallback={<div className="h-[360px] w-full sm:h-[440px] lg:h-[500px]" />}>
+                  <ClientOnly>
+                    <OfficeMap />
+                  </ClientOnly>
+                </Suspense>
                 <a
                   href={MAPS_SEARCH_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-navy shadow-elegant transition-transform hover:scale-[1.03]"
+                  className="absolute bottom-4 right-4 z-[1000] inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-navy shadow-elegant transition-transform hover:scale-[1.03]"
                 >
                   <Navigation className="h-4 w-4" />
                   Open in Maps
@@ -613,6 +604,12 @@ function Contact() {
       </section>
     </>
   );
+}
+
+function ClientOnly({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted ? <>{children}</> : null;
 }
 
 function Label({ children }: { children: React.ReactNode }) {

@@ -187,7 +187,7 @@ export function DetailModal({
                   </div>
 
                   {/* RIGHT — Content Panel */}
-                  <div className="relative overflow-hidden bg-gray-50">
+                  <div className="relative flex-1 min-h-0 overflow-hidden bg-gray-50">
                     <div
                       className="absolute inset-0 overflow-y-auto p-6 md:p-8"
                       style={{ paddingBottom: "5rem" }}

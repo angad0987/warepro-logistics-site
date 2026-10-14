@@ -20,6 +20,10 @@ function getEnvVariable(name: keyof ImportMetaEnv): string {
   return value;
 }
 
+function getOptionalEnvVariable(name: keyof ImportMetaEnv): string {
+  return import.meta.env[name]?.trim() ?? "";
+}
+
 function getEnvironment(): "development" | "production" {
   const environment = getEnvVariable("VITE_ENVIRONMENT");
 
@@ -36,4 +40,6 @@ export const ENV = {
   TURNSTILE_SITE_KEY: getEnvVariable("VITE_TURNSTILE_SITE_KEY"),
 
   ENVIRONMENT: getEnvironment(),
+
+  GEOAPIFY_API_KEY: getOptionalEnvVariable("VITE_GEOAPIFY_API_KEY"),
 };
