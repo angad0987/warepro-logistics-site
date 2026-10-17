@@ -6,6 +6,7 @@ import { submitCallbackRequest } from "@/services/callbackService";
 import { CheckCircle2, Send } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { useTurnstile } from "react-turnstile";
 import { quickEnquiry } from "@/content/home";
 import type {
   GeoapifyContext as GeoapifyContextType,
@@ -42,6 +43,7 @@ export function QuickEnquiry() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useState("");
+  const turnstile = useTurnstile();
 
   const [Geoapify, setGeoapify] = useState<GeoapifyLib | null>(null);
 
@@ -150,6 +152,8 @@ export function QuickEnquiry() {
     } catch {
       setErrorMessage(quickEnquiry.errorNetworkMessage);
     } finally {
+      setToken("");
+      turnstile.reset();
       setIsSubmitting(false);
     }
   };

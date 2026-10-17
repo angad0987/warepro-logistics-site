@@ -28,6 +28,7 @@ import {
 } from "@/content/contact";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { useTurnstile } from "react-turnstile";
 import { ENV } from "@/config/environment";
 import { OFFICE_LOCATION } from "@/config/office";
 import {
@@ -132,6 +133,7 @@ function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useState("");
+  const turnstile = useTurnstile();
 
   const resetForm = () => {
     setName("");
@@ -236,6 +238,8 @@ function Contact() {
     } catch {
       setErrorMessage(contactPage.errorNetworkMessage);
     } finally {
+      setToken("");
+      turnstile.reset();
       setIsSubmitting(false);
     }
   };

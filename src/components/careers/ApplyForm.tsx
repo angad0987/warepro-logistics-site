@@ -15,6 +15,7 @@ import {
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 import "@/geoapify-overrides.css";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { useTurnstile } from "react-turnstile";
 import { ENV } from "@/config/environment";
 import {
   Select,
@@ -235,6 +236,7 @@ export function ApplyForm() {
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const selectedPlaceRef = useRef<any>(null);
   const [token, setToken] = useState("");
+  const turnstile = useTurnstile();
 
   const validateFile = (file: File | undefined | null, key: string) => {
     if (!file) return null;
@@ -330,6 +332,8 @@ export function ApplyForm() {
     } catch {
       setSubmitError("Something Went Wrong");
     } finally {
+      setToken("");
+      turnstile.reset();
       setSubmitting(false);
     }
   };

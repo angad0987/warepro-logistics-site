@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Turnstile } from "react-turnstile";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ENV } from "@/config/environment";
 
 const TURNSTILE_SITE_KEY = ENV.TURNSTILE_SITE_KEY;
@@ -16,13 +16,36 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 }
 
 export function TurnstileWidget({ onVerify, onExpire }: Props) {
+  const [widgetKey, setWidgetKey] = useState(0);
+  const retries = useRef(0);
+
+  const restart = () => {
+    if (retries.current >= 3) return;
+    retries.current += 1;
+    setTimeout(() => setWidgetKey((k) => k + 1), 1000);
+  };
+
   return (
     <ClientOnly>
       <Turnstile
+        key={widgetKey}
         sitekey={TURNSTILE_SITE_KEY}
-        onVerify={onVerify}
+        retry="auto"
+        retryInterval={4000}
+        refreshExpired="auto"
+        onVerify={(token) => {
+          retries.current = 0;
+          onVerify(token);
+        }}
         onExpire={onExpire}
-        onError={onExpire}
+        onTimeout={() => {
+          onExpire();
+          restart();
+        }}
+        onError={() => {
+          onExpire();
+          restart();
+        }}
       />
     </ClientOnly>
   );
