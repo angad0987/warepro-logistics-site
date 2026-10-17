@@ -139,7 +139,7 @@ export function DetailModal({
 
   return (
     <Dialog open={!!item} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-4xl w-[calc(100%-2rem)] h-[80vh] max-h-[80vh] p-0 gap-0 overflow-hidden rounded-2xl shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 [&>button.absolute.right-4]:hidden">
+      <DialogContent className="max-w-6xl w-[calc(100%-2rem)] h-[80vh] max-h-[80vh] p-0 gap-0 overflow-hidden rounded-2xl shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 [&>button.absolute.right-4]:hidden">
         <DialogClose className="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-black/50 text-white shadow-md cursor-pointer transition-colors hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>

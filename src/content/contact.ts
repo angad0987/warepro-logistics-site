@@ -41,7 +41,8 @@ export const businessTypes: string[] = [
 ];
 
 export const volumeOptions: string[] = [
-  "Less than 500 orders / month",
+  "Less than 100 orders / month",
+  "100 – 500 orders / month",
   "500 – 2,000 orders / month",
   "2,000 – 10,000 orders / month",
   "10,000 – 50,000 orders / month",

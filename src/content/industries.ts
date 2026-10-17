@@ -2,6 +2,11 @@ import imgECommFulfillment from "@/assets/E-commfulfillment.png";
 import imgFMCG from "@/assets/FMCG.png";
 import imgElectronics from "@/assets/Electronics.png";
 import imgFashion from "@/assets/Fashion.png";
+import imgAutomotives from "@/assets/Automotive.png";
+import imgRetail from "@/assets/Retail.png";
+import imgHealthcare from "@/assets/healthcare.png";
+import imgManufacturing from "@/assets/Manufacturing.png";
+import imgConsumerGoods from "@/assets/ConsumerGoods.png";
 
 export interface IndustryItem {
   icon: string;
@@ -63,8 +68,7 @@ export const industries: IndustryItem[] = [
       "Planogram-ready kitting",
       "Regional distribution",
     ],
-    image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&auto=format&fit=crop",
+    image: imgRetail
   },
   {
     icon: "Utensils",
@@ -124,8 +128,7 @@ export const industries: IndustryItem[] = [
       "Bonded storage options",
       "Finished-goods distribution",
     ],
-    image:
-      "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&auto=format&fit=crop",
+    image: imgManufacturing
   },
   {
     icon: "Package",
@@ -140,8 +143,7 @@ export const industries: IndustryItem[] = [
       "Modern trade ready",
       "Promotional kitting",
     ],
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&auto=format&fit=crop",
+    image: imgConsumerGoods
   },
   {
     icon: "Car",
@@ -156,8 +158,7 @@ export const industries: IndustryItem[] = [
       "Serialized tracking",
       "Regional stocking points",
     ],
-    image:
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?w=1200&auto=format&fit=crop",
+    image: imgAutomotives
   },
   {
     icon: "HeartPulse",
@@ -172,7 +173,6 @@ export const industries: IndustryItem[] = [
       "Traceable chain of custody",
       "Secure storage zones",
     ],
-    image:
-      "https://images.unsplash.com/photo-1583912267550-d6c2ac3196c0?w=1200&auto=format&fit=crop",
+    image: imgHealthcare
   },
 ];
