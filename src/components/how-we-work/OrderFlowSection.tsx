@@ -30,7 +30,7 @@ export function OrderFlowSection() {
           </p>
         </Reveal>
 
-        <div className="mt-12 md:mt-14 flex items-start justify-center gap-2 md:gap-4 overflow-x-auto pb-4 md:pb-0">
+        <div className="mt-12 md:mt-14 flex items-start justify-start md:justify-center gap-2 md:gap-4 overflow-x-auto pb-4 md:pb-0">
           {orderFlow.steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.08}>
               <div className="flex items-center gap-2 md:gap-4">
