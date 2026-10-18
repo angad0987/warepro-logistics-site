@@ -34,6 +34,7 @@ import imgReverseLogistics from "@/assets/Reverselogistics.png";
 import imgCrossDocking from "@/assets/crossdocking.png";
 import imgTransportation from "@/assets/transportation&distribution.png";
 import imgPackagingAndKitting from "@/assets/PackagingAndKitting.png"
+import imgWarehouse from "@/assets/warehouse.png";
 
 export const services: ServiceItem[] = [
   {
@@ -49,7 +50,7 @@ export const services: ServiceItem[] = [
       "Shared or dedicated space",
       "Pan-India footprint",
     ],
-    image: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&auto=format&fit=crop",
+    image: imgWarehouse
   },
   {
     icon: "Boxes",
