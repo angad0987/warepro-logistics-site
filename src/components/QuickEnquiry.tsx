@@ -8,12 +8,13 @@ import { BRAND } from "@/lib/brand";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { useTurnstile } from "react-turnstile";
 import { quickEnquiry } from "@/content/home";
+import { ENV } from "@/config/environment";
 import type {
   GeoapifyContext as GeoapifyContextType,
   GeoapifyGeocoderAutocomplete as GeoapifyAutocompleteType,
 } from "@geoapify/react-geocoder-autocomplete";
 
-const GEOAPIFY_API_KEY = "599ec45612474e8ea2babe2cd8b9bef4";
+const GEOAPIFY_API_KEY = ENV.GEOAPIFY_API_KEY;
 
 type GeoapifyLib = {
   Context: ComponentType<{ apiKey: string; children: ReactNode }>;
