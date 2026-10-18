@@ -586,7 +586,7 @@ function Contact() {
                 </a>
               </div>
 
-              <div className="relative min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft">
+              <div className="relative isolate min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft">
                 <Suspense fallback={<div className="h-[360px] w-full sm:h-[440px] lg:h-[500px]" />}>
                   <ClientOnly>
                     <OfficeMap />

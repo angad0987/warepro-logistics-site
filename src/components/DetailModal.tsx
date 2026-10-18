@@ -161,7 +161,7 @@ export function DetailModal({
                 {/* Desktop: side-by-side | Mobile: stacked */}
                 <div className="flex flex-col md:grid md:grid-cols-[2fr_3fr] h-full">
                   {/* LEFT — Image Panel */}
-                  <div className="relative h-48 md:h-full shrink-0 overflow-hidden">
+                  <div className="relative h-48 md:h-full shrink-0 overflow-hidden bg-navy/10">
                     {!loaded && !errored && (
                       <div className="absolute inset-0 bg-muted animate-pulse md:rounded-l-2xl rounded-t-2xl md:rounded-tr-none" />
                     )}
@@ -170,13 +170,21 @@ export function DetailModal({
                         <DynamicIcon name={item.icon} className="h-16 w-16 text-white/40" />
                       </div>
                     ) : (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className={`h-full w-full object-cover md:rounded-l-2xl rounded-t-2xl md:rounded-tr-none transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
-                        onLoad={setLoaded}
-                        onError={setErrored}
-                      />
+                      <>
+                        <img
+                          src={item.image}
+                          alt=""
+                          aria-hidden="true"
+                          className={`absolute inset-0 h-full w-full scale-110 object-cover blur-2xl transition-opacity duration-300 ${loaded ? "opacity-50" : "opacity-0"}`}
+                        />
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className={`relative z-10 h-full w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
+                          onLoad={setLoaded}
+                          onError={setErrored}
+                        />
+                      </>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:rounded-l-2xl rounded-t-2xl md:rounded-tr-none pointer-events-none" />
                     <div className="absolute bottom-4 left-4 pointer-events-none">
