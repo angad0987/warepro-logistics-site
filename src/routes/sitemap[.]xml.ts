@@ -15,9 +15,13 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/about", priority: "0.7", changefreq: "monthly" },
           { path: "/blog", priority: "0.6", changefreq: "weekly" },
           { path: "/contact", priority: "0.8", changefreq: "monthly" },
+          { path: "/careers", priority: "0.6", changefreq: "monthly" },
+          { path: "/privacy-policy", priority: "0.3", changefreq: "yearly" },
+          { path: "/terms", priority: "0.3", changefreq: "yearly" },
         ];
-        const urls = entries.map((e) =>
-          `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`
+        const urls = entries.map(
+          (e) =>
+            `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`,
         );
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,

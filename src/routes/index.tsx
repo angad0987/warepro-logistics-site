@@ -1,334 +1,304 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { z } from "zod";
-import {
-  ArrowRight, Warehouse, Boxes, Truck, ShoppingCart, PackageOpen, RotateCcw,
-  Package, Layers,
-  CheckCircle2, Send, Quote,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-warehouse.jpg";
-import fleetImg from "@/assets/fleet.jpg";
+import ourStory2 from "@/assets/ourStory2.png";
 import { Reveal } from "@/components/Reveal";
+import { ProcessTeaser } from "@/components/ProcessTeaser";
 import { BRAND } from "@/lib/brand";
-import { HowItWorks } from "@/components/HowItWorks";
 import { IconCallouts } from "@/components/IconCallouts";
+import { WarehouseJourney } from "@/components/WarehouseJourney";
+import { ShowcaseParallax } from "@/components/ShowcaseParallax";
+import { ClientMarquee } from "@/components/ClientMarquee";
+import { TestimonialsMarquee } from "@/components/TestimonialsMarquee";
+import { InteractiveCTA } from "@/components/InteractiveCTA";
+import { DynamicIcon } from "@/lib/DynamicIcon";
+import { hero, brandStory, servicesOverview } from "@/content/home";
+import { services } from "@/content/services";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "CoreWarehousing — B2B Warehousing & 3PL Fulfillment in India" },
-      { name: "description", content: "Reliable warehousing, inventory, B2B & eCommerce fulfillment, transportation and cross-docking. Get a tailored 3PL quote from CoreWarehousing." },
+      {
+        name: "description",
+        content:
+          "Reliable warehousing, inventory, B2B & eCommerce fulfillment, transportation and cross-docking. Get a tailored 3PL quote from CoreWarehousing.",
+      },
       { property: "og:title", content: "CoreWarehousing — B2B Warehousing & 3PL Fulfillment" },
-      { property: "og:description", content: "End-to-end warehousing and fulfillment for growing brands. Request a quote today." },
+      {
+        property: "og:description",
+        content:
+          "End-to-end warehousing and fulfillment for growing brands. Request a quote today.",
+      },
       { property: "og:url", content: "/" },
       { property: "og:image", content: heroImg },
     ],
     links: [{ rel: "canonical", href: "/" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: BRAND.name,
-        url: "/",
-        description: "B2B Warehousing and 3PL fulfillment services.",
-        address: { "@type": "PostalAddress", streetAddress: BRAND.address },
-        contactPoint: { "@type": "ContactPoint", telephone: BRAND.phone, contactType: "customer service" },
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: BRAND.name,
+          url: "/",
+          description: "B2B Warehousing and 3PL fulfillment services.",
+          address: { "@type": "PostalAddress", streetAddress: BRAND.address },
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: BRAND.phone,
+            contactType: "customer service",
+          },
+        }),
+      },
+    ],
   }),
   component: Home,
-});
-
-const benefits = [
-  "Pan-India warehousing footprint",
-  "Real-time inventory visibility",
-  "Seamless marketplace integrations",
-  "Scalable capacity — no lock-in",
-  "Dedicated B2B & 3PL specialists",
-  "Same-day dispatch capability",
-];
-
-const services = [
-  { icon: Warehouse, title: "Warehousing", desc: "Secure, scalable storage across shared and dedicated facilities." },
-  { icon: Boxes, title: "Inventory Management", desc: "SKU-level accuracy with cycle counts and reconciliation." },
-  { icon: Package, title: "B2B Fulfillment", desc: "Bulk order processing for distributors, wholesalers and retail." },
-  { icon: ShoppingCart, title: "eCommerce Fulfillment", desc: "Pick, pack and ship across all major marketplaces." },
-  { icon: Truck, title: "Transportation", desc: "PTL, FTL and last-mile distribution nationwide." },
-  { icon: RotateCcw, title: "Reverse Logistics", desc: "Returns, quality checks and restocking made simple." },
-  { icon: PackageOpen, title: "Packaging & Kitting", desc: "Custom kitting, bundling and value-added packaging." },
-  { icon: Layers, title: "Cross Docking", desc: "Direct dock-to-dock transfers with minimal dwell time." },
-];
-
-const platforms = ["Amazon", "Flipkart", "Shopify", "WooCommerce", "Meesho"];
-
-
-const testimonials = [
-  { name: "Client Name", role: "Company", quote: "Add your first client testimonial here to build trust with prospects." },
-  { name: "Client Name", role: "Company", quote: "Placeholder testimonial — replace with real B2B/3PL success stories." },
-  { name: "Client Name", role: "Company", quote: "Placeholder testimonial — highlight measurable results like accuracy or SLA." },
-];
-
-const quickSchema = z.object({
-  name: z.string().trim().min(1, "Required").max(100),
-  businessType: z.string().min(1, "Select a business type"),
-  contact: z.string().trim().min(5, "Phone or email required").max(120),
 });
 
 function Home() {
   return (
     <>
-      {/* HERO */}
+      {/* HERO — cinematic */}
       <section className="relative min-h-[100svh] flex items-center text-white overflow-hidden">
-        <img src={heroImg} alt="CoreWarehousing modern warehouse" width={1920} height={1080} className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={heroImg}
+          alt="CoreWarehousing modern warehouse"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover animate-ken-burns"
+        />
         <div className="absolute inset-0 gradient-hero" />
-        <div className="absolute inset-0 bg-navy/50" />
+        <div className="absolute inset-0 bg-navy/55" />
+        <div className="pointer-events-none absolute -top-24 right-[-6rem] h-[30rem] w-[30rem] rounded-full bg-primary/15 blur-[130px] animate-float-slow" />
 
-        <div className="container-x relative z-10 pt-28 pb-20 md:pt-32">
-          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 items-center">
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium backdrop-blur">
+        <div className="container-x relative z-10 pt-28 pb-24 md:pt-32">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
+              <span className="inline-flex items-center gap-2 rounded-full glass-panel px-4 py-1.5 text-xs font-medium">
                 <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                B2B Warehousing & 3PL Fulfillment
+                {hero.badge}
               </span>
-              <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
-                Warehousing that <span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">scales with your brand.</span>
+              <h1 className="mt-7 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-heading leading-[1.1] text-balance">
+                {hero.headline}
+                <span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">
+                  {hero.headlineHighlight}
+                </span>
               </h1>
-              <p className="mt-6 text-lg md:text-xl text-white/80 max-w-xl leading-relaxed">
-                CoreWarehousing runs the storage, inventory and fulfillment backbone behind ambitious B2B and D2C companies — reliably, and at any volume.
+              <p className="mt-7 text-lg md:text-xl text-white/75 max-w-xl leading-relaxed">
+                {hero.subheadline}
               </p>
 
-              <ul className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-2 max-w-xl">
-                {benefits.map((b) => (
-                  <li key={b} className="flex items-start gap-2 text-sm text-white/85">
+              <ul className="mt-9 grid sm:grid-cols-2 gap-x-6 gap-y-3 max-w-xl">
+                {hero.benefits.map((b, i) => (
+                  <motion.li
+                    key={b}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
+                    className="flex items-start gap-2 text-sm text-white/85"
+                  >
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     {b}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Link to="/contact" className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]">
-                  Get a Quote <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link to="/services" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 backdrop-blur px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition-colors">
-                  Explore Services
+              <div className="mt-11 flex flex-wrap gap-4">
+                <Link
+                  to="/services"
+                  className="group inline-flex items-center gap-2 rounded-full glass-panel px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white/15"
+                >
+                  {hero.ctaSecondary}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </motion.div>
 
             {/* Quick enquiry form */}
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
-              <QuickEnquiry />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <LazyQuickEnquiry />
             </motion.div>
           </div>
+        </div>
+
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 hidden justify-center md:flex">
+          <span className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 p-1.5">
+            <ChevronDown className="h-3 w-3 text-white/70 animate-scroll-dot" />
+          </span>
         </div>
       </section>
 
       {/* BRAND STORY */}
-      <section className="py-24 md:py-28">
-        <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
+      <section className="section-y">
+        <div className="container-x grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <Reveal>
-            <img src={fleetImg} alt="CoreWarehousing operations" loading="lazy" width={1280} height={800} className="rounded-3xl shadow-elegant w-full" />
+            <div className="group overflow-hidden rounded-[26px] shadow-elegant">
+              <img
+                src={ourStory2}
+                alt="CoreWarehousing operations"
+                loading="lazy"
+                width={1280}
+                height={800}
+                className="w-full transition-transform duration-[900ms] ease-out group-hover:scale-105"
+              />
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Our story</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy">Built by supply-chain operators, for growing brands.</h2>
-            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
-              CoreWarehousing was founded to solve a simple problem: modern brands need warehousing that keeps pace with their growth — without the overhead of running their own operations.
-            </p>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Today we operate strategically located facilities, integrate with every major marketplace, and provide dedicated support to B2B distributors, D2C brands and 3PL partners across the country.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link to="/about" className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant">
-                About Us <ArrowRight className="h-4 w-4" />
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
+              {brandStory.eyebrow}
+            </span>
+            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-navy font-heading leading-[1.08] text-balance">
+              {brandStory.headline}
+            </h2>
+            {brandStory.paragraphs.map((p) => (
+              <p key={p.slice(0, 20)} className="mt-5 text-muted-foreground leading-relaxed">
+                {p}
+              </p>
+            ))}
+            <div className="mt-9 flex flex-wrap gap-4">
+              <Link
+                to="/about"
+                className="group inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform duration-300 hover:scale-[1.03]"
+              >
+                {brandStory.ctaPrimary}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-              <Link to="/why-choose-us" className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-navy hover:bg-muted">
-                Why Choose Us
+              <Link
+                to="/why-choose-us"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-muted"
+              >
+                {brandStory.ctaSecondary}
               </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* HOW WE WORK — TEASER */}
+      <ProcessTeaser />
+
+      {/* ANIMATED WAREHOUSE JOURNEY */}
+      <WarehouseJourney />
+
+      {/* FULL-WIDTH PARALLAX SHOWCASE */}
+      <ShowcaseParallax />
+
       {/* SERVICES OVERVIEW */}
-      <section className="py-24 bg-secondary/40">
+      <section className="section-y bg-secondary/40">
         <div className="container-x">
           <Reveal className="max-w-2xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">What we do</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy">End-to-end logistics, under one roof.</h2>
-            <p className="mt-4 text-muted-foreground text-lg">Eight integrated services covering the full journey from inbound receipt to last-mile delivery.</p>
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
+              {servicesOverview.eyebrow}
+            </span>
+            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-navy font-heading leading-[1.08] text-balance">
+              {servicesOverview.headline}
+            </h2>
+            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
+              {servicesOverview.subheadline}
+            </p>
           </Reveal>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.04}>
-                <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-card-soft hover:shadow-elegant hover:-translate-y-1 transition-all">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-glow">
-                    <s.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-5 text-lg font-bold text-navy">{s.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                </div>
+              <Reveal key={s.title} delay={i * 0.05}>
+                <Link
+                  to="/services"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-border bg-card p-7 shadow-card-soft transition-all duration-500 hover:-translate-y-2 hover:shadow-elegant"
+                >
+                  <span className="pointer-events-none absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(18rem_10rem_at_50%_100%,oklch(0.9_0.17_95/0.22),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl gradient-primary text-primary-foreground shadow-glow transition-transform duration-500 group-hover:scale-110">
+                    <DynamicIcon name={s.icon} className="h-6 w-6" />
+                  </span>
+                  <h3 className="mt-6 text-lg font-bold text-navy font-heading">{s.title}</h3>
+                  <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold text-primary opacity-0 transition-all duration-500 group-hover:opacity-100">
+                    Learn more <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
 
-          <div className="mt-10">
-            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
+          <div className="mt-12">
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
+            >
               View all services <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <HowItWorks />
-
       {/* WHY CHOOSE US */}
-      <IconCallouts
-        variant="dark"
-        eyebrow="Why CoreWarehousing"
-        title="Built for ambitious supply chains."
-        intro="Six values delivered daily by our operations team — not just a marketing tagline."
-      />
+      <IconCallouts variant="dark" />
 
-      {/* PLATFORMS */}
-      <section className="py-20">
-        <div className="container-x">
-          <Reveal className="text-center max-w-2xl mx-auto">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Integrations</span>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold text-navy">Plug into the platforms you already sell on.</h2>
-            <p className="mt-3 text-muted-foreground">Native marketplace integrations for seamless order flow and inventory sync.</p>
-          </Reveal>
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {platforms.map((p, i) => (
-              <Reveal key={p} delay={i * 0.05}>
-                <div className="rounded-xl border border-border bg-card p-6 text-center shadow-card-soft hover:shadow-elegant transition-shadow">
-                  <div className="font-display text-lg font-bold text-navy">{p}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* TRUSTED CLIENTS */}
+      <ClientMarquee />
 
       {/* TESTIMONIALS */}
-      <section className="py-24 bg-secondary/40">
-        <div className="container-x">
-          <Reveal className="max-w-2xl">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Trusted by brands</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-navy">Real results, from real partners.</h2>
-          </Reveal>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <figure className="h-full rounded-2xl border border-border bg-card p-7 shadow-card-soft">
-                  <div className="h-10 w-24 rounded bg-muted grid place-items-center text-xs text-muted-foreground">LOGO</div>
-                  <Quote className="mt-6 h-8 w-8 text-primary/40" />
-                  <blockquote className="mt-3 text-foreground leading-relaxed">"{t.quote}"</blockquote>
-                  <figcaption className="mt-6 pt-6 border-t border-border">
-                    <div className="font-semibold text-navy">{t.name}</div>
-                    <div className="text-sm text-muted-foreground">{t.role}</div>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsMarquee />
 
-      {/* CTA */}
-      <section className="py-20">
-        <div className="container-x">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-3xl gradient-primary px-8 py-16 md:p-20 text-center text-primary-foreground shadow-elegant">
-              <h2 className="text-3xl md:text-5xl font-bold">Ready to optimize your supply chain?</h2>
-              <p className="mt-4 text-lg md:text-xl opacity-90 max-w-2xl mx-auto">Share your volumes and we'll build a tailored 3PL proposal within 24 hours.</p>
-              <Link to="/contact" className="mt-10 inline-flex items-center gap-2 rounded-full bg-navy px-8 py-4 text-base font-bold text-white shadow-elegant hover:scale-[1.03] transition-transform">
-                Request Free Quote <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* INTERACTIVE CTA */}
+      <InteractiveCTA />
     </>
   );
 }
 
-function QuickEnquiry() {
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [sent, setSent] = useState(false);
+function ClientOnly({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted ? <>{children}</> : null;
+}
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const data = {
-      name: fd.get("name"),
-      businessType: fd.get("businessType"),
-      contact: fd.get("contact"),
-    };
-    const parsed = quickSchema.safeParse(data);
-    if (!parsed.success) {
-      const errs: Record<string, string> = {};
-      parsed.error.issues.forEach((i) => {
-        const k = i.path[0];
-        if (typeof k === "string") errs[k] = i.message;
+function LazyQuickEnquiry() {
+  const [Mounted, setMounted] = useState<React.ComponentType | null>(null);
+  const loadRef = useRef<Promise<void> | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const load = () =>
+      import("@/components/QuickEnquiry").then((m) => {
+        if (active) setMounted(() => m.QuickEnquiry);
       });
-      setErrors(errs);
-      return;
-    }
-    setErrors({});
-    // Send via mailto (Phase 1 — no backend)
-    const subject = encodeURIComponent(`Quick enquiry from ${parsed.data.name}`);
-    const body = encodeURIComponent(
-      `Name: ${parsed.data.name}\nBusiness Type: ${parsed.data.businessType}\nContact: ${parsed.data.contact}`
-    );
-    window.location.href = `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
-    setSent(true);
-    form.reset();
-  };
+    loadRef.current = load();
+    return () => {
+      active = false;
+    };
+  }, []);
 
+  return <ClientOnly>{Mounted ? <Mounted /> : <QuickEnquiryPlaceholder />}</ClientOnly>;
+}
+
+function QuickEnquiryPlaceholder() {
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl p-6 md:p-8 shadow-elegant">
+    <div className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl p-5 md:p-6 shadow-elegant">
       <div className="text-white">
-        <div className="text-xs font-semibold tracking-widest uppercase text-primary">Quick Enquiry</div>
-        <h3 className="mt-2 text-2xl font-bold">Get a callback in minutes.</h3>
-        <p className="mt-2 text-sm text-white/75">Tell us who you are — our team responds fast.</p>
-      </div>
-      {sent ? (
-        <div className="mt-6 rounded-xl bg-white/10 border border-white/20 p-5 text-white">
-          <div className="flex items-center gap-2 font-semibold"><CheckCircle2 className="h-5 w-5 text-primary" /> Thanks! Opening your email…</div>
-          <button onClick={() => setSent(false)} className="mt-3 text-sm underline text-primary">Send another</button>
+        <div className="text-[11px] font-semibold tracking-widest uppercase text-primary">
+          Quick enquiry
         </div>
-      ) : (
-        <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
-          <div>
-            <input name="name" placeholder="Your name" className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary" />
-            {errors.name && <p className="mt-1 text-xs text-primary">{errors.name}</p>}
-          </div>
-          <div>
-            <select name="businessType" defaultValue="" className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white outline-none focus:border-primary">
-              <option value="" disabled className="text-navy">Business type</option>
-              {["D2C / eCommerce Brand", "B2B Distributor", "Manufacturer", "Retailer", "3PL Partner", "Other"].map((o) => (
-                <option key={o} value={o} className="text-navy">{o}</option>
-              ))}
-            </select>
-            {errors.businessType && <p className="mt-1 text-xs text-primary">{errors.businessType}</p>}
-          </div>
-          <div>
-            <input name="contact" placeholder="Phone or email" className="w-full rounded-xl bg-white/15 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary" />
-            {errors.contact && <p className="mt-1 text-xs text-primary">{errors.contact}</p>}
-          </div>
-          <button type="submit" className="w-full inline-flex items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform">
-            Request Callback <Send className="h-4 w-4" />
-          </button>
-          <p className="text-[11px] text-white/60 text-center">By submitting, you agree to be contacted about your enquiry.</p>
-        </form>
-      )}
+        <h3 className="mt-1.5 text-xl font-bold font-heading">Quick Enquiry</h3>
+        <p className="mt-1 text-sm text-white/75">Tell us a little about your requirements.</p>
+      </div>
+      <div className="mt-5 space-y-3">
+        <div className="h-10 w-full animate-pulse rounded-xl bg-white/15" />
+        <div className="h-10 w-full animate-pulse rounded-xl bg-white/15" />
+        <div className="h-10 w-full animate-pulse rounded-xl bg-white/15" />
+        <div className="h-10 w-full animate-pulse rounded-xl bg-white/15" />
+        <div className="h-10 w-full animate-pulse rounded-xl bg-white/15" />
+      </div>
     </div>
   );
 }
