@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { bentoSection, bentoCards } from "@/content/homeSections";
-import { opImages } from "@/lib/opImages";
+import { opImages, opImageSizes } from "@/lib/opImages";
 import { cn } from "@/lib/utils";
 
 export function BentoOperations() {
@@ -51,6 +51,9 @@ export function BentoOperations() {
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
+                  decoding="async"
+                  width={opImageSizes[card.image].width}
+                  height={opImageSizes[card.image].height}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/25" />

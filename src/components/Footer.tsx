@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { PackageCheck, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
 import {
@@ -8,6 +8,7 @@ import {
   footerDescription,
   footerTagline,
 } from "@/content/nav";
+import logoImg from "@/assets/brand-logo.webp";
 
 const socialLinks = [
   {
@@ -38,9 +39,15 @@ export function Footer() {
       <div className="container-x py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-1">
           <Link to="/" className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-xl gradient-primary text-primary-foreground">
-              <PackageCheck className="h-5 w-5" />
-            </span>
+            <img
+              src={logoImg}
+              alt="CoreWarehousing logo"
+              loading="lazy"
+              decoding="async"
+              width={512}
+              height={341}
+              className="h-10 md:h-12 w-auto"
+            />
             <span className="font-heading text-lg font-bold text-white">
               Core<span className="text-primary">Warehousing</span>
             </span>

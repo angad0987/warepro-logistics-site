@@ -105,7 +105,7 @@ export interface JourneyStep {
 
 export const journeySection = {
   eyebrow: "The journey",
-  headline: "From inbound dock to customer doorstep.",
+  headline: "Warehouse to customer's doorstep.",
   subheadline: "Two distinct flows — full 3PL fulfillment and streamlined B2B bulk movement.",
 };
 

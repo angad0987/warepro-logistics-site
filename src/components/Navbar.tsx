@@ -4,8 +4,8 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BRAND } from "@/lib/brand";
 import { navLinks, ctaLabel } from "@/content/nav";
-import logoImg from "@/assets/logo1.png";
-import logoScrolledImg from "@/assets/logo4.png";
+import logoImg from "@/assets/brand-logo.webp";
+import logoScrolledImg from "@/assets/brand-logo-scrolled.webp";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,6 +32,9 @@ export function Navbar() {
             <img
               src={scrolled ? logoScrolledImg : logoImg}
               alt="CoreWarehousing"
+              decoding="async"
+              width={512}
+              height={341}
               className="h-10 md:h-12 w-auto"
             />
           </span>

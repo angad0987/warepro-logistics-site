@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { platforms } from "@/content/platforms";
 import { platformsSection } from "@/content/home";
 import { clientsSection } from "@/content/homeSections";
-import amazonLogo from "@/assets/amazonlogo.png";
-import flipkartLogo from "@/assets/flipkartlogo.png";
-import myntraLogo from "@/assets/myntra.png";
-import shopifyLogo from "@/assets/shopify-seeklogo.png";
-import woocommerceLogo from "@/assets/woocommerce-seeklogo.png";
-import meeshoLogo from "@/assets/meesho-seeklogo.png";
+import amazonLogo from "@/assets/amazon-logo.webp";
+import flipkartLogo from "@/assets/flipkart-logo.webp";
+import myntraLogo from "@/assets/myntra-logo.webp";
+import shopifyLogo from "@/assets/shopify-logo.webp";
+import woocommerceLogo from "@/assets/woocommerce-logo.webp";
+import meeshoLogo from "@/assets/meesho-logo.webp";
 
 const logoMap: Record<string, string> = {
   amazonlogo: amazonLogo,
@@ -17,6 +17,15 @@ const logoMap: Record<string, string> = {
   "shopify-seeklogo": shopifyLogo,
   "woocommerce-seeklogo": woocommerceLogo,
   "meesho-seeklogo": meeshoLogo,
+};
+
+const logoSizes: Record<string, { width: number; height: number }> = {
+  amazonlogo: { width: 512, height: 226 },
+  flipkartlogo: { width: 400, height: 300 },
+  myntra: { width: 150, height: 72 },
+  "shopify-seeklogo": { width: 512, height: 148 },
+  "woocommerce-seeklogo": { width: 512, height: 103 },
+  "meesho-seeklogo": { width: 256, height: 256 },
 };
 
 export function ClientMarquee() {
@@ -53,6 +62,9 @@ export function ClientMarquee() {
                 src={logoMap[p.logo]}
                 alt={p.name}
                 loading="lazy"
+                decoding="async"
+                width={logoSizes[p.logo].width}
+                height={logoSizes[p.logo].height}
                 initial={{ opacity: 0, y: 12, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-60px" }}

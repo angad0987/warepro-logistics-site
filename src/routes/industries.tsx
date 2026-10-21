@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { DetailModal } from "@/components/DetailModal";
 import { industries, industriesPage, type IndustryItem } from "@/content/industries";
-import industriesLogo from "@/assets/industrieslogo.png";
+import industriesLogo from "@/assets/industries-logo.webp";
 
 export const Route = createFileRoute("/industries")({
   head: () => ({
@@ -100,6 +100,10 @@ function Industries() {
             <img
               src={industriesLogo}
               alt="Industries we serve"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={800}
               className="w-full max-w-5xl mx-auto object-contain"
             />
           </Reveal>

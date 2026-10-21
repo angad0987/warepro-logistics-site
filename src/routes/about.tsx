@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { getIcon } from "@/lib/icons";
-import ourStory2 from "@/assets/ourStory2.png";
+import ourStory2 from "@/assets/our-story.webp";
 import { aboutPage, visionMission, story } from "@/content/about";
 
 export const Route = createFileRoute("/about")({
@@ -93,8 +93,9 @@ function About() {
               src={ourStory2}
               alt="CoreWarehousing operations"
               loading="lazy"
-              width={1280}
-              height={800}
+              decoding="async"
+              width={800}
+              height={533}
               className="rounded-3xl shadow-elegant w-full"
             />
           </Reveal>

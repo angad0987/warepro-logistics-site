@@ -3,10 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { howWeWorkPage } from "@/content/howWeWork";
-import imgPick from "@/assets/01_pick.png";
-import imgVerify from "@/assets/02_verify.png";
-import imgPack from "@/assets/03_pack.png";
-import imgDispatch from "@/assets/04_dispatch.png";
+import imgPick from "@/assets/01-pick.webp";
+import imgVerify from "@/assets/02-verify.webp";
+import imgPack from "@/assets/03-pack.webp";
+import imgDispatch from "@/assets/04-dispatch.webp";
 
 const stepImages = [imgPick, imgVerify, imgPack, imgDispatch];
 

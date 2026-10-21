@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, PhoneCall } from "lucide-react";
 
-import ctaImg from "@/assets/warehouse-aerial.jpg";
+import ctaImg from "@/assets/warehouse-aerial.webp";
 import { finalCta } from "@/content/homeSections";
 import { BRAND } from "@/lib/brand";
 
@@ -22,6 +22,9 @@ export function InteractiveCTA() {
             alt=""
             aria-hidden="true"
             loading="lazy"
+            decoding="async"
+            width={1280}
+            height={800}
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy/92 to-navy/70" />

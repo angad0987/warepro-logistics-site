@@ -80,6 +80,10 @@ export function TestimonialsMarquee() {
                         <img
                           src={t.avatar}
                           alt={t.name ?? ""}
+                          loading="lazy"
+                          decoding="async"
+                          width={44}
+                          height={44}
                           className="h-11 w-11 shrink-0 rounded-full object-cover"
                         />
                       ) : (

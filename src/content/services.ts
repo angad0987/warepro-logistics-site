@@ -27,14 +27,14 @@ export const servicesPage: ServicesPageContent = {
   workflowSubheadline: "From inbound to delivery — a single integrated supply chain.",
 };
 
-import imgInventoryManagement from "@/assets/Inventory Management.png";
-import imgECommFulfillment from "@/assets/E-commfulfillment.png";
-import imgB2BFulfillment from "@/assets/B2Bfulfillment-.png";
-import imgReverseLogistics from "@/assets/Reverselogistics.png";
-import imgCrossDocking from "@/assets/crossdocking.png";
-import imgTransportation from "@/assets/transportation&distribution.png";
-import imgPackagingAndKitting from "@/assets/PackagingAndKitting.png"
-import imgWarehouse from "@/assets/warehouse.png";
+import imgInventoryManagement from "@/assets/service-inventory-management.webp";
+import imgECommFulfillment from "@/assets/ecommerce-fulfillment.webp";
+import imgB2BFulfillment from "@/assets/service-b2b-fulfillment.webp";
+import imgReverseLogistics from "@/assets/service-reverse-logistics.webp";
+import imgCrossDocking from "@/assets/service-cross-docking.webp";
+import imgTransportation from "@/assets/service-transportation-distribution.webp";
+import imgPackagingAndKitting from "@/assets/service-packaging-kitting.webp"
+import imgWarehouse from "@/assets/service-warehousing.webp";
 
 export const services: ServiceItem[] = [
   {

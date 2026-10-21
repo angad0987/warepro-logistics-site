@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
-import heroImg from "@/assets/hero-warehouse.jpg";
-import ourStory2 from "@/assets/ourStory2.png";
+import heroImg from "@/assets/hero-warehouse.webp";
+import ourStory2 from "@/assets/our-story.webp";
 import { Reveal } from "@/components/Reveal";
 import { ProcessTeaser } from "@/components/ProcessTeaser";
 import { BRAND } from "@/lib/brand";
@@ -67,6 +67,8 @@ function Home() {
         <img
           src={heroImg}
           alt="CoreWarehousing modern warehouse"
+          fetchPriority="high"
+          decoding="async"
           width={1920}
           height={1080}
           className="absolute inset-0 h-full w-full object-cover animate-ken-burns"
@@ -149,8 +151,9 @@ function Home() {
                 src={ourStory2}
                 alt="CoreWarehousing operations"
                 loading="lazy"
-                width={1280}
-                height={800}
+                decoding="async"
+                width={800}
+                height={533}
                 className="w-full transition-transform duration-[900ms] ease-out group-hover:scale-105"
               />
             </div>

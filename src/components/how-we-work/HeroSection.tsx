@@ -5,7 +5,7 @@ import { ArrowRight, Info } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { howWeWorkPage } from "@/content/howWeWork";
-import heroImg from "@/assets/howWeWork1.png";
+import heroImg from "@/assets/how-we-work-1.webp";
 
 export function HeroSection() {
   const { hero } = howWeWorkPage;
@@ -71,8 +71,10 @@ export function HeroSection() {
               <img
                 src={heroImg}
                 alt="Warehouse operations"
+                fetchPriority="high"
+                decoding="async"
                 width={800}
-                height={600}
+                height={533}
                 className="w-full h-[340px] sm:h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
