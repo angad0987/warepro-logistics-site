@@ -1,19 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
+import { blogPosts } from "@/data/blogPosts";
+
 const BASE_URL = "";
+
+interface SitemapEntry {
+  path: string;
+  priority: string;
+  changefreq: string;
+}
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const entries = [
+        const entries: SitemapEntry[] = [
           { path: "/", priority: "1.0", changefreq: "weekly" },
           { path: "/services", priority: "0.9", changefreq: "monthly" },
           { path: "/industries", priority: "0.8", changefreq: "monthly" },
           { path: "/why-choose-us", priority: "0.8", changefreq: "monthly" },
           { path: "/about", priority: "0.7", changefreq: "monthly" },
           { path: "/blog", priority: "0.6", changefreq: "weekly" },
+          ...blogPosts.map((post) => ({
+            path: `/blog/${post.slug}`,
+            priority: "0.5",
+            changefreq: "monthly",
+          })),
           { path: "/contact", priority: "0.8", changefreq: "monthly" },
           { path: "/careers", priority: "0.6", changefreq: "monthly" },
           { path: "/privacy-policy", priority: "0.3", changefreq: "yearly" },
