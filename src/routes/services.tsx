@@ -22,7 +22,7 @@ export const Route = createFileRoute("/services")({
       { property: "og:title", content: "Services | CoreWarehousing" },
       {
         property: "og:description",
-        content: "Explore our full range of warehousing and 3PL fulfillment services.",
+        content: "Explore our full range of warehousing and Fulfillment services.",
       },
       { property: "og:url", content: "/services" },
       { property: "og:type", content: "website" },

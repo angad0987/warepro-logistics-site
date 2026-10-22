@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Learn about CoreWarehousing — our vision, mission and story of building a modern B2B warehousing and 3PL fulfillment partner.",
+          "Learn about CoreWarehousing — our vision, mission and story of building a modern B2B warehousing and Fulfillment services partner.",
       },
       { property: "og:title", content: "About CoreWarehousing" },
       { property: "og:description", content: "Vision, mission and story behind CoreWarehousing." },

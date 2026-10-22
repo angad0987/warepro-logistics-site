@@ -9,6 +9,7 @@ import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { useTurnstile } from "react-turnstile";
 import { quickEnquiry } from "@/content/home";
 import { ENV } from "@/config/environment";
+import { scrollToFirstInvalidField } from "@/lib/formValidation";
 import type {
   GeoapifyContext as GeoapifyContextType,
   GeoapifyGeocoderAutocomplete as GeoapifyAutocompleteType,
@@ -31,6 +32,16 @@ const quickSchema = z.object({
   city: z.string().min(2, "City is required").max(100, "City is too long"),
 });
 
+const labelClass = "mb-1.5 block text-xs font-medium text-white/75";
+
+function FieldLabel({ htmlFor, children }: { htmlFor?: string; children: React.ReactNode }) {
+  return (
+    <label htmlFor={htmlFor} className={labelClass}>
+      {children}
+    </label>
+  );
+}
+
 export function QuickEnquiry() {
   const [name, setName] = useState("");
   const [businessType, setBusinessType] = useState("");
@@ -39,12 +50,17 @@ export function QuickEnquiry() {
   const [city, setCity] = useState("");
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const selectedPlaceRef = useRef<Place | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useState("");
   const turnstile = useTurnstile();
+
+  const clearError = (field: string) => {
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: "" } : prev));
+  };
 
   const [Geoapify, setGeoapify] = useState<GeoapifyLib | null>(null);
 
@@ -99,6 +115,7 @@ export function QuickEnquiry() {
         if (typeof k === "string") errs[k] = i.message;
       });
       setErrors(errs);
+      scrollToFirstInvalidField(errs, formRef.current);
       return;
     }
 
@@ -134,6 +151,7 @@ export function QuickEnquiry() {
             }
           }
           setErrors(mapped);
+          scrollToFirstInvalidField(mapped, formRef.current);
           setErrorMessage("");
           break;
         }
@@ -181,22 +199,36 @@ export function QuickEnquiry() {
           </button>
         </div>
       ) : (
-        <form onSubmit={onSubmit} className="mt-5 space-y-3" noValidate>
-          <div>
+        <form ref={formRef} onSubmit={onSubmit} className="mt-5 space-y-3" noValidate>
+          <div data-form-field="name">
+            <FieldLabel htmlFor="quick-name">
+              Name
+            </FieldLabel>
             <input
+              id="quick-name"
               name="name"
               placeholder="Your name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                clearError("name");
+              }}
               className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
             />
             {errors.name && <p className="mt-1 text-xs text-primary">{errors.name}</p>}
           </div>
-          <div>
+          <div data-form-field="businessType">
+            <FieldLabel htmlFor="quick-businessType">
+              Business Type
+            </FieldLabel>
             <select
+              id="quick-businessType"
               name="businessType"
               value={businessType}
-              onChange={(e) => setBusinessType(e.target.value)}
+              onChange={(e) => {
+                setBusinessType(e.target.value);
+                clearError("businessType");
+              }}
               className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white outline-none focus:border-primary"
             >
               <option value="" disabled className="text-navy">
@@ -213,12 +245,14 @@ export function QuickEnquiry() {
             )}
           </div>
           <div
+            data-form-field="city"
             onBlur={() => {
               setTimeout(() => {
                 if (!selectedPlaceRef.current) setCity("");
               }, 200);
             }}
           >
+            <FieldLabel>City</FieldLabel>
             {Geoapify ? (
               <Geoapify.Context apiKey={GEOAPIFY_API_KEY}>
                 <Geoapify.Autocomplete
@@ -234,16 +268,19 @@ export function QuickEnquiry() {
                     setSelectedPlace(place);
                     selectedPlaceRef.current = place;
                     setCity(place.properties?.city ?? "");
+                    clearError("city");
                   }}
                   onUserInput={(value: string) => {
                     setSelectedPlace(null);
                     selectedPlaceRef.current = null;
                     setCity(value);
+                    clearError("city");
                   }}
                   onClear={() => {
                     setSelectedPlace(null);
                     selectedPlaceRef.current = null;
                     setCity("");
+                    clearError("city");
                   }}
                 />
               </Geoapify.Context>
@@ -252,31 +289,48 @@ export function QuickEnquiry() {
                 name="city"
                 placeholder="Enter your city"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                  clearError("city");
+                }}
                 className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
               />
             )}
 
             {errors.city && <p className="mt-1 text-xs text-primary">{errors.city}</p>}
           </div>
-          <div>
+          <div data-form-field="phone">
+            <FieldLabel htmlFor="quick-phone">
+              Phone Number
+            </FieldLabel>
             <input
+              id="quick-phone"
               name="phone"
               type="tel"
               placeholder="Phone number"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                setPhone(e.target.value);
+                clearError("phone");
+              }}
               className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
             />
             {errors.phone && <p className="mt-1 text-xs text-primary">{errors.phone}</p>}
           </div>
-          <div>
+          <div data-form-field="email">
+            <FieldLabel htmlFor="quick-email">
+              Email
+            </FieldLabel>
             <input
+              id="quick-email"
               name="email"
               type="email"
               placeholder="Email address"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                clearError("email");
+              }}
               className="w-full rounded-xl bg-white/15 border border-white/20 px-3.5 py-2.5 text-sm text-white placeholder:text-white/60 outline-none focus:border-primary"
             />
             {errors.email && <p className="mt-1 text-xs text-primary">{errors.email}</p>}

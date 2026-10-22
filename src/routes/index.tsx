@@ -18,16 +18,18 @@ import { DynamicIcon } from "@/lib/DynamicIcon";
 import { hero, brandStory, servicesOverview } from "@/content/home";
 import { services } from "@/content/services";
 
+const SHOW_TESTIMONIALS = false;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CoreWarehousing — B2B Warehousing & 3PL Fulfillment in India" },
+      { title: "CoreWarehousing — B2B Warehousing & Fulfillment services in India" },
       {
         name: "description",
         content:
           "Reliable warehousing, inventory, B2B & eCommerce fulfillment, transportation and cross-docking. Get a tailored 3PL quote from CoreWarehousing.",
       },
-      { property: "og:title", content: "CoreWarehousing — B2B Warehousing & 3PL Fulfillment" },
+      { property: "og:title", content: "CoreWarehousing — B2B Warehousing & Fulfillment services" },
       {
         property: "og:description",
         content:
@@ -45,7 +47,7 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: BRAND.name,
           url: "/",
-          description: "B2B Warehousing and 3PL fulfillment services.",
+          description: "B2B Warehousing and Fulfillment services.",
           address: { "@type": "PostalAddress", streetAddress: BRAND.address },
           contactPoint: {
             "@type": "ContactPoint",
@@ -252,7 +254,7 @@ function Home() {
       <ClientMarquee />
 
       {/* TESTIMONIALS */}
-      <TestimonialsMarquee />
+      {SHOW_TESTIMONIALS && <TestimonialsMarquee />}
 
       {/* INTERACTIVE CTA */}
       <InteractiveCTA />

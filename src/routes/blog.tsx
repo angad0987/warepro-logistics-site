@@ -11,7 +11,7 @@ export const Route = createFileRoute("/blog")({
       {
         name: "description",
         content:
-          "Insights on warehousing, 3PL fulfillment, inventory management and modern supply chain — from the CoreWarehousing team.",
+          "Insights on warehousing, Fulfillment services, inventory management and modern supply chain — from the CoreWarehousing team.",
       },
       { property: "og:title", content: "Blog & Resources | CoreWarehousing" },
       { property: "og:description", content: "Practical logistics content for growing brands." },

@@ -55,7 +55,7 @@ export function WarehouseJourney() {
                     : "text-white/60 hover:text-white")
                 }
               >
-                {f === "3PL" ? "3PL Fulfillment" : "B2B Bulk"}
+                {f === "3PL" ? "Fulfillment services" : "B2B Bulk"}
               </button>
             ))}
           </div>
