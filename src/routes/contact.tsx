@@ -31,6 +31,7 @@ import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { useTurnstile } from "react-turnstile";
 import { ENV } from "@/config/environment";
 import { OFFICE_LOCATION } from "@/config/office";
+import { getRequiredFieldNames, scrollToFirstInvalidField } from "@/lib/formValidation";
 import {
   GeoapifyContext,
   GeoapifyGeocoderAutocomplete,
@@ -75,6 +76,8 @@ const schema = z.object({
   city: z.string().min(2, "City is required").max(100, "City is too long"),
   message: z.string().trim().max(1000).optional(),
 });
+
+const requiredFields = getRequiredFieldNames(schema);
 
 const timelineSteps = [
   {
@@ -128,12 +131,17 @@ function Contact() {
   const [city, setCity] = useState("");
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const selectedPlaceRef = useRef<any>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useState("");
   const turnstile = useTurnstile();
+
+  const clearError = (field: string) => {
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: "" } : prev));
+  };
 
   const resetForm = () => {
     setName("");
@@ -180,6 +188,7 @@ function Contact() {
         if (typeof k === "string") errs[k] = i.message;
       });
       setErrors(errs);
+      scrollToFirstInvalidField(errs, formRef.current);
       return;
     }
 
@@ -219,6 +228,7 @@ function Contact() {
             }
           }
           setErrors(mapped);
+          scrollToFirstInvalidField(mapped, formRef.current);
           setErrorMessage("");
           break;
         }
@@ -294,14 +304,23 @@ function Contact() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} className="mt-8 grid sm:grid-cols-2 gap-5" noValidate>
+                <form
+                  ref={formRef}
+                  onSubmit={onSubmit}
+                  className="mt-8 grid sm:grid-cols-2 gap-5"
+                  noValidate
+                >
                   <Field
                     label={formLabels.name}
                     name="name"
                     error={errors.name}
                     placeholder={formLabels.namePlaceholder}
                     value={name}
-                    onChange={setName}
+                    onChange={(value) => {
+                      setName(value);
+                      clearError("name");
+                    }}
+                    required={requiredFields.has("name")}
                   />
                   <Field
                     label={formLabels.company}
@@ -309,7 +328,11 @@ function Contact() {
                     error={errors.company}
                     placeholder={formLabels.companyPlaceholder}
                     value={company}
-                    onChange={setCompany}
+                    onChange={(value) => {
+                      setCompany(value);
+                      clearError("company");
+                    }}
+                    required={requiredFields.has("company")}
                   />
 
                   <Select
@@ -319,7 +342,11 @@ function Contact() {
                     error={errors.businessType}
                     placeholder={formLabels.businessTypePlaceholder}
                     value={businessType}
-                    onChange={setBusinessType}
+                    onChange={(value) => {
+                      setBusinessType(value);
+                      clearError("businessType");
+                    }}
+                    required={requiredFields.has("businessType")}
                   />
                   <Select
                     label={formLabels.volume}
@@ -328,7 +355,11 @@ function Contact() {
                     error={errors.volume}
                     placeholder={formLabels.volumePlaceholder}
                     value={volume}
-                    onChange={setVolume}
+                    onChange={(value) => {
+                      setVolume(value);
+                      clearError("volume");
+                    }}
+                    required={requiredFields.has("volume")}
                   />
 
                   <div className="sm:col-span-2">
@@ -339,7 +370,11 @@ function Contact() {
                       error={errors.warehouseNeeds}
                       placeholder={formLabels.warehouseNeedsPlaceholder}
                       value={warehouseNeed}
-                      onChange={setWarehouseNeed}
+                      onChange={(value) => {
+                        setWarehouseNeed(value);
+                        clearError("warehouseNeeds");
+                      }}
+                      required={requiredFields.has("warehouseNeeds")}
                     />
                   </div>
 
@@ -350,7 +385,11 @@ function Contact() {
                     error={errors.phone}
                     placeholder={formLabels.phonePlaceholder}
                     value={phone}
-                    onChange={setPhone}
+                    onChange={(value) => {
+                      setPhone(value);
+                      clearError("phone");
+                    }}
+                    required={requiredFields.has("phone")}
                   />
                   <Field
                     label={formLabels.email}
@@ -359,11 +398,15 @@ function Contact() {
                     error={errors.email}
                     placeholder={formLabels.emailPlaceholder}
                     value={email}
-                    onChange={setEmail}
+                    onChange={(value) => {
+                      setEmail(value);
+                      clearError("email");
+                    }}
+                    required={requiredFields.has("email")}
                   />
 
-                  <div className="sm:col-span-2">
-                    <Label>City</Label>
+                  <div className="sm:col-span-2" data-form-field="city">
+                    <Label required={requiredFields.has("city")}>City</Label>
                     <div
                       className="mt-2 contact-geoapify"
                       onBlur={() => {
@@ -386,16 +429,19 @@ function Contact() {
                             setSelectedPlace(place);
                             selectedPlaceRef.current = place;
                             setCity(place.properties.city ?? "");
+                            clearError("city");
                           }}
                           onUserInput={(value) => {
                             setSelectedPlace(null);
                             selectedPlaceRef.current = null;
                             setCity(value);
+                            clearError("city");
                           }}
                           onClear={() => {
                             setSelectedPlace(null);
                             selectedPlaceRef.current = null;
                             setCity("");
+                            clearError("city");
                           }}
                         />
                       </GeoapifyContext>
@@ -405,14 +451,17 @@ function Contact() {
                     )}
                   </div>
 
-                  <div className="sm:col-span-2">
-                    <Label>{formLabels.messageLabel}</Label>
+                  <div className="sm:col-span-2" data-form-field="message">
+                    <Label required={requiredFields.has("message")}>{formLabels.messageLabel}</Label>
                     <textarea
                       name="message"
                       rows={4}
                       placeholder={formLabels.messagePlaceholder}
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={(e) => {
+                        setMessage(e.target.value);
+                        clearError("message");
+                      }}
                       className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition resize-none"
                     />
                   </div>
@@ -616,8 +665,13 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
   return mounted ? <>{children}</> : null;
 }
 
-function Label({ children }: { children: React.ReactNode }) {
-  return <label className="text-sm font-semibold text-navy">{children}</label>;
+function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
+  return (
+    <label className="text-sm font-semibold text-navy">
+      {children}
+      {required ? <span className="text-red-500"> *</span> : null}
+    </label>
+  );
 }
 
 function Field({
@@ -628,6 +682,7 @@ function Field({
   error,
   value,
   onChange,
+  required,
 }: {
   label: string;
   name: string;
@@ -636,10 +691,11 @@ function Field({
   error?: string;
   value: string;
   onChange: (v: string) => void;
+  required?: boolean;
 }) {
   return (
-    <div>
-      <Label>{label}</Label>
+    <div data-form-field={name}>
+      <Label required={required}>{label}</Label>
       <input
         type={type}
         name={name}
@@ -661,6 +717,7 @@ function Select({
   placeholder,
   value,
   onChange,
+  required,
 }: {
   label: string;
   name: string;
@@ -669,10 +726,11 @@ function Select({
   placeholder: string;
   value: string;
   onChange: (v: string) => void;
+  required?: boolean;
 }) {
   return (
-    <div>
-      <Label>{label}</Label>
+    <div data-form-field={name}>
+      <Label required={required}>{label}</Label>
       <select
         name={name}
         value={value}

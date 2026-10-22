@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import { Reveal } from "@/components/Reveal";
-import hiringWorkflowImg from "@/assets/hiring_workflow.png";
+import hiringWorkflowImg from "@/assets/hiring-workflow.webp";
 
 export function HiringWorkflowSection() {
   return (
@@ -30,8 +30,10 @@ export function HiringWorkflowSection() {
             <img
               src={hiringWorkflowImg}
               alt="CoreWarehousing hiring workflow — six-step journey from application to onboarding"
-              width={1200}
-              height={800}
+              loading="lazy"
+              decoding="async"
+              width={1000}
+              height={528}
               className="w-full object-contain"
             />
           </motion.div>

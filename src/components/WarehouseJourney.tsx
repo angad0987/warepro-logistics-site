@@ -3,7 +3,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { journeySection, journeySteps, journeyStepsB2B } from "@/content/homeSections";
-import { opImages } from "@/lib/opImages";
+import { opImages, opImageSizes } from "@/lib/opImages";
 
 type Flow = "3PL" | "B2B";
 
@@ -55,7 +55,7 @@ export function WarehouseJourney() {
                     : "text-white/60 hover:text-white")
                 }
               >
-                {f === "3PL" ? "3PL Fulfillment" : "B2B Bulk"}
+                {f === "3PL" ? "Fulfillment services" : "B2B Bulk"}
               </button>
             ))}
           </div>
@@ -107,8 +107,9 @@ export function WarehouseJourney() {
                       src={opImages[step.image]}
                       alt={`${step.title} operations at CoreWarehousing`}
                       loading="lazy"
-                      width={1280}
-                      height={900}
+                      decoding="async"
+                      width={opImageSizes[step.image].width}
+                      height={opImageSizes[step.image].height}
                       className="h-52 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105 md:h-60"
                     />
                   </div>

@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
-import showcaseImg from "@/assets/showcase-warehouse.jpg";
+import showcaseImg from "@/assets/showcase-warehouse.webp";
 import { showcaseSection } from "@/content/homeSections";
 
 export function ShowcaseParallax() {
@@ -18,6 +18,7 @@ export function ShowcaseParallax() {
         src={showcaseImg}
         alt="Inside a CoreWarehousing distribution centre"
         loading="lazy"
+        decoding="async"
         width={1920}
         height={1080}
         style={{ y, scale }}

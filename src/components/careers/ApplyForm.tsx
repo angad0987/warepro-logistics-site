@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getRequiredFieldNames, scrollToFirstInvalidField } from "@/lib/formValidation";
 
 const GEOAPIFY_API_KEY = ENV.GEOAPIFY_API_KEY;
 
@@ -91,6 +92,8 @@ const schema = z.object({
   aboutYourself: z.string().trim().max(2000).optional(),
 });
 
+const requiredFields = getRequiredFieldNames(schema);
+
 const fieldBase =
   "w-full min-w-0 rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/25";
 
@@ -106,7 +109,7 @@ function Label({
   return (
     <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-foreground">
       {children}
-      {required ? <span className="text-primary"> *</span> : null}
+      {required ? <span className="text-red-500"> *</span> : null}
     </label>
   );
 }
@@ -170,6 +173,7 @@ function FileDrop({
         <div
           role="button"
           tabIndex={0}
+          data-field-control
           onClick={() => inputRef.current?.click()}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -235,6 +239,7 @@ export function ApplyForm() {
   const [submitError, setSubmitError] = useState("");
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const selectedPlaceRef = useRef<any>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [token, setToken] = useState("");
   const turnstile = useTurnstile();
 
@@ -267,16 +272,17 @@ export function ApplyForm() {
       aboutYourself,
     };
     const parsed = schema.safeParse(data);
-    const nextErrors: Record<string, string> = {};
-    if (!parsed.success) {
-      parsed.error.issues.forEach((i) => {
-        const k = i.path[0];
-        if (typeof k === "string" && !nextErrors[k]) nextErrors[k] = i.message;
-      });
-      if (!resume) nextErrors["resume"] = "Please upload your resume.";
-      if (Object.keys(nextErrors).length > 0) {
-        setErrors(nextErrors);
+    if (!parsed.success || !resume) {
+      const nextErrors: Record<string, string> = {};
+      if (!parsed.success) {
+        parsed.error.issues.forEach((i) => {
+          const k = i.path[0];
+          if (typeof k === "string" && !nextErrors[k]) nextErrors[k] = i.message;
+        });
       }
+      if (!resume) nextErrors["resume"] = "Please upload your resume.";
+      setErrors(nextErrors);
+      scrollToFirstInvalidField(nextErrors, formRef.current);
       return;
     }
 
@@ -313,6 +319,7 @@ export function ApplyForm() {
             }
           }
           setErrors(mapped);
+          scrollToFirstInvalidField(mapped, formRef.current);
           setSubmitError("");
           break;
         }
@@ -412,6 +419,7 @@ export function ApplyForm() {
               ) : (
                 <motion.form
                   key="form"
+                  ref={formRef}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   onSubmit={onSubmit}
@@ -422,8 +430,8 @@ export function ApplyForm() {
                     className="grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-2"
                   >
                     <SectionLabel>About You</SectionLabel>
-                    <div className="min-w-0">
-                      <Label htmlFor="fullName" required>
+                    <div className="min-w-0" data-form-field="fullName">
+                      <Label htmlFor="fullName" required={requiredFields.has("fullName")}>
                         Full Name
                       </Label>
                       <input
@@ -438,8 +446,8 @@ export function ApplyForm() {
                       />
                       <FieldError message={errors["fullName"]} />
                     </div>
-                    <div className="min-w-0">
-                      <Label htmlFor="email" required>
+                    <div className="min-w-0" data-form-field="email">
+                      <Label htmlFor="email" required={requiredFields.has("email")}>
                         Email Address
                       </Label>
                       <input
@@ -456,8 +464,8 @@ export function ApplyForm() {
                       />
                       <FieldError message={errors["email"]} />
                     </div>
-                    <div className="min-w-0">
-                      <Label htmlFor="phone" required>
+                    <div className="min-w-0" data-form-field="phone">
+                      <Label htmlFor="phone" required={requiredFields.has("phone")}>
                         Phone Number
                       </Label>
                       <input
@@ -474,8 +482,8 @@ export function ApplyForm() {
                       />
                       <FieldError message={errors["phone"]} />
                     </div>
-                    <div className="min-w-0">
-                      <Label htmlFor="location" required>
+                    <div className="min-w-0" data-form-field="location">
+                      <Label htmlFor="location" required={requiredFields.has("location")}>
                         Current Location
                       </Label>
                       <GeoapifyContext apiKey={GEOAPIFY_API_KEY}>
@@ -524,7 +532,7 @@ export function ApplyForm() {
                     </div>
 
                     <SectionLabel>Your Professional Profile</SectionLabel>
-                    <div className="min-w-0">
+                    <div className="min-w-0" data-form-field="linkedin">
                       <Label htmlFor="linkedin">LinkedIn Profile URL</Label>
                       <input
                         id="linkedin"
@@ -538,7 +546,7 @@ export function ApplyForm() {
                       />
                       <FieldError message={errors["linkedin"]} />
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0" data-form-field="areaOfInterest">
                       <Label htmlFor="areaOfInterest">Area of Interest / Preferred Role</Label>
                       <Select
                         value={areaOfInterest}
@@ -549,6 +557,7 @@ export function ApplyForm() {
                       >
                         <SelectTrigger
                           id="areaOfInterest"
+                          data-field-control
                           className={cn(fieldBase, "data-[placeholder]:text-muted-foreground/70")}
                         >
                           <SelectValue placeholder="Select an area of interest" />
@@ -563,7 +572,7 @@ export function ApplyForm() {
                       </Select>
                       <FieldError message={errors["areaOfInterest"]} />
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0" data-form-field="yearsExperience">
                       <Label htmlFor="yearsExperience">Years of Experience</Label>
                       <input
                         id="yearsExperience"
@@ -579,7 +588,7 @@ export function ApplyForm() {
                     </div>
 
                     <SectionLabel>Tell Us More</SectionLabel>
-                    <div className="min-w-0 sm:col-span-2">
+                    <div className="min-w-0 sm:col-span-2" data-form-field="resume">
                       <Label htmlFor="resume" required>
                         Upload Resume
                       </Label>
@@ -592,7 +601,7 @@ export function ApplyForm() {
                       />
                       <FieldError message={errors["resume"]} />
                     </div>
-                    <div className="min-w-0 sm:col-span-2">
+                    <div className="min-w-0 sm:col-span-2" data-form-field="aboutYourself">
                       <Label htmlFor="aboutYourself">Tell Us About Yourself</Label>
                       <textarea
                         id="aboutYourself"

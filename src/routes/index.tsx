@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
-import heroImg from "@/assets/hero-warehouse.jpg";
-import ourStory2 from "@/assets/ourStory2.png";
+import heroImg from "@/assets/hero-warehouse.webp";
+import ourStory2 from "@/assets/our-story.webp";
 import { Reveal } from "@/components/Reveal";
 import { ProcessTeaser } from "@/components/ProcessTeaser";
 import { BRAND } from "@/lib/brand";
@@ -18,16 +18,18 @@ import { DynamicIcon } from "@/lib/DynamicIcon";
 import { hero, brandStory, servicesOverview } from "@/content/home";
 import { services } from "@/content/services";
 
+const SHOW_TESTIMONIALS = false;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CoreWarehousing — B2B Warehousing & 3PL Fulfillment in India" },
+      { title: "CoreWarehousing — B2B Warehousing & Fulfillment services in India" },
       {
         name: "description",
         content:
           "Reliable warehousing, inventory, B2B & eCommerce fulfillment, transportation and cross-docking. Get a tailored 3PL quote from CoreWarehousing.",
       },
-      { property: "og:title", content: "CoreWarehousing — B2B Warehousing & 3PL Fulfillment" },
+      { property: "og:title", content: "CoreWarehousing — B2B Warehousing & Fulfillment services" },
       {
         property: "og:description",
         content:
@@ -45,7 +47,7 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: BRAND.name,
           url: "/",
-          description: "B2B Warehousing and 3PL fulfillment services.",
+          description: "B2B Warehousing and Fulfillment services.",
           address: { "@type": "PostalAddress", streetAddress: BRAND.address },
           contactPoint: {
             "@type": "ContactPoint",
@@ -67,6 +69,8 @@ function Home() {
         <img
           src={heroImg}
           alt="CoreWarehousing modern warehouse"
+          fetchPriority="high"
+          decoding="async"
           width={1920}
           height={1080}
           className="absolute inset-0 h-full w-full object-cover animate-ken-burns"
@@ -149,8 +153,9 @@ function Home() {
                 src={ourStory2}
                 alt="CoreWarehousing operations"
                 loading="lazy"
-                width={1280}
-                height={800}
+                decoding="async"
+                width={800}
+                height={533}
                 className="w-full transition-transform duration-[900ms] ease-out group-hover:scale-105"
               />
             </div>
@@ -249,7 +254,7 @@ function Home() {
       <ClientMarquee />
 
       {/* TESTIMONIALS */}
-      <TestimonialsMarquee />
+      {SHOW_TESTIMONIALS && <TestimonialsMarquee />}
 
       {/* INTERACTIVE CTA */}
       <InteractiveCTA />

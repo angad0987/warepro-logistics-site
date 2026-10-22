@@ -4,7 +4,7 @@ import { ArrowRight, PhoneCall } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
 import { whyChooseUsBrand, whyChooseUsHero } from "@/content/why-choose-us";
-import heroImg from "@/assets/showcase-warehouse.jpg";
+import heroImg from "@/assets/showcase-warehouse-hero.webp";
 
 function BrandBadge() {
   const { monogram, name, taglineLead, taglineHighlight, taglineTail } = whyChooseUsBrand;
@@ -88,8 +88,10 @@ export function HeroSection() {
               <img
                 src={heroImg}
                 alt="Modern warehouse storage racks and inventory operations"
-                width={960}
-                height={640}
+                fetchPriority="high"
+                decoding="async"
+                width={800}
+                height={450}
                 className="h-72 w-full object-cover sm:h-80 lg:h-[26rem]"
               />
               <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-2/5 bg-gradient-to-r from-navy via-navy/45 to-transparent lg:block" />

@@ -175,11 +175,14 @@ export function DetailModal({
                           src={item.image}
                           alt=""
                           aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
                           className={`absolute inset-0 h-full w-full scale-110 object-cover blur-2xl transition-opacity duration-300 ${loaded ? "opacity-50" : "opacity-0"}`}
                         />
                         <img
                           src={item.image}
                           alt={item.title}
+                          decoding="async"
                           className={`relative z-10 h-full w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
                           onLoad={setLoaded}
                           onError={setErrored}
@@ -187,11 +190,6 @@ export function DetailModal({
                       </>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:rounded-l-2xl rounded-t-2xl md:rounded-tr-none pointer-events-none" />
-                    <div className="absolute bottom-4 left-4 pointer-events-none">
-                      <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-md shadow-glow">
-                        <DynamicIcon name={item.icon} className="h-6 w-6 text-white" />
-                      </div>
-                    </div>
                   </div>
 
                   {/* RIGHT — Content Panel */}

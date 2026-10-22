@@ -4,7 +4,7 @@ import { ArrowRight, Phone } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
 import { howWeWorkPage } from "@/content/howWeWork";
-import ctaImg from "@/assets/howWeWork4.png";
+import ctaImg from "@/assets/how-we-work-4.webp";
 
 export function CTABannerSection() {
   const { cta } = howWeWorkPage;
@@ -27,8 +27,10 @@ export function CTABannerSection() {
               <img
                 src={ctaImg}
                 alt="Warehouse exterior at dusk"
+                loading="lazy"
+                decoding="async"
                 width={800}
-                height={600}
+                height={450}
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-navy/50 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-navy/70" />

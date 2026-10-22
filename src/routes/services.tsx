@@ -7,8 +7,8 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { DetailModal } from "@/components/DetailModal";
 import { services, servicesPage, type ServiceItem } from "@/content/services";
-import img3pl from "@/assets/3pl.png";
-import imgB2b from "@/assets/b2b.png";
+import img3pl from "@/assets/3pl.webp";
+import imgB2b from "@/assets/b2b.webp";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/services")({
       { property: "og:title", content: "Services | CoreWarehousing" },
       {
         property: "og:description",
-        content: "Explore our full range of warehousing and 3PL fulfillment services.",
+        content: "Explore our full range of warehousing and Fulfillment services.",
       },
       { property: "og:url", content: "/services" },
       { property: "og:type", content: "website" },
@@ -118,6 +118,10 @@ function Services() {
             <img
               src={flow === "3PL" ? img3pl : imgB2b}
               alt={`${flow} workflow`}
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={800}
               className="w-full max-w-5xl mx-auto object-contain"
             />
           </Reveal>

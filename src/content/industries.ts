@@ -1,12 +1,12 @@
-import imgECommFulfillment from "@/assets/E-commfulfillment.png";
-import imgFMCG from "@/assets/FMCG.png";
-import imgElectronics from "@/assets/Electronics.png";
-import imgFashion from "@/assets/Fashion.png";
-import imgAutomotives from "@/assets/Automotive.png";
-import imgRetail from "@/assets/Retail.png";
-import imgHealthcare from "@/assets/healthcare.png";
-import imgManufacturing from "@/assets/Manufacturing.png";
-import imgConsumerGoods from "@/assets/ConsumerGoods.png";
+import imgECommFulfillment from "@/assets/ecommerce-fulfillment.webp";
+import imgFMCG from "@/assets/industry-fmcg.webp";
+import imgElectronics from "@/assets/industry-electronics.webp";
+import imgFashion from "@/assets/industry-fashion.webp";
+import imgAutomotives from "@/assets/industry-automotive.webp";
+import imgRetail from "@/assets/industry-retail.webp";
+import imgHealthcare from "@/assets/industry-healthcare.webp";
+import imgManufacturing from "@/assets/industry-manufacturing.webp";
+import imgConsumerGoods from "@/assets/industry-consumer-goods.webp";
 
 export interface IndustryItem {
   icon: string;

@@ -3,7 +3,7 @@ const address =
 
 export const BRAND = {
   name: "CoreWarehousing",
-  tagline: "B2B Warehousing & 3PL Fulfillment",
+  tagline: "B2B Warehousing & Fulfillment services",
   phone: "+91 8427304006",
   phoneHref: "tel:+918427304006",
   whatsapp: "918427304006",
