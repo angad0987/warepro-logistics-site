@@ -3,7 +3,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
-import heroImg from "@/assets/hero-warehouse.webp";
+import heroImg800 from "@/assets/hero-warehouse-800.webp";
+import heroImg1280 from "@/assets/hero-warehouse-1280.webp";
+import heroImg1920 from "@/assets/hero-warehouse-1920.webp";
 import ourStory2 from "@/assets/our-story.webp";
 import { Reveal } from "@/components/Reveal";
 import { ProcessTeaser } from "@/components/ProcessTeaser";
@@ -36,7 +38,7 @@ export const Route = createFileRoute("/")({
           "End-to-end warehousing and fulfillment for growing brands. Request a quote today.",
       },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: heroImg1920 },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
@@ -67,7 +69,9 @@ function Home() {
       {/* HERO — cinematic */}
       <section className="relative min-h-[100svh] flex items-center text-white overflow-hidden">
         <img
-          src={heroImg}
+          src={heroImg1280}
+          srcSet={`${heroImg800} 800w, ${heroImg1280} 1280w, ${heroImg1920} 1920w`}
+          sizes="100vw"
           alt="CoreWarehousing modern warehouse"
           fetchPriority="high"
           decoding="async"
