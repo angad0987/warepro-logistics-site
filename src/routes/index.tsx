@@ -86,9 +86,7 @@ function Home() {
         <div className="container-x relative z-10 pt-28 pb-24 md:pt-32">
           <div className="grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
+              initial={false}
             >
               <span className="inline-flex items-center gap-2 rounded-full glass-panel px-4 py-1.5 text-xs font-medium">
                 <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
@@ -108,9 +106,7 @@ function Home() {
                 {hero.benefits.map((b, i) => (
                   <motion.li
                     key={b}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
+                    initial={false}
                     className="flex items-start gap-2 text-sm text-white/85"
                   >
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -132,9 +128,7 @@ function Home() {
 
             {/* Quick enquiry form */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
             >
               <LazyQuickEnquiry />
             </motion.div>
