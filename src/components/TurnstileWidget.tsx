@@ -16,35 +16,37 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 }
 
 export function TurnstileWidget({ onVerify, onExpire }: Props) {
-  const [widgetKey, setWidgetKey] = useState(0);
   const retries = useRef(0);
+  const onVerifyRef = useRef(onVerify);
+  const onExpireRef = useRef(onExpire);
 
-  const restart = () => {
-    if (retries.current >= 3) return;
-    retries.current += 1;
-    setTimeout(() => setWidgetKey((k) => k + 1), 1000);
-  };
+  useEffect(() => {
+    onVerifyRef.current = onVerify;
+  }, [onVerify]);
+
+  useEffect(() => {
+    onExpireRef.current = onExpire;
+  }, [onExpire]);
 
   return (
     <ClientOnly>
       <Turnstile
-        key={widgetKey}
         sitekey={TURNSTILE_SITE_KEY}
         retry="auto"
         retryInterval={4000}
         refreshExpired="auto"
         onVerify={(token) => {
           retries.current = 0;
-          onVerify(token);
+          onVerifyRef.current(token);
         }}
-        onExpire={onExpire}
+        onExpire={() => {
+          onExpireRef.current();
+        }}
         onTimeout={() => {
-          onExpire();
-          restart();
+          onExpireRef.current();
         }}
         onError={() => {
-          onExpire();
-          restart();
+          onExpireRef.current();
         }}
       />
     </ClientOnly>
