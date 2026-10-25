@@ -183,7 +183,7 @@ export function MISReportsSection() {
                     <Check className="h-4 w-4" />
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold text-navy">{feat.label}</h4>
+                    <h3 className="text-sm font-bold text-navy">{feat.label}</h3>
                     <p className="mt-0.5 text-xs text-muted-foreground leading-relaxed">
                       {feat.desc}
                     </p>

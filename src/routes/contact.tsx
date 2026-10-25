@@ -18,6 +18,7 @@ import {
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
 import { BRAND } from "@/lib/brand";
+import { seo } from "@/lib/seo";
 import {
   contactPage,
   formLabels,
@@ -45,23 +46,13 @@ const MAPS_SEARCH_URL = OFFICE_LOCATION.mapsSearchUrl;
 const DIRECTIONS_URL = OFFICE_LOCATION.directionsUrl;
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact & Get a Quote | CoreWarehousing" },
-      {
-        name: "description",
-        content:
-          "Request a tailored B2B/3PL warehousing quote. Reach CoreWarehousing by form, phone, email or WhatsApp — fast response guaranteed.",
-      },
-      { property: "og:title", content: "Contact CoreWarehousing" },
-      {
-        property: "og:description",
-        content: "Get a tailored warehousing and fulfillment quote in under 24 hours.",
-      },
-      { property: "og:url", content: "/contact" },
-    ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
+  head: () =>
+    seo({
+      title: "Contact CoreWarehousing for a Warehousing Quote",
+      description:
+        "Share your B2B or 3PL requirements and get a tailored warehousing quote. Reach CoreWarehousing by form, phone, email or WhatsApp.",
+      path: "/contact",
+    }),
   component: Contact,
 });
 

@@ -183,7 +183,7 @@ export function QuickEnquiry() {
         <div className="text-[11px] font-semibold tracking-widest uppercase text-primary">
           {quickEnquiry.eyebrow}
         </div>
-        <h3 className="mt-1.5 text-xl font-bold font-heading">{quickEnquiry.headline}</h3>
+        <h2 className="mt-1.5 text-xl font-bold font-heading">{quickEnquiry.headline}</h2>
         <p className="mt-1 text-sm text-white/75">{quickEnquiry.subheadline}</p>
       </div>
       {submitted ? (

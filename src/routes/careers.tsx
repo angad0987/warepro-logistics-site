@@ -7,28 +7,16 @@ import { ApplyForm } from "@/components/careers/ApplyForm";
 import { HiringWorkflowSection } from "@/components/careers/HiringWorkflowSection";
 import { DynamicIcon } from "@/lib/DynamicIcon";
 import { careersPage } from "@/content/careers";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/careers")({
-  head: () => ({
-    meta: [
-      { title: "Careers at CW | Warehousing & Fulfillment Jobs" },
-      {
-        name: "description",
-        content:
-          "Work at CoreWarehousing. Explore open roles in operations, technology and business development, or submit your profile for future opportunities.",
-      },
-      { property: "og:title", content: "Careers at CW | Warehousing & Fulfillment Jobs" },
-      {
-        property: "og:description",
-        content:
-          "Join CoreWarehousing and help build smarter warehousing, fulfillment and distribution across India.",
-      },
-      { property: "og:url", content: "/careers" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/careers" }],
-  }),
+  head: () =>
+    seo({
+      title: "Warehousing & Fulfillment Careers | CoreWarehousing",
+      description:
+        "Explore careers in warehousing, operations and supply chain at CoreWarehousing. No open roles now, but submit your profile for future openings.",
+      path: "/careers",
+    }),
   component: CareersPage,
 });
 

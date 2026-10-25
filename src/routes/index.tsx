@@ -10,6 +10,7 @@ import ourStory2 from "@/assets/our-story.webp";
 import { Reveal } from "@/components/Reveal";
 import { ProcessTeaser } from "@/components/ProcessTeaser";
 import { BRAND } from "@/lib/brand";
+import { SITE_URL, seo } from "@/lib/seo";
 import { IconCallouts } from "@/components/IconCallouts";
 import { WarehouseJourney } from "@/components/WarehouseJourney";
 import { ShowcaseParallax } from "@/components/ShowcaseParallax";
@@ -24,23 +25,12 @@ const SHOW_TESTIMONIALS = false;
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "CoreWarehousing — B2B Warehousing & Fulfillment services in India" },
-      {
-        name: "description",
-        content:
-          "Reliable warehousing, inventory, B2B & eCommerce fulfillment, transportation and cross-docking. Get a tailored 3PL quote from CoreWarehousing.",
-      },
-      { property: "og:title", content: "CoreWarehousing — B2B Warehousing & Fulfillment services" },
-      {
-        property: "og:description",
-        content:
-          "End-to-end warehousing and fulfillment for growing brands. Request a quote today.",
-      },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: heroImg1920 },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
+    ...seo({
+      title: "B2B Warehousing & 3PL Fulfillment in Gurugram | CoreWarehousing",
+      description:
+        "CoreWarehousing runs the storage, inventory and fulfillment backbone for B2B and D2C companies across India. Get a tailored 3PL quote.",
+      path: "/",
+    }),
     scripts: [
       {
         type: "application/ld+json",
@@ -48,14 +38,26 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Organization",
           name: BRAND.name,
-          url: "/",
-          description: "B2B Warehousing and Fulfillment services.",
-          address: { "@type": "PostalAddress", streetAddress: BRAND.address },
-          contactPoint: {
-            "@type": "ContactPoint",
-            telephone: BRAND.phone,
-            contactType: "customer service",
+          url: `${SITE_URL}/`,
+          logo: `${SITE_URL}/brand-logo.webp`,
+          image: `${SITE_URL}/og-image.jpg`,
+          description: "B2B warehousing, inventory management and fulfillment services.",
+          email: BRAND.email,
+          telephone: BRAND.phone,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Unit No. 1029, Tower A, Spaze i-Tech Park, Sector-49, Sohna Road",
+            addressLocality: "Gurugram",
+            addressRegion: "Haryana",
+            postalCode: "122018",
+            addressCountry: "IN",
           },
+          sameAs: [
+            "https://www.facebook.com/profile.php?id=61595838296980&mibextid=wwXIfr&mibextid=wwXIfr",
+            "https://www.instagram.com/corewarehousing?igsi=a3Y4dmgzNjVzOHp0",
+            "https://www.linkedin.com/company/corewarehousing-pvt-ltd/",
+            "https://youtube.com/@corewarehousing?si=-mkWz5SB_RACgu-M",
+          ],
         }),
       },
     ],
@@ -292,7 +294,7 @@ function QuickEnquiryPlaceholder() {
         <div className="text-[11px] font-semibold tracking-widest uppercase text-primary">
           Quick enquiry
         </div>
-        <h3 className="mt-1.5 text-xl font-bold font-heading">Quick Enquiry</h3>
+        <h2 className="mt-1.5 text-xl font-bold font-heading">Quick Enquiry</h2>
         <p className="mt-1 text-sm text-white/75">Tell us a little about your requirements.</p>
       </div>
       <div className="mt-5 space-y-3">

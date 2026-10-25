@@ -3,22 +3,16 @@ import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { blogPage } from "@/content/blog";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      { title: "Blog & Resources | CoreWarehousing" },
-      {
-        name: "description",
-        content:
-          "Insights on warehousing, Fulfillment services, inventory management and modern supply chain — from the CoreWarehousing team.",
-      },
-      { property: "og:title", content: "Blog & Resources | CoreWarehousing" },
-      { property: "og:description", content: "Practical logistics content for growing brands." },
-      { property: "og:url", content: "/blog" },
-    ],
-    links: [{ rel: "canonical", href: "/blog" }],
-  }),
+  head: () =>
+    seo({
+      title: "Warehousing & Logistics Insights | CoreWarehousing",
+      description:
+        "Practical guides on warehousing, fulfillment and inventory management from the CoreWarehousing team. New resources are on the way.",
+      path: "/blog",
+    }),
   component: Blog,
 });
 

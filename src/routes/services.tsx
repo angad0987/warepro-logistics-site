@@ -9,27 +9,16 @@ import { DetailModal } from "@/components/DetailModal";
 import { services, servicesPage, type ServiceItem } from "@/content/services";
 import img3pl from "@/assets/3pl.webp";
 import imgB2b from "@/assets/b2b.webp";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services — Warehousing, Fulfillment & Distribution | CoreWarehousing" },
-      {
-        name: "description",
-        content:
-          "Eight integrated 3PL services: warehousing, inventory management, B2B & eCommerce fulfillment, transportation, reverse logistics, packaging, cross-docking.",
-      },
-      { property: "og:title", content: "Services | CoreWarehousing" },
-      {
-        property: "og:description",
-        content: "Explore our full range of warehousing and Fulfillment services.",
-      },
-      { property: "og:url", content: "/services" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/services" }],
-  }),
+  head: () =>
+    seo({
+      title: "3PL Warehousing, Fulfillment & Distribution | CoreWarehousing",
+      description:
+        "Integrated 3PL services: warehousing, inventory management, B2B and eCommerce fulfillment, transportation, reverse logistics, packaging and cross-docking.",
+      path: "/services",
+    }),
   component: Services,
 });
 
