@@ -74,7 +74,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white text-sm font-semibold mb-4">{footerCompanyLinks.title}</h4>
+          <h3 className="text-white text-sm font-semibold mb-4">{footerCompanyLinks.title}</h3>
           <ul className="space-y-2 text-sm">
             {footerCompanyLinks.links.map((l) => (
               <li key={l.to + l.label}>
@@ -87,7 +87,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white text-sm font-semibold mb-4">{footerServicesLinks.title}</h4>
+          <h3 className="text-white text-sm font-semibold mb-4">{footerServicesLinks.title}</h3>
           <ul className="space-y-2 text-sm">
             {footerServicesLinks.links.map((l) => (
               <li key={l.to + l.label}>
@@ -100,7 +100,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white text-sm font-semibold mb-4">Get in touch</h4>
+          <h3 className="text-white text-sm font-semibold mb-4">Get in touch</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" />

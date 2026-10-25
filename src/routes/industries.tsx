@@ -7,27 +7,16 @@ import { DynamicIcon } from "@/lib/DynamicIcon";
 import { DetailModal } from "@/components/DetailModal";
 import { industries, industriesPage, type IndustryItem } from "@/content/industries";
 import industriesLogo from "@/assets/industries-logo.webp";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/industries")({
-  head: () => ({
-    meta: [
-      { title: "Industries We Serve | CoreWarehousing" },
-      {
-        name: "description",
-        content:
-          "3PL warehousing and fulfillment for eCommerce, Retail, FMCG, Electronics, Fashion, Manufacturing, Consumer Goods, Automotive and Healthcare.",
-      },
-      { property: "og:title", content: "Industries We Serve | CoreWarehousing" },
-      {
-        property: "og:description",
-        content: "Purpose-built logistics for the industries we know best.",
-      },
-      { property: "og:url", content: "/industries" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/industries" }],
-  }),
+  head: () =>
+    seo({
+      title: "3PL Logistics for Nine Industries | CoreWarehousing",
+      description:
+        "Purpose-built 3PL warehousing and fulfillment for eCommerce, retail, FMCG, electronics, fashion, manufacturing, consumer goods, automotive and healthcare.",
+      path: "/industries",
+    }),
   component: Industries,
 });
 

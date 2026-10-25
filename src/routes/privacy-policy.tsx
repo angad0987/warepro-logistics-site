@@ -1,28 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPageLayout, LegalSection, LegalContactCard } from "@/components/LegalPageLayout";
 import { BRAND } from "@/lib/brand";
+import { seo } from "@/lib/seo";
 
 const LAST_UPDATED = "August 26, 2026";
 
 export const Route = createFileRoute("/privacy-policy")({
-  head: () => ({
-    meta: [
-      { title: "Privacy Policy | CoreWarehousing" },
-      {
-        name: "description",
-        content:
-          "CoreWarehousing Privacy Policy — learn how we collect, use, and protect your personal information on our website.",
-      },
-      { property: "og:title", content: "Privacy Policy | CoreWarehousing" },
-      {
-        property: "og:description",
-        content:
-          "Learn how CoreWarehousing collects, uses, and protects your personal information.",
-      },
-      { property: "og:url", content: "/privacy-policy" },
-    ],
-    links: [{ rel: "canonical", href: "/privacy-policy" }],
-  }),
+  head: () =>
+    seo({
+      title: "Privacy Policy & Data Protection | CoreWarehousing",
+      description:
+        "How CoreWarehousing collects, uses, stores and protects personal information submitted through our website, forms and career applications.",
+      path: "/privacy-policy",
+    }),
   component: PrivacyPolicy,
 });
 

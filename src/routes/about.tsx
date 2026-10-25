@@ -5,22 +5,16 @@ import { Reveal } from "@/components/Reveal";
 import { getIcon } from "@/lib/icons";
 import ourStory2 from "@/assets/our-story.webp";
 import { aboutPage, visionMission, story } from "@/content/about";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About CoreWarehousing — Our Vision, Mission & Story" },
-      {
-        name: "description",
-        content:
-          "Learn about CoreWarehousing — our vision, mission and story of building a modern B2B warehousing and Fulfillment services partner.",
-      },
-      { property: "og:title", content: "About CoreWarehousing" },
-      { property: "og:description", content: "Vision, mission and story behind CoreWarehousing." },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
+  head: () =>
+    seo({
+      title: "Our Vision, Mission and Story | CoreWarehousing",
+      description:
+        "Learn how CoreWarehousing was built by supply-chain operators to give growing brands reliable, scalable warehousing and fulfillment. Partner with us.",
+      path: "/about",
+    }),
   component: About,
 });
 

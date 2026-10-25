@@ -91,9 +91,9 @@ export function HeroSection() {
                     <Info className="h-4 w-4" />
                   </span>
                   <div>
-                    <h3 className="text-sm font-bold uppercase tracking-wide text-white">
+                    <h2 className="text-sm font-bold uppercase tracking-wide text-white">
                       {hero.importantHeading}
-                    </h3>
+                    </h2>
                     <p
                       className="mt-2 text-xs leading-relaxed text-white/70"
                       dangerouslySetInnerHTML={{ __html: hero.importantBody }}

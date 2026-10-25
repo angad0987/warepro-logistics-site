@@ -1,27 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LegalPageLayout, LegalSection, LegalContactCard } from "@/components/LegalPageLayout";
 import { BRAND } from "@/lib/brand";
+import { seo } from "@/lib/seo";
 
 const LAST_UPDATED = "August 26, 2026";
 
 export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Terms of Use | CoreWarehousing" },
-      {
-        name: "description",
-        content:
-          "CoreWarehousing Terms of Use — terms governing your use of our website and services.",
-      },
-      { property: "og:title", content: "Terms of Use | CoreWarehousing" },
-      {
-        property: "og:description",
-        content: "Terms governing your use of the CoreWarehousing website and services.",
-      },
-      { property: "og:url", content: "/terms" },
-    ],
-    links: [{ rel: "canonical", href: "/terms" }],
-  }),
+  head: () =>
+    seo({
+      title: "Terms of Use & Website Conditions | CoreWarehousing",
+      description:
+        "The terms governing your use of the CoreWarehousing website, forms and services, including website use, submissions and liability.",
+      path: "/terms",
+    }),
   component: TermsOfUse,
 });
 
