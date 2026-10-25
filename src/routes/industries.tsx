@@ -12,9 +12,9 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/industries")({
   head: () =>
     seo({
-      title: "3PL Logistics for Nine Industries | CoreWarehousing",
+      title: "Fullfillment Services for Nine Industries | CoreWarehousing",
       description:
-        "Purpose-built 3PL warehousing and fulfillment for eCommerce, retail, FMCG, electronics, fashion, manufacturing, consumer goods, automotive and healthcare.",
+        "Purpose-built Fullfillment Services for eCommerce, retail, FMCG, electronics, fashion, manufacturing, consumer goods, automotive and healthcare.",
       path: "/industries",
     }),
   component: Industries,

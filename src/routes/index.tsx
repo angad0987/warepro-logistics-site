@@ -26,7 +26,7 @@ const SHOW_TESTIMONIALS = false;
 export const Route = createFileRoute("/")({
   head: () => ({
     ...seo({
-      title: "B2B Warehousing & 3PL Fulfillment in Gurugram | CoreWarehousing",
+      title: "B2B Warehousing & Fullfillment Services in Gurugram | CoreWarehousing",
       description:
         "CoreWarehousing runs the storage, inventory and fulfillment backbone for B2B and D2C companies across India. Get a tailored 3PL quote.",
       path: "/",

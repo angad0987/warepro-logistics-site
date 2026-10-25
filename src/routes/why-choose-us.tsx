@@ -10,7 +10,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/why-choose-us")({
   head: () =>
     seo({
-      title: "Why Choose CoreWarehousing for 3PL Warehousing",
+      title: "Why Choose CoreWarehousing for Fullfillment Services",
       description:
         "See why growing brands choose CoreWarehousing: reliable operations, scalable capacity, same-day dispatch, dedicated support and transparent pricing.",
       path: "/why-choose-us",
