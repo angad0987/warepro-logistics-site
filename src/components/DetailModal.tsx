@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { DynamicIcon } from "@/lib/DynamicIcon";
+import { trackEvent } from "@/lib/analytics";
 
 const keywordIconMap: Record<string, typeof CheckCircle2> = {
   expiry: Clock,
@@ -238,7 +239,13 @@ export function DetailModal({
                     <div className="absolute bottom-0 left-0 right-0 border-t border-border bg-white px-6 md:px-8 py-4">
                       <Link
                         to="/contact"
-                        onClick={onClose}
+                        onClick={() => {
+                          trackEvent("cta_click", {
+                            link_location: "body",
+                            cta_name: "sector_specialist",
+                          });
+                          onClose();
+                        }}
                         className="inline-flex items-center justify-center gap-2 w-full rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant hover:scale-[1.02] transition-transform"
                       >
                         {ctaLabel} <ArrowRight className="h-4 w-4" />

@@ -42,4 +42,6 @@ export const ENV = {
   ENVIRONMENT: getEnvironment(),
 
   GEOAPIFY_API_KEY: getOptionalEnvVariable("VITE_GEOAPIFY_API_KEY"),
+
+  GA_MEASUREMENT_ID: getOptionalEnvVariable("VITE_GA_MEASUREMENT_ID"),
 };

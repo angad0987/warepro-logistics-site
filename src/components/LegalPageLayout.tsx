@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
+import { trackEvent } from "@/lib/analytics";
 
 interface LegalPageLayoutProps {
   title: string;
@@ -88,6 +89,9 @@ export function LegalContactCard({
             </p>
             <a
               href={`mailto:${email}`}
+              onClick={() =>
+                trackEvent("email_click", { link_location: "body", transport_type: "beacon" })
+              }
               className="text-navy font-medium hover:text-primary transition-colors break-all"
             >
               {email}
@@ -99,6 +103,9 @@ export function LegalContactCard({
             </p>
             <a
               href={`tel:${phone.replace(/\s/g, "")}`}
+              onClick={() =>
+                trackEvent("phone_click", { link_location: "body", transport_type: "beacon" })
+              }
               className="text-navy font-medium hover:text-primary transition-colors"
             >
               {phone}

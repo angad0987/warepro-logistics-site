@@ -5,6 +5,7 @@ import { ArrowRight, PhoneCall } from "lucide-react";
 import ctaImg from "@/assets/warehouse-aerial.webp";
 import { finalCta } from "@/content/homeSections";
 import { BRAND } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
 
 export function InteractiveCTA() {
   return (
@@ -45,6 +46,7 @@ export function InteractiveCTA() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/contact"
+                onClick={() => trackEvent("cta_click", { link_location: "body", cta_name: "quote" })}
                 className="group inline-flex items-center gap-2 rounded-full gradient-primary px-8 py-4 text-sm md:text-base font-bold text-primary-foreground animate-glow-pulse transition-transform duration-300 hover:scale-[1.04]"
               >
                 {finalCta.primary}
@@ -52,6 +54,12 @@ export function InteractiveCTA() {
               </Link>
               <a
                 href={BRAND.phoneHref}
+                onClick={() =>
+                  trackEvent("phone_click", {
+                    link_location: "body",
+                    transport_type: "beacon",
+                  })
+                }
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-8 py-4 text-sm md:text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white/12"
               >
                 <PhoneCall className="h-4 w-4 text-primary" />

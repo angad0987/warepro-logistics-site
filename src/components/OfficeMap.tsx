@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import "@/office-map.css";
 import { ENV } from "@/config/environment";
 import { OFFICE_LOCATION } from "@/config/office";
+import { trackEvent } from "@/lib/analytics";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const { name, lat, lng, zoom, mapStyle } = OFFICE_LOCATION;
@@ -102,8 +103,28 @@ export default function OfficeMap() {
               Gurugram, Haryana 122018, India
             </p>
             <div className="cw-map-popup__contact">
-              <a href={OFFICE_LOCATION.phoneHref}>{OFFICE_LOCATION.phone}</a>
-              <a href={`mailto:${OFFICE_LOCATION.email}`}>{OFFICE_LOCATION.email}</a>
+              <a
+                href={OFFICE_LOCATION.phoneHref}
+                onClick={() =>
+                  trackEvent("phone_click", {
+                    link_location: "contact_page",
+                    transport_type: "beacon",
+                  })
+                }
+              >
+                {OFFICE_LOCATION.phone}
+              </a>
+              <a
+                href={`mailto:${OFFICE_LOCATION.email}`}
+                onClick={() =>
+                  trackEvent("email_click", {
+                    link_location: "contact_page",
+                    transport_type: "beacon",
+                  })
+                }
+              >
+                {OFFICE_LOCATION.email}
+              </a>
             </div>
           </Popup>
         </Marker>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
 import { howWeWorkPage } from "@/content/howWeWork";
 import ctaImg from "@/assets/how-we-work-4.webp";
 
@@ -55,6 +56,12 @@ export function CTABannerSection() {
                 <div className="mt-6 flex flex-wrap items-center gap-4">
                   <Link
                     to="/contact"
+                    onClick={() =>
+                      trackEvent("cta_click", {
+                        link_location: "body",
+                        cta_name: "storage_quote",
+                      })
+                    }
                     className="group inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-elegant transition-transform duration-300 hover:scale-[1.03]"
                   >
                     {cta.button}
@@ -65,6 +72,12 @@ export function CTABannerSection() {
                     <span className="text-sm">{cta.phone}</span>
                     <a
                       href={BRAND.phoneHref}
+                      onClick={() =>
+                        trackEvent("phone_click", {
+                          link_location: "body",
+                          transport_type: "beacon",
+                        })
+                      }
                       className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                     >
                       <Phone className="h-4 w-4" />

@@ -1,11 +1,15 @@
 import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { BRAND } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
 
 export function WhatsAppButton() {
   return (
     <motion.a
       href={BRAND.whatsappUrl}
+      onClick={() =>
+        trackEvent("whatsapp_click", { link_location: "floating", transport_type: "beacon" })
+      }
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"

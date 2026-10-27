@@ -1,11 +1,15 @@
 import { Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { BRAND } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
 
 export function CallNowButton() {
   return (
     <motion.a
       href={BRAND.phoneHref}
+      onClick={() =>
+        trackEvent("phone_click", { link_location: "floating", transport_type: "beacon" })
+      }
       aria-label="Call Now"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
