@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 import { BRAND } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
 import {
   footerCompanyLinks,
   footerServicesLinks,
@@ -108,13 +109,31 @@ export function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-primary shrink-0" />
-              <a href={BRAND.phoneHref} className="hover:text-white">
+              <a
+                href={BRAND.phoneHref}
+                onClick={() =>
+                  trackEvent("phone_click", {
+                    link_location: "footer",
+                    transport_type: "beacon",
+                  })
+                }
+                className="hover:text-white"
+              >
                 {BRAND.phone}
               </a>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-primary shrink-0" />
-              <a href={`mailto:${BRAND.email}`} className="hover:text-white">
+              <a
+                href={`mailto:${BRAND.email}`}
+                onClick={() =>
+                  trackEvent("email_click", {
+                    link_location: "footer",
+                    transport_type: "beacon",
+                  })
+                }
+                className="hover:text-white"
+              >
                 {BRAND.email}
               </a>
             </li>

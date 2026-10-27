@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { SITE_URL } from "../lib/seo";
+import { initAnalytics } from "../lib/analytics";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
@@ -141,6 +142,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />

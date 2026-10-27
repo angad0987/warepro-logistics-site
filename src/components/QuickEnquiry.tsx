@@ -5,6 +5,7 @@ import { z } from "zod";
 import { submitCallbackRequest } from "@/services/callbackService";
 import { CheckCircle2, Send } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { useTurnstile } from "react-turnstile";
 import { quickEnquiry } from "@/content/home";
@@ -57,6 +58,13 @@ export function QuickEnquiry() {
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useState("");
   const turnstile = useTurnstile();
+  const formStartedRef = useRef(false);
+
+  const handleFormStart = () => {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    trackEvent("form_start", { form_name: "quick_enquiry" });
+  };
 
   const clearError = (field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: "" } : prev));
@@ -139,8 +147,14 @@ export function QuickEnquiry() {
         setErrors({});
         setErrorMessage("");
         setSubmitted(true);
+        trackEvent("generate_lead", {
+          form_name: "quick_enquiry",
+          page_path: window.location.pathname,
+        });
         return;
       }
+
+      trackEvent("form_error", { form_name: "quick_enquiry" });
 
       switch (result.type) {
         case "VALIDATION_ERROR": {
@@ -169,6 +183,7 @@ export function QuickEnquiry() {
           break;
       }
     } catch {
+      trackEvent("form_error", { form_name: "quick_enquiry" });
       setErrorMessage(quickEnquiry.errorNetworkMessage);
     } finally {
       setToken("");
@@ -199,7 +214,14 @@ export function QuickEnquiry() {
           </button>
         </div>
       ) : (
-        <form ref={formRef} onSubmit={onSubmit} className="mt-5 space-y-3" noValidate>
+        <form
+          ref={formRef}
+          onSubmit={onSubmit}
+          onFocus={handleFormStart}
+          onChange={handleFormStart}
+          className="mt-5 space-y-3"
+          noValidate
+        >
           <div data-form-field="name">
             <FieldLabel htmlFor="quick-name">
               Name
@@ -352,6 +374,12 @@ export function QuickEnquiry() {
           <div className="flex justify-center">
             <a
               href={BRAND.phoneHref}
+              onClick={() =>
+                trackEvent("phone_click", {
+                  link_location: "contact_page",
+                  transport_type: "beacon",
+                })
+              }
               className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-steel transition-all"
             >
               Quick Call
