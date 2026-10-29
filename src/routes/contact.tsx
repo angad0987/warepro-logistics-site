@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
+import contactPageFooter from "@/assets/contactPageFooter.png";
 import { BRAND } from "@/lib/brand";
 import { seo } from "@/lib/seo";
 import {
@@ -44,6 +45,8 @@ const OfficeMap = lazy(() => import("@/components/OfficeMap"));
 
 const MAPS_SEARCH_URL = OFFICE_LOCATION.mapsSearchUrl;
 const DIRECTIONS_URL = OFFICE_LOCATION.directionsUrl;
+
+const SHOW_MAP = false;
 
 export const Route = createFileRoute("/contact")({
   head: () =>
@@ -626,21 +629,33 @@ function Contact() {
                 </a>
               </div>
 
-              <div className="relative isolate min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft">
-                <Suspense fallback={<div className="h-[360px] w-full sm:h-[440px] lg:h-[500px]" />}>
-                  <ClientOnly>
-                    <OfficeMap />
-                  </ClientOnly>
-                </Suspense>
-                <a
-                  href={MAPS_SEARCH_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-4 right-4 z-[1000] inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-navy shadow-elegant transition-transform hover:scale-[1.03]"
-                >
-                  <Navigation className="h-4 w-4" />
-                  Open in Maps
-                </a>
+              <div className="relative isolate min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft lg:min-h-[400px] lg:self-center">
+                {SHOW_MAP ? (
+                  <>
+                    <Suspense
+                      fallback={<div className="h-[360px] w-full sm:h-[440px] lg:h-[500px]" />}
+                    >
+                      <ClientOnly>
+                        <OfficeMap />
+                      </ClientOnly>
+                    </Suspense>
+                    <a
+                      href={MAPS_SEARCH_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-4 right-4 z-[1000] inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-navy shadow-elegant transition-transform hover:scale-[1.03]"
+                    >
+                      <Navigation className="h-4 w-4" />
+                      Open in Maps
+                    </a>
+                  </>
+                ) : (
+                  <img
+                    src={contactPageFooter}
+                    alt="CoreWarehousing facility"
+                    className="block h-auto w-full object-contain lg:absolute lg:inset-0 lg:h-full lg:w-full lg:object-cover"
+                  />
+                )}
               </div>
             </div>
           </Reveal>
