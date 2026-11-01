@@ -22,6 +22,7 @@ import { hero, brandStory, servicesOverview } from "@/content/home";
 import { services } from "@/content/services";
 
 const SHOW_TESTIMONIALS = false;
+const SHOW_CLIENTS = false;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -251,7 +252,7 @@ function Home() {
       <IconCallouts variant="dark" />
 
       {/* TRUSTED CLIENTS */}
-      <ClientMarquee />
+      {SHOW_CLIENTS && <ClientMarquee />}
 
       {/* TESTIMONIALS */}
       {SHOW_TESTIMONIALS && <TestimonialsMarquee />}

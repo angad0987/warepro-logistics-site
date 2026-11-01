@@ -47,6 +47,7 @@ const MAPS_SEARCH_URL = OFFICE_LOCATION.mapsSearchUrl;
 const DIRECTIONS_URL = OFFICE_LOCATION.directionsUrl;
 
 const SHOW_MAP = false;
+const SHOW_DIRECTIONS = false;
 
 export const Route = createFileRoute("/contact")({
   head: () =>
@@ -618,15 +619,17 @@ function Contact() {
                   </li>
                 </ul>
 
-                <a
-                  href={DIRECTIONS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]"
-                >
-                  <Navigation className="h-4 w-4" />
-                  Get Directions
-                </a>
+                {SHOW_DIRECTIONS && (
+                  <a
+                    href={DIRECTIONS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.03]"
+                  >
+                    <Navigation className="h-4 w-4" />
+                    Get Directions
+                  </a>
+                )}
               </div>
 
               <div className="relative isolate min-w-0 overflow-hidden rounded-3xl border border-border shadow-card-soft lg:min-h-[400px] lg:self-center">
